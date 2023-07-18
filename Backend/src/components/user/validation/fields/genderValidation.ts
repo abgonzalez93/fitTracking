@@ -1,0 +1,10 @@
+import Joi from 'joi';
+import { gender } from '../../model/enums';
+import messages from '../../../../config/i18n/en';
+
+const msg = messages.src.components.user.validation.genderValidation;
+
+export const genderValidation = Joi.string().valid(...Object.values(gender)).optional().messages({
+    'string.empty': msg.emptyData,
+    'any.only': msg.mustBeOneOfTheFollowing(Object.values(gender).join(', ')),
+});
