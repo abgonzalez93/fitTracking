@@ -31,8 +31,7 @@ export default class UserService {
                 throw new ErrorHandler(400, msg.emailAlreadyExists);
             }
             
-            const hashedPassword = await HashService.hashPassword(userData.password);
-            const user = new User({ ...userData, password: hashedPassword });
+            const user = new User(userData);
 
             await user.save();
             return user;
@@ -69,8 +68,6 @@ export default class UserService {
                 if (isSamePassword) {
                     throw new ErrorHandler(400, msg.passwordMustBeDifferentFromYourCurrent);
                 }
-
-                userData.password = await HashService.hashPassword(userData.password);
             }
 
             if (userData.username && userData.username !== currentUser.username && await this.fieldExists('username', userData.username)) {
@@ -80,8 +77,11 @@ export default class UserService {
             if (userData.email && userData.email !== currentUser.email && await this.fieldExists('email', userData.email)) {
                 throw new ErrorHandler(400, msg.emailAlreadyExists);
             }
-
-            const user = await User.findByIdAndUpdate(id, userData, { new: true }).select('-password');
+            
+            Object.assign(currentUser, userData);
+            await currentUser.save();
+    
+            const user = await User.findById(id).select('-password');
             return user;
         } catch (error: any) {
             throw new ErrorHandler(500, msg.errorUpdatingUser, error.stack);

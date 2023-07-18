@@ -13,10 +13,10 @@ const messages = {
                 model: {
                     enums: {
                         activityLevel: {
-                            sedentary: 'Little or no exercise',
-                            lightlyActive: 'Light exercise (1-3 days/week)',
-                            moderatelyActive: 'Moderate exercise (3-5 days/week)',
-                            veryActive: 'Hard exercise (6-7 days a week)',
+                            sedentary: 'Sedentary',
+                            lightlyActive: 'Lightly active',
+                            moderatelyActive: 'Moderately active',
+                            veryActive: 'Very active',
                         },
                         foodPreferences: {
                             omnivore: 'Omnivore',
@@ -71,7 +71,7 @@ const messages = {
                     passwordMustBeDifferentFromYourCurrent: 'The entered password must be different from your current one',
                 },
                 validation: {
-                    invalidUserData: (error: Error): string => `Invalid user data: ${error.message}`,
+                    invalidUserData: (error: string): string => `${error}. Invalid user data`,
                     activityLevelValidation: {
                         emptyData: commonMessages.emptyData('Activity level'),
                         mustBeOneOfTheFollowing: (activityLevel: string): string => `Activity level must be one of the following ${activityLevel}`
@@ -79,8 +79,20 @@ const messages = {
                     birthDateValidation: {
                         invalidData: commonMessages.invalidData('date format')
                     },
+                    clientsValidation: {
+                        mustBeAnArray: 'Clients must be an array',
+                        invalidData: commonMessages.invalidData('client'),
+                        mustBeAdvanced: 'Only advanced users can have clients'
+                    },
                     contactInfoValidation: {
-                        emptyData: commonMessages.emptyData('Contact information'),
+                        phoneNumberValidation: {
+                            emptyData: commonMessages.emptyData('Phone number'),
+                            invalidData: commonMessages.invalidData('phone number')
+                        },
+                        addressValidation: {
+                            emptyData: commonMessages.emptyData('Address'),
+                            invalidData: commonMessages.invalidData('address')
+                        }
                     },
                     emailValidation: {
                         emptyData: commonMessages.emptyData('Email'),
@@ -115,9 +127,6 @@ const messages = {
                     },
                     profileImageValidation: {
                         emptyData: commonMessages.emptyData('Profile image'),
-                    },
-                    sessionTokenValidation: {
-                        emptyData: commonMessages.emptyData('Session token'),
                     },
                     statusValidation: {
                         emptyData: commonMessages.emptyData('Status'),

@@ -8,24 +8,37 @@ type HealthConditions = typeof healthConditions[keyof typeof healthConditions];
 type UserStatus = typeof userStatus[keyof typeof userStatus];
 type UserType = typeof userType[keyof typeof userType];
 
-export interface UserInterface extends Document {
+export interface ContactInfoInterface {
+    phoneNumber: string;
+    address: string;
+}
+
+interface UserPersonalInfo {
     name: string;
     surname: string;
     username: string;
-    email: string;
     password: string;
-    userType: UserType;
-    status: UserStatus;
-    profileImage: string;
-    contactInfo: string;
+    email: string;
     gender: Gender;
     birthDate: Date;
+    contactInfo: ContactInfoInterface;
+}
+
+interface UserPhysicalInfo {
     weight: number;
     height: number;
     healthConditions: HealthConditions[];
     foodPreferences: FoodPreferences[];
     activityLevel: ActivityLevel;
-    sessionToken: string;
+}
+
+interface UserSystemInfo extends Document {
+    userType: UserType;
+    clients: string[];
+    status: UserStatus;
+    profileImage: string; 
     creationDate: Date;
     updatedDate: Date;
 }
+
+export type UserInterface = UserPersonalInfo & UserPhysicalInfo & UserSystemInfo;
