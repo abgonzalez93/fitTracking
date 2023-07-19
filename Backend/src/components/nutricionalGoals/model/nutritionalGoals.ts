@@ -42,10 +42,4 @@ const nutritionalGoalsSchema: Schema = new Schema({
     }
 });
 
-nutritionalGoalsSchema.pre<NutritionalGoalsInterface>('save', async function(next) {
-    // Insertar funciones pre-save
-    
-    next();
-});
-
 export default mongoose.model<NutritionalGoalsInterface>('NutritionalGoals', nutritionalGoalsSchema);
