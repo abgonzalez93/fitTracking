@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import { ErrorHandler } from '../../../middlewares/errorHandler';
-import { activityLevelValidation, birthDateValidation, clientsValidation, phoneNumberValidation, addressValidation, emailValidation, foodPreferencesValidation, genderValidation, healthConditionsValidation, heightValidation, nameValidation, passwordValidation, profileImageValidation, statusValidation, surnameValidation, userTypeValidation, usernameValidation, weightValidation  } from './fields'
+import { activityLevelValidation, birthDateValidation, clientsValidation, contactInfoValidation, emailValidation, foodPreferencesValidation, genderValidation, healthConditionsValidation, heightValidation, nameValidation, passwordValidation, profileImageValidation, statusValidation, surnameValidation, userTypeValidation, usernameValidation, weightValidation  } from './fields'
+import { nutritionalGoalsValidation } from '../../nutricionalGoals/validation/nutritionalGoalValidation';
 import messages from '../../../config/i18n/en';
 
 const userSchema = Joi.object({
@@ -13,10 +14,7 @@ const userSchema = Joi.object({
     clients: clientsValidation,
     status: statusValidation,
     profileImage: profileImageValidation,
-    contactInfo: Joi.object({
-        phoneNumber: phoneNumberValidation,
-        address: addressValidation
-    }),
+    contactInfo: contactInfoValidation,
     gender: genderValidation,
     birthDate: birthDateValidation,
     weight: weightValidation,
@@ -24,6 +22,8 @@ const userSchema = Joi.object({
     healthConditions: healthConditionsValidation,
     foodPreferences: foodPreferencesValidation,
     activityLevel: activityLevelValidation,
+    //assignedDiet: assignedDietValidation,
+    nutritionalGoals: nutritionalGoalsValidation
 });
 
 export const validateUser = (userData: any) => {

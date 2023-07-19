@@ -1,6 +1,8 @@
 const commonMessages = {
     emptyData: (field: string): string => `${field} cannot be empty`,
-    invalidData: (field: string): string => `Invalid ${field}`
+    invalidData: (field: string): string => `Invalid ${field}`,
+    mustBeNumber: (field: string): string => `${field} must be a number`,
+    mustBePositive: (field: string): string => `${field} must be a positive number`
 };
 
 const messages = {
@@ -85,14 +87,8 @@ const messages = {
                         mustBeAdvanced: 'Only advanced users can have clients'
                     },
                     contactInfoValidation: {
-                        phoneNumberValidation: {
-                            emptyData: commonMessages.emptyData('Phone number'),
-                            invalidData: commonMessages.invalidData('phone number')
-                        },
-                        addressValidation: {
-                            emptyData: commonMessages.emptyData('Address'),
-                            invalidData: commonMessages.invalidData('address')
-                        }
+                        emptyData: commonMessages.emptyData('Contact info'),
+                        invalidData: commonMessages.invalidData('contact info')
                     },
                     emailValidation: {
                         emptyData: commonMessages.emptyData('Email'),
@@ -112,7 +108,7 @@ const messages = {
                     },
                     heightValidation: {
                         invalidData: commonMessages.invalidData('height'),
-                        mustBePositive: 'Height must be a positive number'
+                        mustBePositive: commonMessages.mustBePositive('Height')
                     },
                     nameValidation: {
                         emptyData: commonMessages.emptyData('Name'),
@@ -148,10 +144,38 @@ const messages = {
                     },
                     weightValidation: {
                         invalidData: commonMessages.invalidData('weight'),
-                        mustBePositive: 'Weight must be a positive number'
+                        mustBePositive: commonMessages.mustBePositive('Weight')
                     },
                 }
-            } 
+            },
+            nutritionalGoals: {
+                validation: {
+                    caloriesPerMealValidation: {
+                        mustBeNumber: commonMessages.mustBePositive('Calories'),
+                        mustBePositive: commonMessages.mustBePositive('Calories')
+                    },
+                    caloriesValidation: {
+                        mustBeNumber: commonMessages.mustBePositive('Calories'),
+                        mustBePositive: commonMessages.mustBePositive('Calories')
+                    },
+                    carbohydratesValidation: {
+                        mustBeNumber: commonMessages.mustBePositive('Carbohydrates'),
+                        mustBePositive: commonMessages.mustBePositive('Carbohydrates')
+                    },
+                    fatsValidation: {
+                        mustBeNumber: commonMessages.mustBePositive('Fats'),
+                        mustBePositive: commonMessages.mustBePositive('Fats')
+                    },
+                    micronutrientsValidation: {
+                        mustBeNumber: commonMessages.mustBePositive('Micronutrients'),
+                        mustBePositive: commonMessages.mustBePositive('Micronutrients')
+                    },
+                    proteinsValidation: {
+                        mustBeNumber: commonMessages.mustBePositive('Proteins'),
+                        mustBePositive: commonMessages.mustBePositive('Proteins')
+                    },
+                }
+            }
         },
         database: {
             dbConnect: {
@@ -159,7 +183,7 @@ const messages = {
                     connectionShutdown: (msg: string): string => `Mongoose has been disconnected due to ${msg}`,
                 },
                 handleDBEvents: {
-                    connectionError: (error: Error): string => `Connection error: ${error.message}`,
+                    connectionError: (error: string): string => `Connection error: ${error}`,
                     startingConnection: 'Starting connection to MongoDB...',
                     connectionInitiated: 'Connection initiated, waiting for it to open...',
                     connected: 'Connected to MongoDB!',
@@ -171,7 +195,7 @@ const messages = {
                 },
                 attemptConnection: {
                     connectionFailed: (attempt: number, retryInSeconds: number): string => `Connection failed, retrying in ${retryInSeconds} seconds... (attempt ${attempt + 1})`,
-                    connectionToDatabaseError: (error: Error): string => `Error connecting to the database: ${error.message}`,
+                    connectionToDatabaseError: (error: string): string => `Error connecting to the database: ${error}`,
                     unknownDatabaseError: 'Unknown database connection error occurred',
                 }
             }

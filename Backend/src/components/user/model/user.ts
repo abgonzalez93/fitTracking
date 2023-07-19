@@ -26,6 +26,8 @@ const userSchema: Schema = new Schema({
     healthConditions: { type: [String], enum: Object.values(healthConditions), required: false },
     foodPreferences: { type: [String], enum: Object.values(foodPreferences), required: false },
     activityLevel: { type: String, enum: Object.values(activityLevel), required: false },
+    assignedDiet: { type: [{type: Types.ObjectId, ref: 'Diet'}], required: false },
+    nutritionalGoals: { type: Types.ObjectId, ref: 'NutritionalGoals', required: false },
 }, { timestamps: true });
 
 userSchema.pre<UserInterface>('save', async function(next) {

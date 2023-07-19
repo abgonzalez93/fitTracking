@@ -16,7 +16,7 @@ const connectionShutdown = (db: Connection, message: string): Promise<void> => {
 const handleDBEvents = (db: Connection): void => {
     // Handle database error
     db.on('error', (error) => {
-        throw new ErrorHandler(500, msg.handleDBEvents.connectionError(error), error.stack);
+        throw new ErrorHandler(500, msg.handleDBEvents.connectionError(error.message), error.stack);
     });
 
     // Handle start of database connection
@@ -77,7 +77,7 @@ const attemptConnection = async (maxAttempts: number): Promise<void> => {
                 await new Promise(resolve => setTimeout(resolve, config.RECONNECTION_RETRY_TIME));
             } else {
                 if(error instanceof Error){
-                    throw new ErrorHandler(500, msg.attemptConnection.connectionToDatabaseError(error), error.stack);
+                    throw new ErrorHandler(500, msg.attemptConnection.connectionToDatabaseError(error.message), error.stack);
                 } else {
                     throw new ErrorHandler(500, msg.attemptConnection.unknownDatabaseError);
                 }

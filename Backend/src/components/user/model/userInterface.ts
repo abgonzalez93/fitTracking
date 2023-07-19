@@ -1,5 +1,6 @@
 import { Document } from 'mongoose';
 import { activityLevel, foodPreferences, gender, healthConditions, userStatus, userType } from './enums'
+import { NutritionalGoalsInterface } from '../../nutricionalGoals/model/nutritionalGoalsInterface';
 
 type ActivityLevel = typeof activityLevel[keyof typeof activityLevel];
 type FoodPreferences = typeof foodPreferences[keyof typeof foodPreferences];
@@ -19,24 +20,26 @@ interface UserPersonalInfo {
     username: string;
     password: string;
     email: string;
-    gender: Gender;
-    birthDate: Date;
-    contactInfo: ContactInfoInterface;
+    gender?: Gender;
+    birthDate?: Date;
+    contactInfo?: ContactInfoInterface;
 }
 
 interface UserPhysicalInfo {
-    weight: number;
-    height: number;
-    healthConditions: HealthConditions[];
-    foodPreferences: FoodPreferences[];
-    activityLevel: ActivityLevel;
+    weight?: number;
+    height?: number;
+    healthConditions?: HealthConditions[];
+    foodPreferences?: FoodPreferences[];
+    activityLevel?: ActivityLevel;
+    assignedDiet?: string[];
+    nutritionalGoals?: NutritionalGoalsInterface;
 }
 
 interface UserSystemInfo extends Document {
     userType: UserType;
-    clients: string[];
+    clients?: string[];
     status: UserStatus;
-    profileImage: string; 
+    profileImage?: string; 
     creationDate: Date;
     updatedDate: Date;
 }
