@@ -31,7 +31,6 @@ interface UserPhysicalInfo {
     healthConditions?: HealthConditions[];
     foodPreferences?: FoodPreferences[];
     activityLevel?: ActivityLevel;
-    assignedDiet?: string[];
     nutritionalGoals?: NutritionalGoalsInterface;
 }
 

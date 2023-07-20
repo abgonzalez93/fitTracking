@@ -5,7 +5,7 @@ import { activityLevel, foodPreferences, gender, healthConditions, userStatus, u
 import { ErrorHandler } from '../../../middlewares/errorHandler';
 import messages from '../../../config/i18n/en';
   
-const userSchema: Schema = new Schema({
+const user: Schema = new Schema({
     name: { type: String, required: true },
     surname: { type: String, required: true },
     username: { type: String, required: true, unique: true },
@@ -26,11 +26,10 @@ const userSchema: Schema = new Schema({
     healthConditions: { type: [String], enum: Object.values(healthConditions), required: false },
     foodPreferences: { type: [String], enum: Object.values(foodPreferences), required: false },
     activityLevel: { type: String, enum: Object.values(activityLevel), required: false },
-    assignedDiet: { type: [{type: Types.ObjectId, ref: 'Diet'}], required: false },
     nutritionalGoals: { type: Types.ObjectId, ref: 'NutritionalGoals', required: false },
 }, { timestamps: true });
 
-userSchema.pre<UserInterface>('save', async function(next) {
+user.pre<UserInterface>('save', async function(next) {
     if (this.isModified('password')) {
         this.password = await HashService.hashPassword(this.password);
     }
@@ -42,4 +41,4 @@ userSchema.pre<UserInterface>('save', async function(next) {
     next();
 });
 
-export default mongoose.model<UserInterface>('User', userSchema);
+export default mongoose.model<UserInterface>('User', user);

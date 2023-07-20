@@ -1,17 +1,11 @@
 import mongoose, { Schema } from 'mongoose';
 import { NutritionalGoalsInterface } from './nutritionalGoalsInterface';
   
-const nutritionalGoalsSchema: Schema = new Schema({
+const nutritionalGoals: Schema = new Schema({
     calories: { type: Number, required: false },
     carbohydrates: { type: Number, required: false },
     fats: { type: Number, required: false },
     proteins: { type: Number, required: false },
-    caloriesPerMeal: {
-        breakfast: { type: Number, required: false },
-        lunch: { type: Number, required: false },
-        dinner: { type: Number, required: false },
-        snack: { type: Number, required: false },
-    },
     micronutrients: {
         vitaminA: { type: Number, required: false },
         vitaminB1: { type: Number, required: false },
@@ -42,4 +36,4 @@ const nutritionalGoalsSchema: Schema = new Schema({
     }
 });
 
-export default mongoose.model<NutritionalGoalsInterface>('NutritionalGoals', nutritionalGoalsSchema);
+export default mongoose.model<NutritionalGoalsInterface>('NutritionalGoals', nutritionalGoals);

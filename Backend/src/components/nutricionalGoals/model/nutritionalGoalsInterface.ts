@@ -3,12 +3,6 @@ export interface NutritionalGoalsInterface {
     carbohydrates?: number;
     fats?: number;
     proteins?: number;
-    caloriesPerMeal?: {
-        breakfast?: number;
-        lunch?: number;
-        dinner?: number;
-        snack?: number;
-    };
     micronutrients?: {
         vitaminA?: number;
         vitaminB1?: number;

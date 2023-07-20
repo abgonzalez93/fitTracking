@@ -4,7 +4,7 @@ import { activityLevelValidation, birthDateValidation, clientsValidation, contac
 import { nutritionalGoalsValidation } from '../../nutricionalGoals/validation/nutritionalGoalValidation';
 import messages from '../../../config/i18n/en';
 
-const userSchema = Joi.object({
+const userValidation = Joi.object({
     username: usernameValidation,
     name: nameValidation,
     surname: surnameValidation,
@@ -22,12 +22,11 @@ const userSchema = Joi.object({
     healthConditions: healthConditionsValidation,
     foodPreferences: foodPreferencesValidation,
     activityLevel: activityLevelValidation,
-    //assignedDiet: assignedDietValidation,
     nutritionalGoals: nutritionalGoalsValidation
 });
 
 export const validateUser = (userData: any) => {
-    const validationResult = userSchema.validate(userData, { abortEarly: false });
+    const validationResult = userValidation.validate(userData, { abortEarly: false });
 
     if (validationResult.error) {
         throw new ErrorHandler(400, messages.src.components.user.validation.invalidUserData(validationResult.error.details[0].message));
