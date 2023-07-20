@@ -9,5 +9,5 @@ export const passwordValidation = Joi.string().min(8).max(100)
     'string.empty': msg.emptyData,
     'string.min': msg.minLength,
     'string.max': msg.maxLength,
-    'string.pattern.base': msg.mustContain
+    'string.pattern.base': msg.mustContain,
 });

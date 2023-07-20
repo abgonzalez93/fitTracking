@@ -6,5 +6,5 @@ const msg = messages.src.components.user.validation.userTypeValidation;
 
 export const userTypeValidation = Joi.string().valid(...Object.values(userType)).required().messages({
     'string.empty': msg.emptyData,
-    'any.only': msg.mustBeOneOfTheFollowing(Object.values(userType).join(', '))
+    'any.only': msg.mustBeOneOfTheFollowing(Object.values(userType).join(', ')),
 });

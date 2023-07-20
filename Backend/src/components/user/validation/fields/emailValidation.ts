@@ -5,5 +5,5 @@ const msg = messages.src.components.user.validation.emailValidation;
 
 export const emailValidation = Joi.string().email().required().messages({
     'string.empty': msg.emptyData,
-    'string.email': msg.invalidData
+    'string.email': msg.invalidData,
 });

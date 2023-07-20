@@ -1,8 +1,11 @@
 const commonMessages = {
     emptyData: (field: string): string => `${field} cannot be empty`,
     invalidData: (field: string): string => `Invalid ${field}`,
+    mustBeArray: (field: string): string => `${field} must be an array`,
     mustBeNumber: (field: string): string => `${field} must be a number`,
-    mustBePositive: (field: string): string => `${field} must be a positive number`
+    mustBePositive: (field: string): string => `${field} must be a positive number`,
+    mustBeString: (field: string): string => `${field} must be a string`,
+    mustBeOneOfTheFollowing: (field: string) => { return (array: string): string => `${field} must be one of the following ${array}`; }
 };
 
 const messages = {
@@ -75,36 +78,33 @@ const messages = {
                 validation: {
                     invalidUserData: (error: string): string => `${error}. Invalid user data`,
                     activityLevelValidation: {
-                        emptyData: commonMessages.emptyData('Activity level'),
-                        mustBeOneOfTheFollowing: (activityLevel: string): string => `Activity level must be one of the following ${activityLevel}`
+                        mustBeOneOfTheFollowing: commonMessages.mustBeOneOfTheFollowing('Activity level')
                     },
                     birthDateValidation: {
                         invalidData: commonMessages.invalidData('date format')
                     },
                     clientsValidation: {
-                        mustBeAnArray: 'Clients must be an array',
+                        mustBeArray: commonMessages.mustBeArray('Clients'),
                         invalidData: commonMessages.invalidData('client'),
                         mustBeAdvanced: 'Only advanced users can have clients'
                     },
                     contactInfoValidation: {
-                        emptyData: commonMessages.emptyData('Contact info'),
                         invalidData: commonMessages.invalidData('contact info')
                     },
                     emailValidation: {
                         emptyData: commonMessages.emptyData('Email'),
-                        invalidData: commonMessages.invalidData('email')
+                        invalidData: commonMessages.invalidData('email'),
                     },
                     foodPreferencesValidation: {
-                        mustBeAnArray: 'Food preferences must be an array',
-                        mustBeOneOfTheFollowing: (foodPreferences: string): string => `Food preferences must be one of the following ${foodPreferences}`
+                        mustBeArray: commonMessages.mustBeArray('Food preferences'),
+                        mustBeOneOfTheFollowing: commonMessages.mustBeOneOfTheFollowing('Food preferences')
                     },
                     genderValidation: {
-                        emptyData: commonMessages.emptyData('Gender'),
-                        mustBeOneOfTheFollowing: (gender: string): string => `Gender must be one of the following ${gender}`
+                        mustBeOneOfTheFollowing: commonMessages.mustBeOneOfTheFollowing('Gender')
                     },
                     healthConditionsValidation: {
-                        mustBeAnArray: 'Health conditions must be an array',
-                        mustBeOneOfTheFollowing: (healthCondition: string): string => `Health condition must be one of the following ${healthCondition}`
+                        mustBeArray: commonMessages.mustBeArray('Health conditions'),
+                        mustBeOneOfTheFollowing: commonMessages.mustBeOneOfTheFollowing('Health condition')
                     },
                     heightValidation: {
                         invalidData: commonMessages.invalidData('height'),
@@ -113,20 +113,18 @@ const messages = {
                     nameValidation: {
                         emptyData: commonMessages.emptyData('Name'),
                         minLength: 'Name should have a minimum length of 1',
-                        maxLength: 'Name should have a maximum length of 100'
+                        maxLength: 'Name should have a maximum length of 100',
                     },
                     passwordValidation: {
                         emptyData: commonMessages.emptyData('Password'),
                         minLength: 'Password should have a minimum length of 8',
                         maxLength: 'Password should have a maximum length of 100',
-                        mustContain: 'Password must contain at least 2 digits, 1 uppercase letter, 1 lowercase letter, and 1 special character'
+                        mustContain: 'Password must contain at least 2 digits, 1 uppercase letter, 1 lowercase letter, and 1 special character',
                     },
-                    profileImageValidation: {
-                        emptyData: commonMessages.emptyData('Profile image'),
-                    },
+                    profileImageValidation: {},
                     statusValidation: {
                         emptyData: commonMessages.emptyData('Status'),
-                        mustBeOneOfTheFollowing: (userStatus: string): string => `Status must be one of the following ${userStatus}`
+                        mustBeOneOfTheFollowing: commonMessages.mustBeOneOfTheFollowing('Status')
                     },
                     surnameValidation: {
                         emptyData: commonMessages.emptyData('Surname'),
@@ -140,7 +138,7 @@ const messages = {
                     },
                     userTypeValidation: {
                         emptyData: commonMessages.emptyData('User type'),
-                        mustBeOneOfTheFollowing: (userType: string): string => `User type must be one of the following ${userType}`
+                        mustBeOneOfTheFollowing: commonMessages.mustBeOneOfTheFollowing('User type')
                     },
                     weightValidation: {
                         invalidData: commonMessages.invalidData('weight'),
@@ -173,6 +171,26 @@ const messages = {
                     proteinsValidation: {
                         mustBeNumber: commonMessages.mustBePositive('Proteins'),
                         mustBePositive: commonMessages.mustBePositive('Proteins')
+                    },
+                }
+            },
+            diet: {
+                validation: {
+                    descriptionValidation: {
+                        mustBeString: commonMessages.mustBeString('Description'),
+                    },
+                    mealsValidation: {
+                        emptyData: commonMessages.emptyData('At least, one meal ID is required. Meals'),
+                        mustBeArray: commonMessages.mustBeArray('Meals'),
+                        mustBeString: commonMessages.mustBeString('Each meal ID'),
+                    },
+                    nameValidation: {
+                        emptyData: commonMessages.emptyData('Name'),
+                        mustBeString: commonMessages.mustBeString('Name'),
+                    },
+                    userValidation: {
+                        emptyData: commonMessages.emptyData('User'),
+                        mustBeString: commonMessages.mustBeString('User'),
                     },
                 }
             }

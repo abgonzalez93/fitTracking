@@ -9,7 +9,7 @@ export const clientsValidation = Joi.array().items(Joi.string().regex(/^[0-9a-fA
     then: Joi.optional(),
     otherwise: Joi.forbidden()
 }).messages({
-    'array.base': msg.mustBeAnArray,
+    'array.base': msg.mustBeArray,
     'string.pattern.base': msg.invalidData,
     'any.only': msg.mustBeAdvanced
 });

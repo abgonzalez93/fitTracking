@@ -7,6 +7,5 @@ export const contactInfoValidation = Joi.object({
     phoneNumberValidation: Joi.string().optional(),
     addressValidation: Joi.string().optional(),
 }).optional().messages({
-    'string.empty': msg.emptyData,
     'string.invalid': msg.invalidData,
 });

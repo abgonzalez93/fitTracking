@@ -6,5 +6,5 @@ const msg = messages.src.components.user.validation.surnameValidation;
 export const surnameValidation = Joi.string().min(1).max(100).required().messages({
     'string.empty': msg.emptyData,
     'string.min': msg.minLength,
-    'string.max': msg.maxLength
+    'string.max': msg.maxLength,
 });
