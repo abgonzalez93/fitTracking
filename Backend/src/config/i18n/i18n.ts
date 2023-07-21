@@ -1,13 +1,12 @@
-import en from './messages/messages';
-//import es from './translates/es';
+import i18n from 'i18n';
 
-export function getTranslation(lang: string) {
-    switch(lang) {
-        case 'en':
-            return en;
-        //case 'es':
-            //return es;
-        default:
-            return en;
-    }
+export const configureI18n = (i18nInstance: typeof i18n) => {
+    i18nInstance.configure({
+        locales: ['en', 'es'],
+        directory: __dirname + '/translations',
+        defaultLocale: 'en',
+        autoReload: true,
+        objectNotation: true,
+        register: global
+    });
 }

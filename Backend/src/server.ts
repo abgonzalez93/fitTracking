@@ -5,11 +5,19 @@ import dbConnect from './database/dbConnect';
 import config from './config/config';
 import dotenv from 'dotenv';
 import path from 'path';
+//import i18n from 'i18n';
+//import { configureI18n } from './config/i18n/i18n';
 
 dotenv.config({path: path.resolve(__dirname, '../.env')});
 
 const app: Express = express();
 const port: number = config.PORT;
+
+// Configure i18n
+//configureI18n(i18n);
+
+// Initialize i18n module
+//app.use(i18n.init); 
 
 // Apply middleware
 applyMiddleware(app);
