@@ -1,5 +1,17 @@
 import { commonMessages } from "../commonMessages";
 
+function createField(fieldName: string) {
+    return {
+        emptyData: commonMessages.emptyData(fieldName),
+        invalidData: commonMessages.invalidData(fieldName),
+        mustBeArray: commonMessages.mustBeArray(fieldName),
+        mustBePositive: commonMessages.mustBePositive(fieldName),
+        minLength: commonMessages.minLength(fieldName),
+        maxLength: commonMessages.maxLength(fieldName),
+        mustBeOneOfTheFollowing: commonMessages.mustBeOneOfTheFollowing(fieldName)
+    };
+}
+
 const enums = {
     activityLevel: {
         sedentary: 'Sedentary',
@@ -13,7 +25,7 @@ const enums = {
         vegan: 'Vegan',
         pescetarian: 'Pescetarian',
         glutenFree: 'Gluten free',
-        lactoseFree: 'Lactose free'
+        lactoseFree: 'Lactose free',
     },
     gender: {
         male: 'Male',
@@ -63,78 +75,31 @@ const service = {
 
 const validation = {
     invalidUserData: (error: string): string => `${error}. Invalid user data`,
-    activityLevelValidation: {
-        mustBeOneOfTheFollowing: commonMessages.mustBeOneOfTheFollowing('Activity level')
-    },
-    birthDateValidation: {
-        invalidData: commonMessages.invalidData('date format')
-    },
+    activityLevelValidation: createField('Activity level'),
+    birthDateValidation: createField('Date format'),
     clientsValidation: {
-        mustBeArray: commonMessages.mustBeArray('Clients'),
-        invalidData: commonMessages.invalidData('client'),
-        mustBeAdvanced: 'Only advanced users can have clients'
-    },
+        ...createField('Clients'),
+        mustBeAdvanced: 'Only advanced users can have clients' },
     contactInfoValidation: {
-        phoneNumberValidation: {
-            invalidData: commonMessages.invalidData('phone number')
-        },
-        addressValidation: {
-            invalidData: commonMessages.invalidData('address')
-        }
+        phoneNumberValidation: createField('Phone number'),
+        addressValidation: createField('Address'),
     },
-    emailValidation: {
-        emptyData: commonMessages.emptyData('Email'),
-        invalidData: commonMessages.invalidData('email'),
-    },
-    foodPreferencesValidation: {
-        mustBeArray: commonMessages.mustBeArray('Food preferences'),
-        mustBeOneOfTheFollowing: commonMessages.mustBeOneOfTheFollowing('Food preferences')
-    },
-    genderValidation: {
-        mustBeOneOfTheFollowing: commonMessages.mustBeOneOfTheFollowing('Gender')
-    },
-    healthConditionsValidation: {
-        mustBeArray: commonMessages.mustBeArray('Health conditions'),
-        mustBeOneOfTheFollowing: commonMessages.mustBeOneOfTheFollowing('Health condition')
-    },
-    heightValidation: {
-        invalidData: commonMessages.invalidData('height'),
-        mustBePositive: commonMessages.mustBePositive('Height')
-    },
-    nameValidation: {
-        emptyData: commonMessages.emptyData('Name'),
-        minLength: commonMessages.minLength('Activity level'),
-        maxLength: commonMessages.maxLength('Activity level'),
-    },
+    emailValidation: createField('Email'),
+    foodPreferencesValidation: createField('Food preferences'),
+    genderValidation: createField('Gender'),
+    healthConditionsValidation: createField('Health conditions'),
+    heightValidation: createField('height'),
+    nameValidation: createField('Name'),
     passwordValidation: {
-        emptyData: commonMessages.emptyData('Password'),
-        minLength: commonMessages.minLength('Password'),
-        maxLength: commonMessages.maxLength('Password'),
+        ...createField('Password'),
         mustContain: 'Password must contain at least 2 digits, 1 uppercase letter, 1 lowercase letter, and 1 special character',
     },
     profileImageValidation: {},
-    statusValidation: {
-        emptyData: commonMessages.emptyData('Status'),
-        mustBeOneOfTheFollowing: commonMessages.mustBeOneOfTheFollowing('Status')
-    },
-    surnameValidation: {
-        emptyData: commonMessages.emptyData('Surname'),
-        minLength: commonMessages.minLength('Surname'),
-        maxLength: commonMessages.maxLength('Surname'),
-    },
-    usernameValidation: {
-        emptyData: commonMessages.emptyData('Username'),
-        minLength: commonMessages.minLength('Username'),
-        maxLength: commonMessages.maxLength('Username'),
-    },
-    userTypeValidation: {
-        emptyData: commonMessages.emptyData('User type'),
-        mustBeOneOfTheFollowing: commonMessages.mustBeOneOfTheFollowing('User type')
-    },
-    weightValidation: {
-        invalidData: commonMessages.invalidData('weight'),
-        mustBePositive: commonMessages.mustBePositive('Weight')
-    },
+    statusValidation: createField('Status'),
+    surnameValidation: createField('Surname'),
+    usernameValidation: createField('Username'),
+    userTypeValidation: createField('User type'),
+    weightValidation: createField('Weight'),
 };
 
 export const userMessages = {
