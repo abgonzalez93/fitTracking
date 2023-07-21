@@ -3,7 +3,6 @@ import { applyMiddleware } from './middlewares/middlewares';
 import routes from './routes/routes';
 import dbConnect from './database/dbConnect';
 import config from './config/config';
-import messages from './config/i18n/en/messages';
 import dotenv from 'dotenv';
 import path from 'path';
 
@@ -24,4 +23,4 @@ app.use(routes);
 // Serve static files
 app.use(express.static('public'));
 
-app.listen(port, () => console.log(messages.server.runningPort(port)));
+app.listen(port);
