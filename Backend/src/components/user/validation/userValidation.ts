@@ -2,7 +2,7 @@ import Joi from 'joi';
 import { ErrorHandler } from '../../../middlewares/errorHandler';
 import { activityLevelValidation, birthDateValidation, clientsValidation, contactInfoValidation, emailValidation, foodPreferencesValidation, genderValidation, healthConditionsValidation, heightValidation, nameValidation, passwordValidation, profileImageValidation, statusValidation, surnameValidation, userTypeValidation, usernameValidation, weightValidation  } from './fields'
 import { nutritionalGoalsValidation } from '../../nutricionalGoals/validation/nutritionalGoalValidation';
-import messages from '../../../config/i18n/en';
+import messages from '../../../config/i18n/en/messages';
 
 const userValidation = Joi.object({
     username: usernameValidation,

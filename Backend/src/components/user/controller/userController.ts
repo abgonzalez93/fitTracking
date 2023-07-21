@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import UserService from '../service/userService';
 import asyncHandler from '../../../middlewares/asyncHandler';
 import { validateUser } from '../validation/userValidation';
-import messages from '../../../config/i18n/en'
+import messages from '../../../config/i18n/en/messages'
 
 const msg = messages.src.components.user.controller;
 

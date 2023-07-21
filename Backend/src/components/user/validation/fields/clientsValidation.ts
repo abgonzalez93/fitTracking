@@ -1,10 +1,11 @@
 import Joi from 'joi';
 import { userType } from '../../model/enums';
-import messages from '../../../../config/i18n/en';
+import messages from '../../../../config/i18n/en/messages';
 
 const msg = messages.src.components.user.validation.clientsValidation;
 
-export const clientsValidation = Joi.array().items(Joi.string().regex(/^[0-9a-fA-F]{24}$/)).when('userType', {
+export const clientsValidation = Joi.array().items(Joi.string().regex(/^[0-9a-fA-F]{24}$/))
+.when('userType', {
     is: userType.Advanced,
     then: Joi.optional(),
     otherwise: Joi.forbidden()

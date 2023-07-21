@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { userStatus } from '../../model/enums';
-import messages from '../../../../config/i18n/en';
+import messages from '../../../../config/i18n/en/messages';
 
 const msg = messages.src.components.user.validation.statusValidation;
 

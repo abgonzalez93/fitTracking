@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { healthConditions } from '../../model/enums'
-import messages from '../../../../config/i18n/en';
+import messages from '../../../../config/i18n/en/messages';
 
 const msg = messages.src.components.user.validation.healthConditionsValidation;
 

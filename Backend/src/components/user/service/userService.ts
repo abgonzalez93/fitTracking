@@ -3,7 +3,7 @@ import { ErrorHandler } from '../../../middlewares/errorHandler';
 import { UserInterface } from '../model/userInterface';
 import User from '../model/user';
 import HashService from '../../../utils/hashService';
-import messages from '../../../config/i18n/en'
+import messages from '../../../config/i18n/en/messages'
 
 const msg = messages.src.components.user.service;
 

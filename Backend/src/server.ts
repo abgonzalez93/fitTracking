@@ -3,7 +3,7 @@ import { applyMiddleware } from './middlewares/middlewares';
 import routes from './routes/routes';
 import dbConnect from './database/dbConnect';
 import config from './config/config';
-import messages from './config/i18n/en';
+import messages from './config/i18n/en/messages';
 import dotenv from 'dotenv';
 import path from 'path';
 

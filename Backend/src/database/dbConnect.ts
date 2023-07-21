@@ -1,7 +1,7 @@
 import mongoose, { Connection } from 'mongoose';
 import { ErrorHandler } from '../middlewares/errorHandler';
 import config from '../config/config';
-import messages from '../config/i18n/en';
+import messages from '../config/i18n/en/messages';
 
 const msg = messages.src.database.dbConnect;
 
