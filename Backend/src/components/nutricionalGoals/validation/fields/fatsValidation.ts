@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import messages from '../../../../config/i18n/en/messages';
+import messages from '../../../../config/i18n/messages/messages';
 
 const msg = messages.src.components.nutritionalGoals.validation.fatsValidation;
 

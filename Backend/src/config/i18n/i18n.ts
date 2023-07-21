@@ -1,4 +1,4 @@
-import en from './en/messages';
+import en from './messages/messages';
 //import es from './translates/es';
 
 export function getTranslation(lang: string) {

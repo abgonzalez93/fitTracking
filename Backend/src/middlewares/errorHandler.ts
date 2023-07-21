@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import messages from '../config/i18n/en/messages';
+import messages from '../config/i18n/messages/messages';
 
 export class ErrorHandler extends Error {
     statusCode: number;

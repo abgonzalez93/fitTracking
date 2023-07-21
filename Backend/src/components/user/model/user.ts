@@ -3,7 +3,7 @@ import HashService from '../../../utils/hashService';
 import { UserInterface } from './userInterface';
 import { activityLevel, foodPreferences, gender, healthConditions, userStatus, userType } from './enums'
 import { ErrorHandler } from '../../../middlewares/errorHandler';
-import messages from '../../../config/i18n/en/messages';
+import messages from '../../../config/i18n/messages/messages';
   
 const user: Schema = new Schema({
     name: { type: String, required: true },
