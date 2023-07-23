@@ -137,7 +137,7 @@ export const es = {
     },
     commonMessages: {
         emptyData: 'no puede estar vacío',
-        invalidData: 'Inválido',
+        invalidData: 'Datos inválidos para',
         mustBeArray: 'debe ser un array',
         mustBeNumber: 'debe ser un número',
         mustBePositive: 'debe ser un número positivo',

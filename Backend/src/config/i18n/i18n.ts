@@ -1,12 +1,16 @@
-import i18n from 'i18n';
-
-export const configureI18n = (i18nInstance: typeof i18n) => {
-    i18nInstance.configure({
-        locales: ['en', 'es'],
-        directory: __dirname + '/translations',
-        defaultLocale: 'en',
-        autoReload: true,
-        objectNotation: true,
-        register: global
-    });
+export async function loadLanguage(userLang: string) {
+    try {
+      const module = await import(`./translations/${userLang}`);
+      return module[userLang];
+    } catch (err) {
+      console.error(`Error loading language file: ${userLang}`, err);
+      // Load default language if user's language file is not found
+        try {
+            const defaultModule = await import(`./translations/en`);
+            return defaultModule['en'];
+        } catch (err) {
+            console.error("Error loading default language file: en", err);
+            throw err;  // Re-throw the error to be handled in the calling code
+        }
+    }
 }
