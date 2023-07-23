@@ -1,15 +1,11 @@
-import { es } from "../../translations/es";
+import i18n from "../../i18n";
 import { createField } from "../../utils/fieldNameCreator";
 
-const translation = es.components.diet;
-
-const validation = {
-    descriptionValidation: createField(translation.validation.descriptionValidation),
-    mealsValidation: createField(translation.validation.mealsValidation),
-    nameValidation: createField(translation.validation.nameValidation),
-    userValidation: createField(translation.validation.userValidation),
-};
-
-export const dietMessages = {
-    validation
+export const getDietMessages = {
+    validation: {
+        descriptionValidation: createField(i18n.__('components.diet.validation.descriptionValidation')),
+        mealsValidation: createField(i18n.__('components.diet.validation.mealsValidation')),
+        nameValidation: createField(i18n.__('components.diet.validation.nameValidation')),
+        userValidation: createField(i18n.__('components.diet.validation.userValidation')),
+    }
 };

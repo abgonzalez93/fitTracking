@@ -1,8 +1,8 @@
 import Joi from 'joi';
 import { userType } from '../../model/enums';
-import messages from '../../../../config/i18n/messages/messages';
+import { getUserMessages } from '../../../../config/i18n/messages/components/userMessages';
 
-const msg = messages.src.components.user.validation.clientsValidation;
+const msg = getUserMessages.validation.clientsValidation;
 
 export const clientsValidation = Joi.array().items(Joi.string().regex(/^[0-9a-fA-F]{24}$/))
 .when('userType', {

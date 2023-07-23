@@ -1,7 +1,7 @@
 import Joi from 'joi';
-import messages from '../../../../config/i18n/messages/messages';
+import { getUserMessages } from '../../../../config/i18n/messages/components/userMessages';
 
-const msg = messages.src.components.user.validation.contactInfoValidation;
+const msg = getUserMessages.validation.contactInfoValidation;
 
 export const contactInfoValidation = Joi.object({
     phoneNumberValidation: Joi.string()

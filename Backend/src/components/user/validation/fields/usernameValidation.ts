@@ -1,7 +1,7 @@
 import Joi from 'joi';
-import messages from '../../../../config/i18n/messages/messages';
+import { getUserMessages } from '../../../../config/i18n/messages/components/userMessages';
 
-const msg = messages.src.components.user.validation.usernameValidation;
+const msg = getUserMessages.validation.usernameValidation;
 
 export const usernameValidation = Joi.string().min(1).max(100).required().messages({
     'string.empty': msg.emptyData,

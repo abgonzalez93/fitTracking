@@ -1,13 +1,13 @@
 import Joi from 'joi';
-import messages from '../../../../config/i18n/messages/messages';
 import { micronutrients } from './micronutrients/micronutrients';
+import { getNutritionalGoalsMessages } from '../../../../config/i18n/messages/components/nutritionalGoalsMessages';
 
 let validation: { [key: string]: any; } = {};
 
 micronutrients.forEach((micronutrient) => {
     validation[micronutrient] = Joi.number().positive().optional().messages({
-        'number.base': messages.src.components.nutritionalGoals.validation.micronutrientsValidation[micronutrient].mustBeNumber,
-        'number.positive': messages.src.components.nutritionalGoals.validation.micronutrientsValidation[micronutrient].mustBePositive,
+        'number.base': getNutritionalGoalsMessages.validation.micronutrientsValidation[micronutrient].mustBeNumber,
+        'number.positive': getNutritionalGoalsMessages.validation.micronutrientsValidation[micronutrient].mustBePositive,
     });
 });
 

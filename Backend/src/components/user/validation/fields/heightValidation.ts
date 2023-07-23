@@ -1,7 +1,7 @@
 import Joi from 'joi';
-import messages from '../../../../config/i18n/messages/messages';
+import { getUserMessages } from '../../../../config/i18n/messages/components/userMessages';
 
-const msg = messages.src.components.user.validation.heightValidation;
+const msg = getUserMessages.validation.heightValidation;
 
 export const heightValidation = Joi.number().positive().optional().messages({
     'number.base': msg.invalidData,

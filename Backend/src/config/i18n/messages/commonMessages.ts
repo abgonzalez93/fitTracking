@@ -1,15 +1,13 @@
-import { es } from "../translations/es";
+import i18n from "../i18n";
 
-const translation = es.commonMessages;
-
-export const commonMessages = {
-    emptyData: (field: string): string => `${field} ${translation.emptyData}`,
-    invalidData: (field: string): string => `${translation.invalidData} ${field}`,
-    mustBeArray: (field: string): string => `${field} ${translation.mustBeArray}`,
-    mustBeNumber: (field: string): string => `${field} ${translation.mustBeNumber}`,
-    mustBePositive: (field: string): string => `${field} ${translation.mustBePositive}`,
-    mustBeString: (field: string): string => `${field} ${translation.mustBeString}`,
-    mustBeOneOfTheFollowing: (field: string) => { return (array: string): string => `${field} ${translation.mustBeOneOfTheFollowing} ${array}`; },
-    minLength: (field: string) => { return (length: string): string => `${field} ${translation.minLength} ${length}`; },
-    maxLength: (field: string) => { return (length: string): string => `${field} ${translation.maxLength} ${length}`; },
+export const getCommonMessages = {
+    emptyData: (field: string): string => i18n.__('commonMessages.emptyData', {field}),
+    invalidData: (field: string): string => i18n.__('commonMessages.invalidData', {field}),
+    mustBeArray: (field: string): string => i18n.__('commonMessages.mustBeArray', {field}),
+    mustBeNumber: (field: string): string => i18n.__('commonMessages.mustBeNumber', {field}),
+    mustBePositive: (field: string): string => i18n.__('commonMessages.mustBePositive', {field}),
+    mustBeString: (field: string): string => i18n.__('commonMessages.mustBeString', {field}),
+    mustBeOneOfTheFollowing: (field: string) => (array: string[]): string => i18n.__('commonMessages.mustBeOneOfTheFollowing', {field, array: array.join(", ")}),
+    minLength: (field: string) => (length: string): string => i18n.__('commonMessages.minLength', {field, length}),
+    maxLength: (field: string) => (length: string): string => i18n.__('commonMessages.maxLength', {field, length}),
 };

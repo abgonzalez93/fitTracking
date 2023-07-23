@@ -1,6 +1,6 @@
-import messages from "../../../../config/i18n/messages/messages";
+import { getUserMessages } from "../../../../config/i18n/messages/components/userMessages";
 
-const msg = messages.src.components.user.model.enums.activityLevel;
+const msg = getUserMessages.model.enums.activityLevel;
 
 export const activityLevel = {
     Sedentary: msg.sedentary,

@@ -1,10 +1,10 @@
 import Joi from 'joi';
 import { healthConditions } from '../../model/enums'
-import messages from '../../../../config/i18n/messages/messages';
+import { getUserMessages } from '../../../../config/i18n/messages/components/userMessages';
 
-const msg = messages.src.components.user.validation.healthConditionsValidation;
+const msg = getUserMessages.validation.healthConditionsValidation;
 
 export const healthConditionsValidation = Joi.array().items(Joi.string().valid(...Object.values(healthConditions))).optional().messages({
     'array.base': msg.mustBeArray,
-    'any.only': msg.mustBeOneOfTheFollowing(Object.values(healthConditions).join(', ')),
+    'any.only': msg.mustBeOneOfTheFollowing(Object.values(healthConditions)),
 });

@@ -3,7 +3,7 @@ import HashService from '../../../utils/hashService';
 import { UserInterface } from './userInterface';
 import { activityLevel, foodPreferences, gender, healthConditions, userStatus, userType } from './enums'
 import { ErrorHandler } from '../../../middlewares/errorHandler';
-import messages from '../../../config/i18n/messages/messages';
+import { getUserMessages } from '../../../config/i18n/messages/components/userMessages';
   
 const user: Schema = new Schema({
     name: { type: String, required: true },
@@ -35,7 +35,7 @@ user.pre<UserInterface>('save', async function(next) {
     }
 
     if (this.isModified('clients') && this.userType !== userType.Advanced) {
-        throw new ErrorHandler(400, messages.src.components.user.validation.clientsValidation.mustBeAdvanced);
+        throw new ErrorHandler(400, getUserMessages.validation.clientsValidation.mustBeAdvanced);
     }
 
     next();

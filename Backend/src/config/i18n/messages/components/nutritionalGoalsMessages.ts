@@ -1,20 +1,16 @@
+import i18n from "../../i18n";
 import { micronutrients } from "../../../../components/nutricionalGoals/validation/fields/micronutrients/micronutrients";
-import { es } from "../../translations/es";
 import { createField } from "../../utils/fieldNameCreator";
 
-const translation = es.components.nutritionGoals;
-
-const validation = {
-    caloriesValidation: createField(translation.validation.caloriesValidation),
-    carbohydratesValidation: createField(translation.validation.carbohydratesValidation),
-    fatsValidation: createField(translation.validation.fatsValidation),
-    micronutrientsValidation: micronutrients.reduce((messages: any, micronutrient: string) => {
-        messages[micronutrient] = createField(micronutrient)
-        return messages;
-    }, {}),
-    proteinsValidation: createField(translation.validation.proteinsValidation),
-};
-
-export const nutritionalGoalsMessages = {
-    validation
+export const getNutritionalGoalsMessages = {
+    validation: {
+        caloriesValidation: createField(i18n.__('components.nutritionGoals.validation.caloriesValidation')),
+        carbohydratesValidation: createField(i18n.__('components.nutritionGoals.validation.carbohydratesValidation')),
+        fatsValidation: createField(i18n.__('components.nutritionGoals.validation.fatsValidation')),
+        micronutrientsValidation: micronutrients.reduce((messages: any, micronutrient: string) => {
+            messages[micronutrient] = createField(micronutrient)
+            return messages;
+        }, {}),
+        proteinsValidation: createField(i18n.__('components.nutritionGoals.validation.proteinsValidation')),
+    }
 };

@@ -1,7 +1,7 @@
 import Joi from 'joi';
-import messages from '../../../../config/i18n/messages/messages';
+import { getDietMessages } from '../../../../config/i18n/messages/components/dietMessages';
 
-const msg = messages.src.components.diet.validation.userValidation;
+const msg = getDietMessages.validation.userValidation;
 
 export const userValidation = Joi.string().required().messages({
     'string.empty': msg.emptyData,

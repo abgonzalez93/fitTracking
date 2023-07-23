@@ -1,31 +1,23 @@
-import { es } from "../../translations/es";
+import i18n from "../../i18n";
 
-const translation = es.database;
-
-const connectionShutdown = {
-    connectionShutdown: (msg: string): string => `${translation.connectionShutdown.connectionShutdown} ${msg}`,
-}
-
-const handleDBEvents = {
-    connectionError: (error: string): string => `${translation.handleDBEvents.connectionError} ${error}`,
-    startingConnection: translation.handleDBEvents.startingConnection,
-    connectionInitiated: translation.handleDBEvents.connectionInitiated,
-    connected: translation.handleDBEvents.connected,
-    disconnecting: translation.handleDBEvents.disconnecting,
-    connectionClosed: translation.handleDBEvents.connectionClosed,
-    successfulReconnection: translation.handleDBEvents.successfulReconnection,
-    nodemonRestart: translation.handleDBEvents.nodemonRestart,
-    applicationTermination: translation.handleDBEvents.applicationTermination,
-}
-
-const attemptConnection = {
-    connectionFailed: (attempt: number, retryInSeconds: number): string => `${translation.attemptConnection.connectionFailed.connection} ${retryInSeconds} ${translation.attemptConnection.connectionFailed.seconds} ${translation.attemptConnection.connectionFailed.attempt} ${attempt + 1}`,
-    connectionToDatabaseError: (error: string): string => `${translation.attemptConnection.connectionToDatabaseError} ${error}`,
-    unknownDatabaseError: translation.attemptConnection.unknownDatabaseError,
-}
-
-export const databaseMessages = {
-    connectionShutdown,
-    handleDBEvents,
-    attemptConnection
+export const getDatabaseMessages = {
+    connectionShutdown: {
+        connectionShutdown: (msg: string): string => i18n.__('database.connectionShutdown.connectionShutdown', { msg: msg })
+    },
+    handleDBEvents: {
+        connectionError: (error: string): string => i18n.__('database.handleDBEvents.connectionError', { error: error }),
+        startingConnection: i18n.__('database.handleDBEvents.startingConnection'),
+        connectionInitiated: i18n.__('database.handleDBEvents.connectionInitiated'),
+        connected: i18n.__('database.handleDBEvents.connected'),
+        disconnecting: i18n.__('database.handleDBEvents.disconnecting'),
+        connectionClosed: i18n.__('database.handleDBEvents.connectionClosed'),
+        successfulReconnection: i18n.__('database.handleDBEvents.successfulReconnection'),
+        nodemonRestart: i18n.__('database.handleDBEvents.nodemonRestart'),
+        applicationTermination: i18n.__('database.handleDBEvents.applicationTermination'),
+    },
+    attemptConnection: {
+        connectionFailed: (attempt: number, retryInSeconds: number): string => i18n.__('database.attemptConnection.connectionFailed', { retry: retryInSeconds.toString(), attempt: (attempt + 1).toString() }),
+        connectionToDatabaseError: (error: string): string => i18n.__('database.attemptConnection.connectionToDatabaseError', error),
+        unknownDatabaseError: i18n.__('database.attemptConnection.unknownDatabaseError'),
+    }
 };

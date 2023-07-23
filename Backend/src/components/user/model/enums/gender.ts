@@ -1,6 +1,6 @@
-import messages from "../../../../config/i18n/messages/messages";
+import { getUserMessages } from "../../../../config/i18n/messages/components/userMessages";
 
-const msg = messages.src.components.user.model.enums.gender;
+const msg = getUserMessages.model.enums.gender;
 
 export const gender = {
     Male: msg.male,

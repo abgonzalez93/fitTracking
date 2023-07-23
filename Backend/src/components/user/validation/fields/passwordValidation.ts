@@ -1,7 +1,7 @@
 import Joi from 'joi';
-import messages from '../../../../config/i18n/messages/messages';
+import { getUserMessages } from '../../../../config/i18n/messages/components/userMessages';
 
-const msg = messages.src.components.user.validation.passwordValidation;
+const msg = getUserMessages.validation.passwordValidation;
 
 export const passwordValidation = Joi.string().min(8).max(100)
     .pattern(new RegExp('^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9].*[0-9])(?=.*[^a-zA-Z0-9])(?!.*[\\s]).*$'))

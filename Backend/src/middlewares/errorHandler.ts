@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import messages from '../config/i18n/messages/messages';
+import { getErrorHandlerMessages } from '../config/i18n/messages/middlewares/errorHandlerMessages';
 
 export class ErrorHandler extends Error {
     statusCode: number;
@@ -18,7 +18,8 @@ export const handleError = (err: ErrorHandler, req: Request, res: Response, next
     let { statusCode, message } = err;
 
     statusCode = statusCode || 500;
-    message = message || messages.src.middlewares.errorHandler.handleError.internalServerError;
+
+    message = message || getErrorHandlerMessages.handleError.internalServerError();
 
     let errorResponse: { status: string; statusCode: number; message: string; stack?: string } = {
         status: 'error',

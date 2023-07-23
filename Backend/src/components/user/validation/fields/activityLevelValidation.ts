@@ -1,9 +1,9 @@
 import Joi from 'joi';
 import { activityLevel } from '../../model/enums'
-import messages from '../../../../config/i18n/messages/messages';
+import { getUserMessages } from '../../../../config/i18n/messages/components/userMessages';
 
-const msg = messages.src.components.user.validation.activityLevelValidation;
+const msg = getUserMessages.validation.activityLevelValidation;
 
 export const activityLevelValidation = Joi.string().valid(...Object.values(activityLevel)).optional().messages({
-    'any.only': msg.mustBeOneOfTheFollowing(Object.values(activityLevel).join(', ')),
+    'any.only': msg.mustBeOneOfTheFollowing(Object.values(activityLevel)),
 });

@@ -1,6 +1,6 @@
-import messages from "../../../../config/i18n/messages/messages";
+import { getUserMessages } from "../../../../config/i18n/messages/components/userMessages";
 
-const msg = messages.src.components.user.model.enums.userStatus;
+const msg = getUserMessages.model.enums.userStatus;
 
 export const userStatus = {
     Active: msg.active,

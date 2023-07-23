@@ -1,15 +1,15 @@
-import { commonMessages } from "../messages/commonMessages";
+import { getCommonMessages } from "../messages/commonMessages";
 
 export function createField(fieldName: string) {
     return {
-        emptyData: commonMessages.emptyData(fieldName),
-        invalidData: commonMessages.invalidData(fieldName),
-        mustBeArray: commonMessages.mustBeArray(fieldName),
-        mustBeNumber: commonMessages.mustBeNumber(fieldName),
-        mustBePositive: commonMessages.mustBePositive(fieldName),
-        mustBeString: commonMessages.mustBeString(fieldName),
-        mustBeOneOfTheFollowing: commonMessages.mustBeOneOfTheFollowing(fieldName),
-        minLength: commonMessages.minLength(fieldName),
-        maxLength: commonMessages.maxLength(fieldName),
+        emptyData: getCommonMessages.emptyData(fieldName),
+        invalidData: getCommonMessages.invalidData(fieldName),
+        mustBeArray: getCommonMessages.mustBeArray(fieldName),
+        mustBeNumber: getCommonMessages.mustBeNumber(fieldName),
+        mustBePositive: getCommonMessages.mustBePositive(fieldName),
+        mustBeString: getCommonMessages.mustBeString(fieldName),
+        mustBeOneOfTheFollowing: getCommonMessages.mustBeOneOfTheFollowing(fieldName),
+        minLength: getCommonMessages.minLength(fieldName),
+        maxLength: getCommonMessages.maxLength(fieldName),
     };
 }

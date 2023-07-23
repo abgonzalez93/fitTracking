@@ -3,9 +3,9 @@ import { ErrorHandler } from '../../../middlewares/errorHandler';
 import { UserInterface } from '../model/userInterface';
 import User from '../model/user';
 import HashService from '../../../utils/hashService';
-import messages from '../../../config/i18n/messages/messages'
+import { getUserMessages } from '../../../config/i18n/messages/components/userMessages';
 
-const msg = messages.src.components.user.service;
+const msg = getUserMessages.service;
 
 export default class UserService {
     public static async getAllUsers(): Promise<(UserInterface & Document)[]> {

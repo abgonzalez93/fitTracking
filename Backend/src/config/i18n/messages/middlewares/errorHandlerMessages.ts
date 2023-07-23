@@ -1,11 +1,7 @@
-import { es } from "../../translations/es";
+import i18n from "../../i18n";
 
-const translation = es.middlewares;
-
-const handleError = {
-    internalServerError: translation.handleError.internalServerError,
-};
-
-export const errorHandlerMessages = {
-    handleError
+export const getErrorHandlerMessages = {
+    handleError: {
+        internalServerError: (): string => i18n.__('middlewares.handleError.internalServerError')
+    }
 };

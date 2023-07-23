@@ -2,9 +2,9 @@ import { NextFunction, Request, Response } from 'express';
 import UserService from '../service/userService';
 import asyncHandler from '../../../middlewares/asyncHandler';
 import { validateUser } from '../validation/userValidation';
-import messages from '../../../config/i18n/messages/messages'
+import { getUserMessages } from '../../../config/i18n/messages/components/userMessages';
 
-const msg = messages.src.components.user.controller;
+const msg = getUserMessages.controller;
 
 export default class UserController {
     public static getAllUsers = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {

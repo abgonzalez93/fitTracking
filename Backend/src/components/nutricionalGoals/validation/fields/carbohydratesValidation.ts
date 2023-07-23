@@ -1,7 +1,7 @@
 import Joi from 'joi';
-import messages from '../../../../config/i18n/messages/messages';
+import { getNutritionalGoalsMessages } from '../../../../config/i18n/messages/components/nutritionalGoalsMessages';
 
-const msg = messages.src.components.nutritionalGoals.validation.carbohydratesValidation;
+const msg = getNutritionalGoalsMessages.validation.carbohydratesValidation;
 
 export const carbohydratesValidation = Joi.number().positive().optional().messages({
     'number.base': msg.mustBeNumber,
