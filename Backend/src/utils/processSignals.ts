@@ -9,7 +9,7 @@ export default class SignalHandler {
             await DatabaseConnection.disconnect(message);
             process.kill(process.pid, signal);
         } catch (error) {
-            if (error instanceof Error) {
+            if (error instanceof ErrorHandler) {
                 const err = new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.connectionShutdown.errorShuttingDown(signal, error.message), error.stack);
                 console.error(err);
             } else {
