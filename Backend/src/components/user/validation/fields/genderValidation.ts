@@ -1,6 +1,6 @@
 import Joi from 'joi';
-import { gender } from '../../model/enums';
-import { getUserMessages } from '../../../../config/i18n/messages/components/userMessages';
+import { gender } from '@components/user/model/enums';
+import { getUserMessages } from '@config/i18n/messages'
 
 const msg = getUserMessages.validation.genderValidation;
 

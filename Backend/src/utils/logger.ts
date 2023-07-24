@@ -1,4 +1,4 @@
-import { ErrorHandler } from "../middlewares/errorHandler";
+import { ErrorHandler } from '@middlewares/errorHandler';
 
 export default {
     info: (message: string) => {

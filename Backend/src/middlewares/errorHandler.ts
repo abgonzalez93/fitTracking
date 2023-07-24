@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { getErrorHandlerMessages } from '../config/i18n/messages/middlewares/errorHandlerMessages';
-import httpStatus from '../constants/httpStatus';
+import { getErrorHandlerMessages } from '@config/i18n/messages'
+import httpStatus from '@constants/httpStatus';
 
 export class ErrorHandler extends Error {
     readonly statusCode: number;

@@ -7,6 +7,16 @@
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@config/*": ["config/*"],
+      "@constants/*": ["constants/*"],
+      "@database/*": ["database/*"],
+      "@middlewares/*": ["middlewares/*"],
+      "@routes/*": ["routes/*"],
+      "@utils/*": ["utils/*"]
+    }
   },
   "include": [
     "src/**/*.ts"

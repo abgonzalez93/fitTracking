@@ -1,10 +1,10 @@
 import { Document } from 'mongoose';
-import { ErrorHandler } from '../../../middlewares/errorHandler';
-import { UserInterface } from '../model/userInterface';
-import User from '../model/user';
-import HashService from '../../../utils/hashService';
-import { getUserMessages } from '../../../config/i18n/messages/components/userMessages';
-import httpStatus from '../../../constants/httpStatus';
+import { ErrorHandler } from '@middlewares/errorHandler';
+import { UserInterface } from '@components/user/model/userInterface';
+import User from '@components/user/model/user';
+import HashService from '@utils/hashService';
+import { getUserMessages } from '@config/i18n/messages'
+import httpStatus from '@constants/httpStatus';
 
 const msg = getUserMessages.service;
 

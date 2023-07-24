@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 import { activityLevel, foodPreferences, gender, healthConditions, userStatus, userType } from './enums'
-import { NutritionalGoalsInterface } from '../../nutricionalGoals/model/nutritionalGoalsInterface';
+import { NutritionalGoalsInterface } from '@components/nutricionalGoals/model/nutritionalGoalsInterface';
 
 type ActivityLevel = typeof activityLevel[keyof typeof activityLevel];
 type FoodPreferences = typeof foodPreferences[keyof typeof foodPreferences];

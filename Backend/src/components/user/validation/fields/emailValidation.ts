@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { getUserMessages } from '../../../../config/i18n/messages/components/userMessages';
+import { getUserMessages } from '@config/i18n/messages'
 
 const msg = getUserMessages.validation.emailValidation;
 

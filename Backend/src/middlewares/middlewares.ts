@@ -3,8 +3,8 @@ import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
-import i18n from '../config/i18n/i18n';
-import { handleError, handle404Error } from './errorHandler';
+import i18n from '@config/i18n/i18n';
+import { handleError, handle404Error } from '@middlewares/errorHandler';
 
 export const applyMiddleware = (app: Application): void => {
   // Middleware to help protect your application from well-known vulnerabilities
@@ -31,13 +31,4 @@ export const applyMiddleware = (app: Application): void => {
 
   // Middleware for i18n
   app.use(i18n.init);
-
-  // Custom middleware to set the locale
-  /*
-  app.use((req, res, next) => {
-    const userLocale = req.get('accept-language') || 'es';
-    i18n.setLocale(req, userLocale);
-    next();
-  });
-  */
 };

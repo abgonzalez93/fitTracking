@@ -1,9 +1,9 @@
 import Joi from 'joi';
-import { ErrorHandler } from '../../../middlewares/errorHandler';
+import { ErrorHandler } from '@middlewares/errorHandler';
 import { activityLevelValidation, birthDateValidation, clientsValidation, contactInfoValidation, emailValidation, foodPreferencesValidation, genderValidation, healthConditionsValidation, heightValidation, nameValidation, passwordValidation, profileImageValidation, statusValidation, surnameValidation, userTypeValidation, usernameValidation, weightValidation  } from './fields'
-import { nutritionalGoalsValidation } from '../../nutricionalGoals/validation/nutritionalGoalValidation';
-import { getUserMessages } from '../../../config/i18n/messages/components/userMessages';
-import httpStatus from '../../../constants/httpStatus';
+import { nutritionalGoalsValidation } from '@components/nutricionalGoals/validation/nutritionalGoalValidation';
+import { getUserMessages } from '@config/i18n/messages'
+import httpStatus from '@constants/httpStatus';
 
 const userValidation = Joi.object({
     username: usernameValidation,

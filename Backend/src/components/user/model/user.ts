@@ -1,10 +1,10 @@
 import mongoose, { Schema, Types } from 'mongoose';
-import HashService from '../../../utils/hashService';
+import HashService from '@utils/hashService';
 import { UserInterface } from './userInterface';
 import { activityLevel, foodPreferences, gender, healthConditions, userStatus, userType } from './enums'
-import { ErrorHandler } from '../../../middlewares/errorHandler';
-import { getUserMessages } from '../../../config/i18n/messages/components/userMessages';
-import httpStatus from '../../../constants/httpStatus';
+import { ErrorHandler } from '@middlewares/errorHandler';
+import { getUserMessages } from '@config/i18n/messages'
+import httpStatus from '@constants/httpStatus';
   
 const user: Schema = new Schema({
     name: { type: String, required: true },

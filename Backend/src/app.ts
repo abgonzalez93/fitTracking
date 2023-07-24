@@ -1,6 +1,6 @@
-import express, { Express, Request, Response, NextFunction } from 'express';
-import { applyMiddleware } from './middlewares/middlewares';
-import routes from './routes/routes';
+import express, { Express } from 'express';
+import { applyMiddleware } from '@middlewares/middlewares';
+import routes from '@routes/routes';
 
 
 const app: Express = express();

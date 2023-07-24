@@ -1,9 +1,9 @@
 import mongoose, { Connection } from 'mongoose';
-import { ErrorHandler } from '../middlewares/errorHandler';
-import config from '../config/config';
-import { getDatabaseMessages } from '../config/i18n/messages/database/databaseMessages';
-import logger from '../utils/logger';
-import httpStatus from '../constants/httpStatus';
+import { ErrorHandler } from '@middlewares/errorHandler';
+import config from '@config/config';
+import { getDatabaseMessages } from '@config/i18n/messages'
+import httpStatus from '@constants/httpStatus';
+import logger from '@utils/logger';
 
 export default class DatabaseConnection {
     // Function to handle database events

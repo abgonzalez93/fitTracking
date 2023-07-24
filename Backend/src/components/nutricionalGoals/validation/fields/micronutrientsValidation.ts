@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { micronutrients } from './micronutrients/micronutrients';
-import { getNutritionalGoalsMessages } from '../../../../config/i18n/messages/components/nutritionalGoalsMessages';
+import { getNutritionalGoalsMessages } from '@config/i18n/messages'
 
 let validation: { [key: string]: any; } = {};
 

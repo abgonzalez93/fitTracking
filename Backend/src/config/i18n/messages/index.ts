@@ -1,0 +1,7 @@
+export { getCommonMessages } from './commonMessages'
+export { getDietMessages } from './components/dietMessages'
+export { getNutritionalGoalsMessages } from './components/nutritionalGoalsMessages'
+export { getUserMessages } from './components/userMessages'
+export { getDatabaseMessages } from './database/databaseMessages'
+export { getErrorHandlerMessages } from './middlewares/errorHandlerMessages'
+export { getServerMessages } from './server/serverMessages'

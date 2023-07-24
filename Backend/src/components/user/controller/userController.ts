@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
-import UserService from '../service/userService';
-import asyncHandler from '../../../middlewares/asyncHandler';
-import { validateUser } from '../validation/userValidation';
-import { getUserMessages } from '../../../config/i18n/messages/components/userMessages';
-import httpStatus from '../../../constants/httpStatus';
+import UserService from '@components/user/service/userService';
+import asyncHandler from '@middlewares/asyncHandler';
+import { validateUser } from '@components/user/validation/userValidation';
+import { getUserMessages } from '@config/i18n/messages'
+import httpStatus from '@constants/httpStatus';
 
 const msg = getUserMessages.controller;
 

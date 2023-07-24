@@ -1,4 +1,4 @@
-import { getUserMessages } from "../../../../config/i18n/messages/components/userMessages";
+import { getUserMessages } from '@config/i18n/messages'
 
 const msg = getUserMessages.model.enums.healthConditions;
 

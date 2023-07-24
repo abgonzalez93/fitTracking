@@ -1,8 +1,8 @@
-import { getDatabaseMessages } from '../config/i18n/messages/database/databaseMessages';
-import httpStatus from '../constants/httpStatus';
-import DatabaseConnection from '../database/databaseConnection';
-import { ErrorHandler } from '../middlewares/errorHandler';
-import logger from './logger';
+import { getDatabaseMessages } from '@config/i18n/messages';
+import httpStatus from '@constants/httpStatus';
+import DatabaseConnection from '@database/databaseConnection';
+import { ErrorHandler } from '@middlewares/errorHandler';
+import logger from '@utils/logger';
 
 export default class SignalHandler {
     private static async handleExit(signal: string, message: string) {

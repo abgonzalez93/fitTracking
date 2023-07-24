@@ -1,6 +1,6 @@
 import Joi from 'joi';
-import { userStatus } from '../../model/enums';
-import { getUserMessages } from '../../../../config/i18n/messages/components/userMessages';
+import { userStatus } from '@components/user/model/enums';
+import { getUserMessages } from '@config/i18n/messages'
 
 const msg = getUserMessages.validation.statusValidation;
 

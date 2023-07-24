@@ -1,14 +1,14 @@
-import i18n from "../../i18n";
+import i18n from "@config/i18n/i18n";
 
 export const getDatabaseMessages = {
     failedToConnect: (error: string): string => i18n.__('database.failedToConnect', { error: error }),
     unknownDatabaseError: i18n.__('database.unknownDatabaseError'),
     connectionShutdown: {
         errorShuttingDown: (signal: string, error: string): string => i18n.__('database.connectionShutdown.connectionShutdown', { signal: signal, error: error }),
-        nodemonRestart: i18n.__('database.handleDBEvents.nodemonRestart'),
-        nodemonRestartError: (error: string): string => i18n.__('database.handleDBEvents.nodemonRestartError', { error: error }),
-        applicationTermination: i18n.__('database.handleDBEvents.applicationTermination'),
-        applicationTerminationError: (error: string): string => i18n.__('database.handleDBEvents.applicationTerminationError', { error: error }),
+        nodemonRestart: i18n.__('database.connectionShutdown.nodemonRestart'),
+        nodemonRestartError: (error: string): string => i18n.__('database.connectionShutdown.nodemonRestartError', { error: error }),
+        applicationTermination: i18n.__('database.connectionShutdown.applicationTermination'),
+        applicationTerminationError: (error: string): string => i18n.__('database.connectionShutdown.applicationTerminationError', { error: error }),
     },
     handleDBEvents: {
         connectionError: (error: string): string => i18n.__('database.handleDBEvents.connectionError', { error: error }),

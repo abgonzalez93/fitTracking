@@ -1,4 +1,4 @@
-import i18n from "../i18n";
+import i18n from "@config/i18n/i18n";
 
 export const getCommonMessages = {
     emptyData: (field: string): string => i18n.__('commonMessages.emptyData', {field}),

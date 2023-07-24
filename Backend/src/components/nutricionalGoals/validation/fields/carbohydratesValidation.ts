@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { getNutritionalGoalsMessages } from '../../../../config/i18n/messages/components/nutritionalGoalsMessages';
+import { getNutritionalGoalsMessages } from '@config/i18n/messages'
 
 const msg = getNutritionalGoalsMessages.validation.carbohydratesValidation;
 

@@ -1,4 +1,4 @@
-import { getCommonMessages } from "../messages/commonMessages";
+import { getCommonMessages } from '@config/i18n/messages';
 
 export function createField(fieldName: string) {
     return {
