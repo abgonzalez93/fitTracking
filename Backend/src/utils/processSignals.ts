@@ -2,18 +2,18 @@ import { getDatabaseMessages } from '../config/i18n/messages/database/databaseMe
 import httpStatus from '../constants/httpStatus';
 import DatabaseConnection from '../database/databaseConnection';
 import { ErrorHandler } from '../middlewares/errorHandler';
+import logger from './logger';
 
 export default class SignalHandler {
     private static async handleExit(signal: string, message: string) {
         try {
             await DatabaseConnection.disconnect(message);
-            process.kill(process.pid, signal);
+            process.exit();
         } catch (error) {
             if (error instanceof ErrorHandler) {
-                const err = new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.connectionShutdown.errorShuttingDown(signal, error.message), error.stack);
-                console.error(err);
+                logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.connectionShutdown.errorShuttingDown(signal, error.message), error.stack));
             } else {
-                throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.unknownDatabaseError);
+                logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.unknownDatabaseError));
             }
 
             process.exit(1);
@@ -21,10 +21,34 @@ export default class SignalHandler {
     }
 
     public static handleNodemonRestarts(): void {
-        process.once('SIGUSR2', () => this.handleExit('SIGUSR2', getDatabaseMessages.connectionShutdown.nodemonRestart));
+        process.once('SIGUSR2', async () => {
+            try {
+                await this.handleExit('SIGUSR2', getDatabaseMessages.connectionShutdown.nodemonRestart);
+            } catch (error) {
+                if (error instanceof ErrorHandler) {
+                    logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.connectionShutdown.nodemonRestartError(error.message), error.stack));
+                } else {
+                    logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.unknownDatabaseError));
+                }
+                
+                process.exit(1);
+            }
+        });
     }
 
     public static handleAppTermination(): void {
-        process.on('SIGINT', () => this.handleExit('SIGINT', getDatabaseMessages.connectionShutdown.applicationTermination));
+        process.on('SIGINT', async () => {
+            try {
+                await this.handleExit('SIGINT', getDatabaseMessages.connectionShutdown.applicationTermination);
+            } catch (error) {
+                if (error instanceof ErrorHandler) {
+                    logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.connectionShutdown.applicationTerminationError(error.message), error.stack));
+                } else {
+                    logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.unknownDatabaseError));
+                }
+
+                process.exit(1);
+            }
+        });
     }
 }

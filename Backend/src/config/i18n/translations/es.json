@@ -106,10 +106,13 @@
 		}
 	},
 	"database": {
+		"failedToConnect": "Fallo al conectar con la base de datos: {{error}}",
 		"unknownDatabaseError": "Ocurrió un error desconocido en la conexión a la base de datos",
 		"connectionShutdown": {
 			"nodemonRestart": "Mongoose se ha desconectado debido al reinicio de Nodemon",
+			"nodemonRestartError": "Error al manejar el reinicio de nodemon: {{error}}",
 			"applicationTermination": "Mongoose se ha desconectado debido a la terminación de la aplicación",
+			"applicationTerminationError": "Error al manejar la terminación de la aplicación: {{error}}",
 			"errorShuttingDown": "Error durante el apagado en {{signal}}: {{error}}"
 		},
 		"handleDBEvents": {
@@ -132,6 +135,9 @@
 			"internalServerError": "Error interno del servidor",
 			"error404": "Error 404. Página no encontrada"
 		}
+	},
+	"server": {
+		"listeningOnPort": "El servidor está escuchando en el puerto {{port}}"
 	},
 	"commonMessages": {
 		"emptyData": "{{field}} no puede estar vacío",

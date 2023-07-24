@@ -10,7 +10,7 @@ export default class DatabaseConnection {
     private static handleDBEvents(db: Connection) {
         // Handle database error
         db.on('error', (error) => {
-            throw new ErrorHandler(500, getDatabaseMessages.handleDBEvents.connectionError(error.message), error.stack);
+            throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.handleDBEvents.connectionError(error.message), error.stack);
         });
 
         // Handle start of database connection
@@ -61,11 +61,7 @@ export default class DatabaseConnection {
                     logger.info(getDatabaseMessages.attemptConnection.connectionFailed(attempt, config.RECONNECTION_RETRY_TIME / 1000));
                     await new Promise(resolve => setTimeout(resolve, config.RECONNECTION_RETRY_TIME));
                 } else {
-                    if(error instanceof ErrorHandler){
-                        throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.attemptConnection.connectionToDatabaseError(error.message), error.stack);
-                    } else {
-                        throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.unknownDatabaseError);
-                    }
+                    throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.unknownDatabaseError);
                 }
             }
         }
