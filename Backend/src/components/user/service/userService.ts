@@ -4,6 +4,7 @@ import { UserInterface } from '../model/userInterface';
 import User from '../model/user';
 import HashService from '../../../utils/hashService';
 import { getUserMessages } from '../../../config/i18n/messages/components/userMessages';
+import httpStatus from '../../../constants/httpStatus';
 
 const msg = getUserMessages.service;
 
@@ -13,22 +14,22 @@ export default class UserService {
             const users = await User.find().select('-password');
             return users;
         } catch (error: any) {
-            throw new ErrorHandler(500, msg.errorGettingAllUsers, error.stack);
+            throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, msg.errorGettingAllUsers, error.stack);
         }
     }
 
     public static async createUser(userData: Partial<UserInterface>): Promise<(UserInterface & Document) | null> {
         try {
             if (!userData.password) {
-                throw new ErrorHandler(400, msg.passwordMustBeProvided);
+                throw new ErrorHandler(httpStatus.BAD_REQUEST, msg.passwordMustBeProvided);
             }
 
             if (userData.username && await this.fieldExists('username', userData.username)) {
-                throw new ErrorHandler(400, msg.usernameAlreadyExists);
+                throw new ErrorHandler(httpStatus.BAD_REQUEST, msg.usernameAlreadyExists);
             }
     
             if (userData.email && await this.fieldExists('email', userData.email)) {
-                throw new ErrorHandler(400, msg.emailAlreadyExists);
+                throw new ErrorHandler(httpStatus.BAD_REQUEST, msg.emailAlreadyExists);
             }
             
             const user = new User(userData);
@@ -36,7 +37,7 @@ export default class UserService {
             await user.save();
             return user;
         } catch (error: any) {
-            throw new ErrorHandler(500, msg.errorCreatingUser, error.stack);
+            throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, msg.errorCreatingUser, error.stack);
         }
     }
 
@@ -45,12 +46,12 @@ export default class UserService {
             const user = await User.findById(id).select('-password');
 
             if (!user) {
-                throw new ErrorHandler(404, msg.userNotFound);
+                throw new ErrorHandler(httpStatus.NOT_FOUND, msg.userNotFound);
             }
 
             return user;
         } catch (error: any) {
-            throw new ErrorHandler(500, msg.errorGettingUser, error.stack);
+            throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, msg.errorGettingUser, error.stack);
         }
     }
 
@@ -59,23 +60,23 @@ export default class UserService {
             const currentUser = await User.findById(id);
 
             if (!currentUser) {
-                throw new ErrorHandler(404, msg.userNotFound);
+                throw new ErrorHandler(httpStatus.NOT_FOUND, msg.userNotFound);
             }
 
             if (userData.password) {
                 const isSamePassword = await HashService.comparePassword(userData.password, currentUser.password);
 
                 if (isSamePassword) {
-                    throw new ErrorHandler(400, msg.passwordMustBeDifferentFromYourCurrent);
+                    throw new ErrorHandler(httpStatus.BAD_REQUEST, msg.passwordMustBeDifferentFromYourCurrent);
                 }
             }
 
             if (userData.username && userData.username !== currentUser.username && await this.fieldExists('username', userData.username)) {
-                throw new ErrorHandler(400, msg.usernameAlreadyExists);
+                throw new ErrorHandler(httpStatus.BAD_REQUEST, msg.usernameAlreadyExists);
             }
 
             if (userData.email && userData.email !== currentUser.email && await this.fieldExists('email', userData.email)) {
-                throw new ErrorHandler(400, msg.emailAlreadyExists);
+                throw new ErrorHandler(httpStatus.BAD_REQUEST, msg.emailAlreadyExists);
             }
             
             Object.assign(currentUser, userData);
@@ -84,7 +85,7 @@ export default class UserService {
             const user = await User.findById(id).select('-password');
             return user;
         } catch (error: any) {
-            throw new ErrorHandler(500, msg.errorUpdatingUser, error.stack);
+            throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, msg.errorUpdatingUser, error.stack);
         }
     }
 
@@ -93,12 +94,12 @@ export default class UserService {
             const user = await User.findByIdAndDelete(id);
 
             if (!user) {
-                throw new ErrorHandler(404, msg.userNotFound);
+                throw new ErrorHandler(httpStatus.NOT_FOUND, msg.userNotFound);
             }
 
             return user;
         } catch (error: any) {
-            throw new ErrorHandler(500, msg.errorDeletingUser, error.stack);
+            throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, msg.errorDeletingUser, error.stack);
         }
     }
 

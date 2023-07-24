@@ -4,7 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 import i18n from '../config/i18n/i18n';
-import { handleError } from './errorHandler';
+import { handleError, handle404Error } from './errorHandler';
 
 export const applyMiddleware = (app: Application): void => {
   // Middleware to help protect your application from well-known vulnerabilities
@@ -23,6 +23,7 @@ export const applyMiddleware = (app: Application): void => {
   app.use(morgan('dev'));
 
   // Middleware for centralized error handling
+  app.use(handle404Error);
   app.use(handleError);
 
   // Middleware for parsing the body of incoming requests as JSON

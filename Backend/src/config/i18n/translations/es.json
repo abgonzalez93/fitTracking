@@ -107,7 +107,8 @@
 	},
 	"database": {
 		"connectionShutdown": {
-			"connectionShutdown": "Mongoose se ha desconectado debido a {{msg}}"
+			"nodemonRestart": "Mongoose se ha desconectado debido al reinicio de Nodemon",
+			"applicationTermination": "Mongoose se ha desconectado debido a la terminación de la aplicación"
 		},
 		"handleDBEvents": {
 			"connectionError": "Error de conexión: {{error}}",
@@ -116,11 +117,10 @@
 			"connected": "¡Conectado a MongoDB!",
 			"disconnecting": "Desconectándose de MongoDB...",
 			"connectionClosed": "Conexión con MongoDB cerrada",
-			"successfulReconnection": "¡Reconexión exitosa a MongoDB!",
-			"nodemonRestart": "Reinicio de Nodemon",
-			"applicationTermination": "terminación de la aplicación"
+			"successfulReconnection": "¡Reconexión exitosa a MongoDB!"
 		},
 		"attemptConnection": {
+			"tryingToReconnect": "Intentando reconectar...",
 			"connectionFailed": "La conexión falló, reintentando en {{retry}} segundos... (intento: {{attempt}})",
 			"connectionToDatabaseError": "Error al conectar a la base de datos: {{error}}",
 			"unknownDatabaseError": "Ocurrió un error desconocido en la conexión a la base de datos"
@@ -128,7 +128,8 @@
 	},
 	"middlewares": {
 		"handleError": {
-			"internalServerError": "Error interno del servidor"
+			"internalServerError": "Error interno del servidor",
+			"error404": "Error 404. Página no encontrada"
 		}
 	},
 	"commonMessages": {

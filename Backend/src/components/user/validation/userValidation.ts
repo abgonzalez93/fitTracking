@@ -3,6 +3,7 @@ import { ErrorHandler } from '../../../middlewares/errorHandler';
 import { activityLevelValidation, birthDateValidation, clientsValidation, contactInfoValidation, emailValidation, foodPreferencesValidation, genderValidation, healthConditionsValidation, heightValidation, nameValidation, passwordValidation, profileImageValidation, statusValidation, surnameValidation, userTypeValidation, usernameValidation, weightValidation  } from './fields'
 import { nutritionalGoalsValidation } from '../../nutricionalGoals/validation/nutritionalGoalValidation';
 import { getUserMessages } from '../../../config/i18n/messages/components/userMessages';
+import httpStatus from '../../../constants/httpStatus';
 
 const userValidation = Joi.object({
     username: usernameValidation,
@@ -29,7 +30,7 @@ export const validateUser = (userData: any) => {
     const validationResult = userValidation.validate(userData, { abortEarly: false });
 
     if (validationResult.error) {
-        throw new ErrorHandler(400, getUserMessages.validation.invalidUserData(validationResult.error.details[0].message));
+        throw new ErrorHandler(httpStatus.BAD_REQUEST, getUserMessages.validation.invalidUserData(validationResult.error.details[0].message));
     }
 
     return userData;

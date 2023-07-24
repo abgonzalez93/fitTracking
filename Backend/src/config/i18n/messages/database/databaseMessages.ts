@@ -2,7 +2,9 @@ import i18n from "../../i18n";
 
 export const getDatabaseMessages = {
     connectionShutdown: {
-        connectionShutdown: (msg: string): string => i18n.__('database.connectionShutdown.connectionShutdown', { msg: msg })
+        connectionShutdown: (msg: string): string => i18n.__('database.connectionShutdown.connectionShutdown', { msg: msg }),
+        nodemonRestart: i18n.__('database.handleDBEvents.nodemonRestart'),
+        applicationTermination: i18n.__('database.handleDBEvents.applicationTermination'),
     },
     handleDBEvents: {
         connectionError: (error: string): string => i18n.__('database.handleDBEvents.connectionError', { error: error }),
@@ -12,10 +14,9 @@ export const getDatabaseMessages = {
         disconnecting: i18n.__('database.handleDBEvents.disconnecting'),
         connectionClosed: i18n.__('database.handleDBEvents.connectionClosed'),
         successfulReconnection: i18n.__('database.handleDBEvents.successfulReconnection'),
-        nodemonRestart: i18n.__('database.handleDBEvents.nodemonRestart'),
-        applicationTermination: i18n.__('database.handleDBEvents.applicationTermination'),
     },
     attemptConnection: {
+        tryingToReconnect: i18n.__('database.attemptConnection.tryingToReconnect'),
         connectionFailed: (attempt: number, retryInSeconds: number): string => i18n.__('database.attemptConnection.connectionFailed', { retry: retryInSeconds.toString(), attempt: (attempt + 1).toString() }),
         connectionToDatabaseError: (error: string): string => i18n.__('database.attemptConnection.connectionToDatabaseError', error),
         unknownDatabaseError: i18n.__('database.attemptConnection.unknownDatabaseError'),
