@@ -106,6 +106,7 @@
 		}
 	},
 	"database": {
+		"unknownDatabaseError": "Ocurrió un error desconocido en la conexión a la base de datos",
 		"connectionShutdown": {
 			"nodemonRestart": "Mongoose se ha desconectado debido al reinicio de Nodemon",
 			"applicationTermination": "Mongoose se ha desconectado debido a la terminación de la aplicación",
@@ -123,8 +124,7 @@
 		"attemptConnection": {
 			"tryingToReconnect": "Intentando reconectar...",
 			"connectionFailed": "La conexión falló, reintentando en {{retry}} segundos... (intento: {{attempt}})",
-			"connectionToDatabaseError": "Error al conectar a la base de datos: {{error}}",
-			"unknownDatabaseError": "Ocurrió un error desconocido en la conexión a la base de datos"
+			"connectionToDatabaseError": "Error al conectar a la base de datos: {{error}}"
 		}
 	},
 	"middlewares": {

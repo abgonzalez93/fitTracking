@@ -1,6 +1,7 @@
 import i18n from "../../i18n";
 
 export const getDatabaseMessages = {
+    unknownDatabaseError: i18n.__('database.attemptConnection.unknownDatabaseError'),
     connectionShutdown: {
         errorShuttingDown: (signal: string, error: string): string => i18n.__('database.connectionShutdown.connectionShutdown', { signal: signal, error: error }),
         nodemonRestart: i18n.__('database.handleDBEvents.nodemonRestart'),
@@ -19,6 +20,5 @@ export const getDatabaseMessages = {
         tryingToReconnect: i18n.__('database.attemptConnection.tryingToReconnect'),
         connectionFailed: (attempt: number, retryInSeconds: number): string => i18n.__('database.attemptConnection.connectionFailed', { retry: retryInSeconds.toString(), attempt: (attempt + 1).toString() }),
         connectionToDatabaseError: (error: string): string => i18n.__('database.attemptConnection.connectionToDatabaseError', error),
-        unknownDatabaseError: i18n.__('database.attemptConnection.unknownDatabaseError'),
     }
 };

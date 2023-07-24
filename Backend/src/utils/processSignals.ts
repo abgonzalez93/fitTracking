@@ -13,7 +13,7 @@ export default class SignalHandler {
                 const err = new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.connectionShutdown.errorShuttingDown(signal, error.message), error.stack);
                 console.error(err);
             } else {
-                throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.attemptConnection.unknownDatabaseError);
+                throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.unknownDatabaseError);
             }
 
             process.exit(1);

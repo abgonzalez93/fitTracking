@@ -106,6 +106,7 @@
 		}
 	},
 	"database": {
+		"unknownDatabaseError": "An unknown error occurred in the database connection",
 		"connectionShutdown": {
 			"nodemonRestart": "Mongoose has been disconnected due to nodemon restart",
 			"applicationTermination": "Mongoose has been disconnected due to application termination",
@@ -123,8 +124,7 @@
 		"attemptConnection": {
 			"tryingToReconnect": "Trying to reconnect...",
 			"connectionFailed": "Connection failed, retrying in {{retry}} seconds... (attempt: {{attempt}})",
-			"connectionToDatabaseError": "Error connecting to the database: {{error}}",
-			"unknownDatabaseError": "An unknown error occurred in the database connection"
+			"connectionToDatabaseError": "Error connecting to the database: {{error}}"
 		}
 	},
 	"middlewares": {

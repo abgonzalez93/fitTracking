@@ -64,7 +64,7 @@ export default class DatabaseConnection {
                     if(error instanceof ErrorHandler){
                         throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.attemptConnection.connectionToDatabaseError(error.message), error.stack);
                     } else {
-                        throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.attemptConnection.unknownDatabaseError);
+                        throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.unknownDatabaseError);
                     }
                 }
             }
@@ -92,7 +92,7 @@ export default class DatabaseConnection {
             if(error instanceof ErrorHandler){
                 throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.attemptConnection.connectionToDatabaseError(error.message), error.stack);
             } else {
-                throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.attemptConnection.unknownDatabaseError);
+                throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.unknownDatabaseError);
             }
         }
     };
