@@ -108,7 +108,8 @@
 	"database": {
 		"connectionShutdown": {
 			"nodemonRestart": "Mongoose has been disconnected due to nodemon restart",
-			"applicationTermination": "Mongoose has been disconnected due to application termination"
+			"applicationTermination": "Mongoose has been disconnected due to application termination",
+			"errorShuttingDown": "Error during shutdown on {{signal}}: {{error}}"
 		},
 		"handleDBEvents": {
 			"connectionError": "Connection error: {{error}}",

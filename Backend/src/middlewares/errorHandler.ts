@@ -3,9 +3,9 @@ import { getErrorHandlerMessages } from '../config/i18n/messages/middlewares/err
 import httpStatus from '../constants/httpStatus';
 
 export class ErrorHandler extends Error {
-    statusCode: number;
-    message: string;
-    stack: string;
+    readonly statusCode: number;
+    readonly message: string;
+    readonly stack: string;
 
     constructor(statusCode: number, message: string, stack: string = '') {
         super(message);
@@ -15,12 +15,9 @@ export class ErrorHandler extends Error {
     }
 }
 
-export const handleError = (err: ErrorHandler, req: Request, res: Response, next: NextFunction): void => {
-    let { statusCode, message } = err;
-
-    statusCode = statusCode || httpStatus.INTERNAL_SERVER_ERROR;
-
-    message = message || getErrorHandlerMessages.handleError.internalServerError();
+export const handleError = (error: ErrorHandler, req: Request, res: Response, next: NextFunction): void => {
+    const statusCode = error.statusCode || httpStatus.INTERNAL_SERVER_ERROR;
+    const message = error.message || getErrorHandlerMessages.handleError.internalServerError();
 
     let errorResponse: { status: string; statusCode: number; message: string; stack?: string } = {
         status: 'error',
@@ -28,8 +25,8 @@ export const handleError = (err: ErrorHandler, req: Request, res: Response, next
         message
     };
 
-    if (process.env.NODE_ENV === 'develop') {
-        errorResponse['stack'] = err.stack;
+    if (process.env.NODE_ENV === 'develop' && error instanceof ErrorHandler) {
+        errorResponse['stack'] = error.stack;
     }
 
     res.status(statusCode).json(errorResponse);
@@ -37,7 +34,7 @@ export const handleError = (err: ErrorHandler, req: Request, res: Response, next
 
 export const handle404Error = (req: Request, res: Response, next: NextFunction) => {
     if (!req.route) {
-        next(new ErrorHandler(httpStatus.NOT_FOUND, getErrorHandlerMessages.handleError.error404()));
+        throw new ErrorHandler(httpStatus.NOT_FOUND, getErrorHandlerMessages.handleError.error404());
     } else {
         next();
     }

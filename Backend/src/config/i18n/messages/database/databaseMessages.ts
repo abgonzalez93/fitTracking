@@ -2,7 +2,7 @@ import i18n from "../../i18n";
 
 export const getDatabaseMessages = {
     connectionShutdown: {
-        connectionShutdown: (msg: string): string => i18n.__('database.connectionShutdown.connectionShutdown', { msg: msg }),
+        errorShuttingDown: (signal: string, error: string): string => i18n.__('database.connectionShutdown.connectionShutdown', { signal: signal, error: error }),
         nodemonRestart: i18n.__('database.handleDBEvents.nodemonRestart'),
         applicationTermination: i18n.__('database.handleDBEvents.applicationTermination'),
     },
