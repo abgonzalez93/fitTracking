@@ -14,7 +14,35 @@
 				"carbohydratesValidation": "Carbohidratos",
 				"fatsValidation": "Grasas",
 				"proteinsValidation": "Proteínas"
-			}
+			},
+			"micronutrients": {
+				"vitaminA": "Vitamina A",
+				"vitaminB1": "Vitamina B1",
+				"vitaminB2": "Vitamina B2",
+				"vitaminB3": "Vitamina B3",
+				"vitaminB5": "Vitamina B5",
+				"vitaminB6": "Vitamina B6",
+				"vitaminB7": "Vitamina B7",
+				"vitaminB9": "Vitamina B9",
+				"vitaminB12": "Vitamina B12",
+				"vitaminC": "Vitamina C",
+				"vitaminD": "Vitamina D",
+				"vitaminE": "Vitamina E",
+				"vitaminK": "Vitamina K",
+				"calcium": "Calcio",
+				"iron": "Hierro",
+				"magnesium": "Magnesio",
+				"potassium": "Potasio",
+				"selenium": "Selenio",
+				"sodium": "Sodio",
+				"zinc": "Zinc",
+				"iodine": "Yodo",
+				"copper": "Cobre",
+				"chromium": "Cromo",
+				"manganese": "Manganeso",
+				"molybdenum": "Molibdeno",
+				"chloride": "Cloruro"
+			}			
 		},
 		"user": {
 			"enums": {

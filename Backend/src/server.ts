@@ -25,8 +25,6 @@ databaseConnection.connect()
         });
     })
     .catch((error) => {
-        let err = error instanceof ErrorHandler
-            ? error
-            : new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.failedToConnect(error.message), error.stack);
+        let err = error instanceof ErrorHandler ? error : new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.failedToConnect(error.message), error.stack);
         throw err;
     });
