@@ -1,17 +1,16 @@
-import express, { Express } from 'express';
-import { applyMiddleware } from '@middlewares/middlewares';
-import router from 'router/router';
+import express, { type Express } from 'express'
+import { applyMiddleware } from '@middlewares/middlewares'
+import router from 'router/router'
 
-
-const app: Express = express();
+const app: Express = express()
 
 // Apply middleware
-applyMiddleware(app);
+applyMiddleware(app)
 
 // Serve static files
-app.use(express.static('public'));
+app.use(express.static('public'))
 
 // Use routes
-app.use(router);
+app.use(router)
 
-export default app;
+export default app

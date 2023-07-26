@@ -1,68 +1,70 @@
-import { NextFunction, Request, Response } from 'express';
-import DietService from '@components/diet/service/dietService';
-import asyncHandler from '@middlewares/asyncHandler';
-import { validateDiet } from '@components/diet/validation/dietValidation';
+import { type NextFunction, type Request, type Response } from 'express'
+import DietService from '@components/diet/service/dietService'
+import asyncHandler from '@middlewares/asyncHandler'
+import { validateDiet } from '@components/diet/validation/dietValidation'
 import { getDietMessages } from '@config/i18n/messages'
-import httpStatus from '@constants/httpStatus';
+import httpStatus from '@constants/httpStatus'
 
-const msg = getDietMessages.controller;
+const msg = getDietMessages.controller
 
-export default class UserController {
-    public static getAllDiets = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-        const diets = await DietService.getAllDiets();
+export default class DietController {
+  public static getAllDiets = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.body.user
 
-        res.status(httpStatus.OK).json({
-            status: 'success',
-            message: msg.dietsFetched,
-            data: diets,
-        });
-    });
+    const diets = await DietService.getAllDiets(userId)
 
-    public static createDiet = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-        const dietData = req.body;
+    res.status(httpStatus.OK).json({
+      status: 'success',
+      message: msg.dietsFetched,
+      data: diets
+    })
+  })
 
-        validateDiet(dietData);
-        
-        const diet = await DietService.createDiet(dietData);
+  public static createDiet = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const dietData = req.body
 
-        res.status(httpStatus.CREATED).json({
-            status: 'success',
-            message: msg.dietCreated,
-            data: diet,
-        });
-    });
+    validateDiet(dietData)
 
-    public static getDiet = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-        const diet = await DietService.getDiet(req.params.id);
+    const diet = await DietService.createDiet(dietData)
 
-        res.status(httpStatus.OK).json({
-            status: 'success',
-            message: msg.dietFetched,
-            data: diet,
-        });
-    });
+    res.status(httpStatus.CREATED).json({
+      status: 'success',
+      message: msg.dietCreated,
+      data: diet
+    })
+  })
 
-    public static updateDiet = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-        const dietData = req.body;
+  public static getDiet = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const diet = await DietService.getDiet(req.params.id)
 
-        validateDiet(dietData);
+    res.status(httpStatus.OK).json({
+      status: 'success',
+      message: msg.dietFetched,
+      data: diet
+    })
+  })
 
-        const diet = await DietService.updateDiet(req.params.id, dietData);
+  public static updateDiet = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const dietData = req.body
 
-        res.status(httpStatus.OK).json({
-            status: 'success',
-            message: msg.dietUpdated,
-            data: diet,
-        });
-    });
+    validateDiet(dietData)
 
-    public static deleteDiet = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-        const diet = await DietService.deleteDiet(req.params.id);
+    const diet = await DietService.updateDiet(req.params.id, dietData)
 
-        res.status(httpStatus.NO_CONTENT).json({
-            status: 'success',
-            message: msg.dietDeleted,
-            data: diet,
-        });
-    });
+    res.status(httpStatus.OK).json({
+      status: 'success',
+      message: msg.dietUpdated,
+      data: diet
+    })
+  })
+
+  public static deleteDiet = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const diet = await DietService.deleteDiet(req.params.id)
+
+    res.status(httpStatus.NO_CONTENT).json({
+      status: 'success',
+      message: msg.dietDeleted,
+      data: diet
+    })
+  })
 }
