@@ -1,7 +1,18 @@
 {
 	"components": {
 		"diet": {
+			"controller": {
+				"dietsFetched": "Fetched all diets successfully",
+				"dietCreated": "Created diet successfully",
+				"dietFetched": "Fetched diet successfully",
+				"dietUpdated": "Updated diet successfully",
+				"dietDeleted": "Deleted diet successfully"
+			},
+			"service": {
+				"errorGettingAllDiets": "Error getting all diets"
+			},
 			"validation": {
+				"invalidDietData": "{{error}}. Invalid diet data",
 				"descriptionValidation": "Description",
 				"mealsValidation": "Meals",
 				"nameValidation": "Name",

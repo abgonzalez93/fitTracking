@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
 import { applyMiddleware } from '@middlewares/middlewares';
-import routes from '@routes/routes';
+import router from 'router/router';
 
 
 const app: Express = express();
@@ -12,6 +12,6 @@ applyMiddleware(app);
 app.use(express.static('public'));
 
 // Use routes
-app.use(routes);
+app.use(router);
 
 export default app;

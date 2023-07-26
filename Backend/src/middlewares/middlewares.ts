@@ -4,6 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 import i18n from '@config/i18n/i18n';
+import compression from 'compression';
 import { handleError, handle404Error } from '@middlewares/errorHandler';
 
 export const applyMiddleware = (app: Application): void => {
@@ -31,4 +32,7 @@ export const applyMiddleware = (app: Application): void => {
 
   // Middleware for i18n
   app.use(i18n.init);
+
+  // Middleware for gzip compression
+  app.use(compression());
 };
