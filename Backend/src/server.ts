@@ -19,12 +19,12 @@ SignalHandler.handleAppTermination()
 
 // Connect to the database
 databaseConnection.connect()
-  .then(() => {
-    app.listen(port, () => {
-      logger.info(getServerMessages.listeningOnPort(port))
+    .then(() => {
+        app.listen(port, () => {
+            logger.info(getServerMessages.listeningOnPort(port))
+        })
     })
-  })
-  .catch((error) => {
-    const err = error instanceof ErrorHandler ? error : new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.failedToConnect(error.message), error.stack)
-    throw err
-  })
+    .catch((error) => {
+        const err = error instanceof ErrorHandler ? error : new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.failedToConnect(error.message), error.stack)
+        throw err
+    })

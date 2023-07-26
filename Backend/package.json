@@ -5,7 +5,9 @@
   "scripts": {
     "start": "nodemon --watch src/**/*.ts --exec ts-node -r tsconfig-paths/register src/server.ts",
     "build": "tsc",
-    "start:prod": "node dist/server.js"
+    "start:prod": "node dist/server.js",
+    "eslint": "npx eslint src/**/*.{ts,tsx}",
+    "eslint:fix": "npx eslint src/**/*.{ts,tsx} --fix"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",

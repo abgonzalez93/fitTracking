@@ -1,4 +1,4 @@
 export const appRoutes = {
-  apiDiet: '/api/diet',
-  apiUsers: '/api/users'
+    apiDiet: '/api/diet',
+    apiUsers: '/api/users'
 }
