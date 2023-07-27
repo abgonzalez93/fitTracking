@@ -4,7 +4,6 @@ import UserService from '@components/user/service/userService'
 import { validateUser } from '@components/user/validation/userValidation'
 import { getAuthMessages } from '@config/i18n/messages'
 import httpStatus from '@constants/httpStatus'
-import HashService from '@utils/hashService'
 
 const msg = getAuthMessages.controller
 
@@ -30,24 +29,8 @@ export default class AuthController {
     public static login = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
             const userData = req.body
-            const email = userData.email
-            const password = userData.password
 
-            let user = await UserService.getUserByEmail(email)
-
-            if (!user || !(await HashService.comparePassword(password, user.password))) {
-
-                res.status(httpStatus.UNAUTHORIZED).json({
-                    status: 'error',
-                    message: msg
-                })
-
-                return
-            }
-
-            const token = UserService.generateToken(user)
-
-            user = user.toJSON()
+            const { user, token } = await UserService.authenticateUser(userData);
 
             res.status(httpStatus.OK).json({
                 status: 'success',

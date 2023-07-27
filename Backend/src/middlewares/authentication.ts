@@ -33,7 +33,7 @@ passport.use(new JwtStrategy(options, async (payload, done) => {
     try {
         const user = await UserService.getUser(payload.id)
 
-        if (user && user.status === userStatus.Active && user.userType === payload.userType) {
+        if (user && user.status === userStatus.Active) {
             return done(null, user)
         }
 

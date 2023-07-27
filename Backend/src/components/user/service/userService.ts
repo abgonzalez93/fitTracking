@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken'
+import { Op } from 'sequelize';
 import { type Document } from 'mongoose'
 import { ErrorHandler } from '@middlewares/errorHandler'
 import { getJwtConfig } from '@middlewares/authentication'
@@ -14,13 +15,12 @@ const authMsg = getAuthenticationMessages.authentication
 
 export default class UserService {
     public static async getAllUsers (): Promise<Array<UserInterface & Document>> {
-        let users = await User.find().select('-password')
+        const users = await User.find()
 
         if (!users) {
             throw new ErrorHandler(httpStatus.NOT_FOUND, msg.errorGettingAllUsers)
         }
 
-        users = users.map(user => user.toJSON())
         return users
     }
 
@@ -37,26 +37,23 @@ export default class UserService {
             throw new ErrorHandler(httpStatus.BAD_REQUEST, msg.emailAlreadyExists)
         }
 
-        let user = new User(userData)
+        const user = new User(userData)
         await user.save()
-
-        user = user.toJSON()
         return user
     }
 
     public static async getUser (id: string): Promise<(UserInterface & Document) | null> {
-        let user = await User.findById(id).select('-password')
+        const user = await User.findById(id)
 
         if (!user) {
             throw new ErrorHandler(httpStatus.NOT_FOUND, msg.userNotFound)
         }
 
-        user = user.toJSON()
         return user
     }
 
     public static async updateUser (id: string, userData: Partial<UserInterface>): Promise<(UserInterface & Document) | null> {
-        const currentUser = await User.findById(id)
+        const currentUser = await User.findById(id).select('+password');
 
         if (!currentUser) {
             throw new ErrorHandler(httpStatus.NOT_FOUND, msg.userNotFound)
@@ -81,35 +78,61 @@ export default class UserService {
         Object.assign(currentUser, userData)
         await currentUser.save()
 
-        let user = await User.findById(id).select('-password')
-
-        if(user){
-            user = user.toJSON()
-        }
-
+        const user = await User.findById(id)
         return user
     }
 
     public static async deleteUser (id: string): Promise<(UserInterface & Document) | null> {
-        let user = await User.findByIdAndDelete(id)
+        const user = await User.findByIdAndDelete(id)
 
         if (!user) {
             throw new ErrorHandler(httpStatus.NOT_FOUND, msg.userNotFound)
         }
 
-        user = user.toJSON()
         return user
     }
 
-    public static async getUserByEmail (email: string): Promise<(UserInterface & Document) | null> {
-        let user = await User.findOne({ email: email })
+    public static async getUserByEmailOrUsername(userData: Partial<UserInterface>, includePassword: boolean = false): Promise<(UserInterface & Document) | null> {
+        let query = User.findOne({
+            where: {
+                [Op.or]: [
+                    { email: userData.email },
+                    { username: userData.username }
+                ]
+            }
+        })
+
+        if (includePassword) {
+            query = query.select('+password');
+        }
+
+        let user = await query;
 
         if (!user) {
             throw new ErrorHandler(httpStatus.NOT_FOUND, msg.userNotFound)
         }
 
-        user = user.toJSON()
         return user
+    }
+
+    public static async authenticateUser(userData: Partial<UserInterface>): Promise<{ user: UserInterface, token: string }> {
+        const user = await this.getUserByEmailOrUsername(userData, true);
+
+        if (!user) {
+            throw new ErrorHandler(httpStatus.NOT_FOUND, msg.userNotFound)
+        }
+
+        if(userData.password){
+            const comparePassword = await HashService.comparePassword(userData.password, user.password);
+
+            if (!comparePassword) {
+                throw new ErrorHandler(httpStatus.UNAUTHORIZED, msg.userNotFound);
+            }
+        }
+
+        const token = this.generateToken(user);
+
+        return { user, token };
     }
 
     private static async fieldExists (field: string, value: string): Promise<boolean> {
@@ -120,16 +143,13 @@ export default class UserService {
     }
 
     public static generateToken(userData: Partial<UserInterface>): string {
-        if (!userData || !userData._id || !userData.userType) {
+        if (!userData || !userData._id) {
             throw new ErrorHandler(httpStatus.BAD_REQUEST, authMsg.invalidUserData)
         }
 
         const { jwtSecret, jwtExpires } = getJwtConfig()
 
-        const payload = {
-            id: userData._id,
-            userType: userData.userType
-        }
+        const payload = { id: userData._id }
 
         return jwt.sign(payload, jwtSecret, { expiresIn: jwtExpires })
     }

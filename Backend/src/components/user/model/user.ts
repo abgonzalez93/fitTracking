@@ -11,7 +11,7 @@ const user: Schema = new Schema({
     surname: { type: String, required: true },
     username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    password: { type: String, required: true, select: false },
     userType: { type: String, enum: Object.values(userType), required: true },
     clients: { type: [{ type: Types.ObjectId, ref: 'User' }], required: false },
     status: { type: String, enum: Object.values(userStatus), required: true, default: userStatus.Active },
