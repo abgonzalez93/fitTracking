@@ -4,5 +4,6 @@ const msg = getUserMessages.model.enums.userType
 
 export const userType = {
     Basic: msg.basic,
-    Advanced: msg.advanced
+    Advanced: msg.advanced,
+    Admin: msg.admin
 } as const

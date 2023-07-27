@@ -39,7 +39,8 @@ export const getUserMessages = {
             },
             userType: {
                 basic: i18n.__('components.user.enums.userType.basic'),
-                advanced: i18n.__('components.user.enums.userType.advanced')
+                advanced: i18n.__('components.user.enums.userType.advanced'),
+                admin: i18n.__('components.user.enums.userType.admin')
             }
         }
     },
@@ -51,6 +52,7 @@ export const getUserMessages = {
         userDeleted: i18n.__('components.user.controller.userDeleted')
     },
     service: {
+        userIdRequired: i18n.__('components.user.service.userIdRequired'),
         userNotFound: i18n.__('components.user.service.userNotFound'),
         errorGettingAllUsers: i18n.__('components.user.service.errorGettingAllUsers'),
         errorCreatingUser: i18n.__('components.user.service.errorCreatingUser'),

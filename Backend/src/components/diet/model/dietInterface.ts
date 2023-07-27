@@ -2,9 +2,9 @@ import { type Document, type Types } from 'mongoose'
 
 export interface DietInterface extends Document {
     user: Types.ObjectId
-    name: string
+    name?: string
     description?: string
-    meals: Types.ObjectId[]
+    meals?: Types.ObjectId[]
     createdAt: Date
     updatedAt: Date
 }

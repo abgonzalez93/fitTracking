@@ -92,7 +92,8 @@
 				},
 				"userType": {
 					"basic": "Basic",
-					"advanced": "Advanced"
+					"advanced": "Advanced",
+					"admin": "Admin"
 				}
 			},
 			"controller": {
@@ -103,6 +104,7 @@
 				"userDeleted": "Deleted user successfully"
 			},
 			"service": {
+				"userIdIsRequired": "User ID is required",
 				"userNotFound": "User not found",
 				"errorGettingAllUsers": "Error getting all users",
 				"errorCreatingUser": "Error creating user",
@@ -164,12 +166,22 @@
 			"successfulReconnection": "Successful reconnection to MongoDB!"
 		},
 		"attemptConnection": {
+			"uriNotSet": "MongoDB URI is not set in the config file",
 			"tryingToReconnect": "Trying to reconnect...",
 			"connectionFailed": "Connection failed, retrying in {{retry}} seconds... (attempt: {{attempt}})",
 			"connectionToDatabaseError": "Error connecting to the database: {{error}}"
 		}
 	},
 	"middlewares": {
+		"authentication": {
+			"bearerTokenRequired": "An authorization token with Bearer scheme is required",
+			"invalidUserStatus": "The user' status is invalid or has changed. Please, sign in again",
+			"invalidUserData": "Invalid user data to generate a token",
+        	"invalidToken": "Invalid token",
+        	"expiredToken": "Token has expired",
+			"tokenNotActiveYet": "The provided token is not active yet. Please wait for the token to become active and try again",
+        	"couldNotVerifyToken": "Could not verify token"
+		},
 		"handleError": {
 			"internalServerError": "Internal server error",
 			"error404": "Error 404. Page not found"

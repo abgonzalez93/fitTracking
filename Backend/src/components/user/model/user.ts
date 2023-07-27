@@ -1,6 +1,6 @@
 import mongoose, { Schema, Types } from 'mongoose'
 import HashService from '@utils/hashService'
-import { type UserInterface } from './userInterface'
+import { type UserInterface } from '@components/user/model/userInterface'
 import { activityLevel, foodPreferences, gender, healthConditions, userStatus, userType } from './enums'
 import { ErrorHandler } from '@middlewares/errorHandler'
 import { getUserMessages } from '@config/i18n/messages'
@@ -29,6 +29,16 @@ const user: Schema = new Schema({
     activityLevel: { type: String, enum: Object.values(activityLevel), required: false },
     nutritionalGoals: { type: Types.ObjectId, ref: 'NutritionalGoals', required: false }
 }, { timestamps: true })
+
+user.methods.toJSON = function() {
+    var obj = this.toObject()
+
+    if(obj.password){
+        delete obj.password
+    }
+
+    return obj
+}
 
 user.pre<UserInterface>('save', async function (next) {
     if (this.isModified('password')) {

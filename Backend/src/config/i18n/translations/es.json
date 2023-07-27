@@ -53,7 +53,7 @@
 				"manganese": "Manganeso",
 				"molybdenum": "Molibdeno",
 				"chloride": "Cloruro"
-			}			
+			}
 		},
 		"user": {
 			"enums": {
@@ -92,7 +92,8 @@
 				},
 				"userType": {
 					"basic": "Básico",
-					"advanced": "Avanzado"
+					"advanced": "Avanzado",
+					"admin": "Administrador"
 				}
 			},
 			"controller": {
@@ -103,6 +104,7 @@
 				"userDeleted": "Usuario eliminado exitosamente"
 			},
 			"service": {
+				"userIdRequired": "Se requiere un ID de usuario",
 				"userNotFound": "Usuario no encontrado",
 				"errorGettingAllUsers": "Error al obtener todos los usuarios",
 				"errorCreatingUser": "Error al crear usuario",
@@ -164,12 +166,22 @@
 			"successfulReconnection": "¡Reconexión exitosa a MongoDB!"
 		},
 		"attemptConnection": {
+			"uriNotSet": "La URI de MongoDB no está configurada en el archivo de configuración",
 			"tryingToReconnect": "Intentando reconectar...",
 			"connectionFailed": "La conexión falló, reintentando en {{retry}} segundos... (intento: {{attempt}})",
 			"connectionToDatabaseError": "Error al conectar a la base de datos: {{error}}"
 		}
 	},
 	"middlewares": {
+		"authentication": {
+			"bearerTokenRequired": "Se requiere un token de autorización con el esquema 'Bearer'",
+			"invalidUserStatus": "El estado del usuario es inválido o ha cambiado. Por favor, inicia sesión nuevamente",
+			"invalidUserData": "Datos de usuario inválidos para generar un token",
+			"invalidToken": "Token inválido",
+			"expiredToken": "El token ha expirado",
+			"tokenNotActiveYet": "El token proporcionado aún no está activo. Por favor, espera a que el token se active e intenta de nuevo",
+			"couldNotVerifyToken": "No se pudo verificar el token"
+		},
 		"handleError": {
 			"internalServerError": "Error interno del servidor",
 			"error404": "Error 404. Página no encontrada"

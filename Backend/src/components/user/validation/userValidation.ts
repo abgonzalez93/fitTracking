@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import { ErrorHandler } from '@middlewares/errorHandler'
-import { type UserInterface } from 'components/user/model/userInterface'
+import { type UserInterface } from '@components/user/model/userInterface'
 import { activityLevelValidation, birthDateValidation, clientsValidation, contactInfoValidation, emailValidation, foodPreferencesValidation, genderValidation, healthConditionsValidation, heightValidation, nameValidation, passwordValidation, profileImageValidation, statusValidation, surnameValidation, userTypeValidation, usernameValidation, weightValidation } from './fields'
 import { nutritionalGoalsValidation } from '@components/nutricionalGoals/validation/nutritionalGoalValidation'
 import { getUserMessages } from '@config/i18n/messages'

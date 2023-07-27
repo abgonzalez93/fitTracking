@@ -23,7 +23,6 @@ module.exports = {
         }
     ],
     "rules": {
-        "@typescript-eslint/indent": ["error", 4],
-        "@typescript-eslint/no-extraneous-class": "off"
+        "@typescript-eslint/indent": ["error", 4]
     }
 }

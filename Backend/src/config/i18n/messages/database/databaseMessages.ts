@@ -20,6 +20,7 @@ export const getDatabaseMessages = {
         successfulReconnection: i18n.__('database.handleDBEvents.successfulReconnection')
     },
     attemptConnection: {
+        uriNotSet: i18n.__('database.attemptConnection.uriNotSet'),
         tryingToReconnect: i18n.__('database.attemptConnection.tryingToReconnect'),
         connectionFailed: (attempt: number, retryInSeconds: number): string => i18n.__('database.attemptConnection.connectionFailed', { retry: retryInSeconds.toString(), attempt: (attempt + 1).toString() }),
         connectionToDatabaseError: (error: string): string => i18n.__('database.attemptConnection.connectionToDatabaseError', error)

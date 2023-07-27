@@ -1,14 +1,16 @@
 import mongoose, { type Connection } from 'mongoose'
+import { type Express } from 'express'
 import { ErrorHandler } from '@middlewares/errorHandler'
 import config from '@config/config'
-import { getDatabaseMessages } from '@config/i18n/messages'
+import { getDatabaseMessages, getServerMessages } from '@config/i18n/messages'
 import httpStatus from '@constants/httpStatus'
 import logger from '@utils/logger'
 
 export default class DatabaseConnection {
     // Function to handle database events
     private static handleDBEvents (db: Connection): void {
-    // Handle database error
+
+        // Handle database error
         db.on('error', (error) => {
             throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.handleDBEvents.connectionError(error.message), error.stack)
         })
@@ -51,7 +53,7 @@ export default class DatabaseConnection {
                 const uri = config.MONGODB_URI
 
                 if (uri === null) {
-                    throw new Error('MONGODB_URI is not set in the config.')
+                    throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.attemptConnection.uriNotSet)
                 }
 
                 await mongoose.connect(uri, {
@@ -60,6 +62,7 @@ export default class DatabaseConnection {
                     family: 4, // Use IPv4, skip trying IPv6
                     autoCreate: true // automatically create the database
                 })
+
                 break
             } catch (error) {
                 logger.info(getDatabaseMessages.attemptConnection.tryingToReconnect)
@@ -97,5 +100,17 @@ export default class DatabaseConnection {
                 throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.unknownDatabaseError)
             }
         }
-    };
+    }
+
+    // Connect to the database and start app
+    public static async startApp(app: Express, port: number): Promise<void> {
+        try {
+            await this.connect()
+            app.listen(port, () => { logger.info(getServerMessages.listeningOnPort(port)) })
+        } catch (error) {
+            const err = error instanceof ErrorHandler ? error : new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.failedToConnect((error as Error).message), (error as Error).stack)
+            logger.error(err)
+            process.exit(1)
+        }
+    }
 }

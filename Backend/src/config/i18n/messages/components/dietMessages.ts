@@ -10,7 +10,11 @@ export const getDietMessages = {
         dietDeleted: i18n.__('components.diet.controller.dietDeleted')
     },
     service: {
-        errorGettingAllDiets: i18n.__('components.diet.service.errorGettingAllDiets')
+        errorGettingAllDiets: i18n.__('components.diet.service.errorGettingAllDiets'),
+        errorCreatingDiet: i18n.__('components.diet.service.errorCreatingDiet'),
+        errorGettingDiet: i18n.__('components.diet.service.errorGettingDiet'),
+        errorUpdatingDiet: i18n.__('components.diet.service.errorUpdatingDiet'),
+        errorDeletingDiet: i18n.__('components.diet.service.errorDeletingDiet')
     },
     validation: {
         invalidDietData: (error: string): string => i18n.__('components.diet.validation.invalidDietData', error),
