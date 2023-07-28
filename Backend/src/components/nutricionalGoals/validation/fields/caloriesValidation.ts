@@ -1,4 +1,7 @@
+// External Libraries
 import Joi from 'joi'
+
+// Configs and Messages
 import { getNutritionalGoalsMessages } from '@config/i18n/messages'
 
 const msg = getNutritionalGoalsMessages.validation.caloriesValidation

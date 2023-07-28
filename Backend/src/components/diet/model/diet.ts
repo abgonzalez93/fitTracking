@@ -1,4 +1,7 @@
+// External Libraries
 import mongoose, { Schema, Types } from 'mongoose'
+
+// Local files
 import { type DietInterface } from './dietInterface'
 
 const diet: Schema = new Schema({

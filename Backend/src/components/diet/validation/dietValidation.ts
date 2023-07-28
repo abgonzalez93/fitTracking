@@ -1,9 +1,20 @@
+// External Libraries
 import Joi from 'joi'
-import { ErrorHandler } from '@middlewares/errorHandler'
-import { type DietInterface } from '@components/diet/model/dietInterface'
-import { nameValidation, descriptionValidation, userValidation, mealsValidation } from './fields'
-import { getDietMessages } from '@config/i18n/messages'
+
+// Constants
 import httpStatus from '@constants/httpStatus'
+
+// Middlewares
+import { ErrorHandler } from '@middlewares/errorHandler'
+
+// Components { Controllers, Models, Routes, Services, Validations }
+import { type DietInterface } from '@components/diet/model/dietInterface'
+
+// Configs and Messages
+import { getDietMessages } from '@config/i18n/messages'
+
+// Local files
+import { nameValidation, descriptionValidation, userValidation, mealsValidation } from './fields'
 
 const dietValidation = Joi.object({
     user: userValidation,

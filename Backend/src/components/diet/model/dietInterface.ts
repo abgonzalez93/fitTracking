@@ -1,3 +1,4 @@
+// External Libraries
 import { type Document, type Types } from 'mongoose'
 
 export interface DietInterface extends Document {

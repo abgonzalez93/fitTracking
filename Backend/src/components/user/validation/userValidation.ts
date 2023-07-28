@@ -1,10 +1,21 @@
+// External Libraries
 import Joi from 'joi'
-import { ErrorHandler } from '@middlewares/errorHandler'
-import { type UserInterface } from '@components/user/model/userInterface'
-import { activityLevelValidation, birthDateValidation, clientsValidation, contactInfoValidation, emailValidation, foodPreferencesValidation, genderValidation, healthConditionsValidation, heightValidation, nameValidation, passwordValidation, profileImageValidation, statusValidation, surnameValidation, userTypeValidation, usernameValidation, weightValidation } from './fields'
-import { nutritionalGoalsValidation } from '@components/nutricionalGoals/validation/nutritionalGoalValidation'
-import { getUserMessages } from '@config/i18n/messages'
+
+// Constants
 import httpStatus from '@constants/httpStatus'
+
+// Middlewares
+import { ErrorHandler } from '@middlewares/errorHandler'
+
+// Components { Controllers, Models, Routes, Services, Validations }
+import { type UserInterface } from '@components/user/model/userInterface'
+import { nutritionalGoalsValidation } from '@components/nutricionalGoals/validation/nutritionalGoalValidation'
+
+// Configs and Messages
+import { getUserMessages } from '@config/i18n/messages'
+
+// Local files
+import { activityLevelValidation, birthDateValidation, clientsValidation, contactInfoValidation, emailValidation, foodPreferencesValidation, genderValidation, healthConditionsValidation, heightValidation, nameValidation, passwordValidation, profileImageValidation, statusValidation, surnameValidation, userTypeValidation, usernameValidation, weightValidation } from './fields'
 
 const userValidation = Joi.object({
     username: usernameValidation,

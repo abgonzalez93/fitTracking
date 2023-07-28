@@ -1,8 +1,17 @@
-import logger from '@utils/logger'
+// Constants
 import httpStatus from '@constants/httpStatus'
+
+// Utils
+import logger from '@utils/logger'
+
+// Database
 import DatabaseConnection from '@database/databaseConnection'
-import { getDatabaseMessages } from '@config/i18n/messages'
+
+// Middlewares
 import { ErrorHandler } from '@middlewares/errorHandler'
+
+// Configs and Messages
+import { getDatabaseMessages } from '@config/i18n/messages'
 
 export default class SignalHandler {
     private static async handleExit (signal: string, message: string): Promise<void> {

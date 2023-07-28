@@ -1,9 +1,18 @@
+// External Libraries
 import { type NextFunction, type Request, type Response } from 'express'
-import UserService from '@components/user/service/userService'
-import { asyncHandler } from '@middlewares/asyncHandler'
-import { validateUser } from '@components/user/validation/userValidation'
-import { getUserMessages } from '@config/i18n/messages'
+
+// Constants
 import httpStatus from '@constants/httpStatus'
+
+// Middlewares
+import { asyncHandler } from '@middlewares/asyncHandler'
+
+// Components { Controllers, Models, Routes, Services, Validations }
+import UserService from '@components/user/service/userService'
+import { validateUser } from '@components/user/validation/userValidation'
+
+// Configs and Messages
+import { getUserMessages } from '@config/i18n/messages'
 
 const msg = getUserMessages.controller
 
@@ -17,7 +26,7 @@ export default class UserController {
                 message: msg.usersFetched,
                 data: users
             })
-        } catch(error) {
+        } catch (error) {
             next(error)
         }
     })
@@ -35,7 +44,7 @@ export default class UserController {
                 message: msg.userCreated,
                 data: user
             })
-        } catch(error) {
+        } catch (error) {
             next(error)
         }
     })
@@ -49,7 +58,7 @@ export default class UserController {
                 message: msg.userFetched,
                 data: user
             })
-        } catch(error) {
+        } catch (error) {
             next(error)
         }
     })
@@ -57,7 +66,9 @@ export default class UserController {
     public static updateUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
             const userData = req.body
+
             validateUser(userData)
+
             const user = await UserService.updateUser(req.params.id, userData)
 
             res.status(httpStatus.OK).json({
@@ -65,7 +76,7 @@ export default class UserController {
                 message: msg.userUpdated,
                 data: user
             })
-        } catch(error) {
+        } catch (error) {
             next(error)
         }
     })
@@ -79,7 +90,7 @@ export default class UserController {
                 message: msg.userDeleted,
                 data: user
             })
-        } catch(error) {
+        } catch (error) {
             next(error)
         }
     })

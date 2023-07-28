@@ -1,9 +1,18 @@
+// External Libraries
 import { type NextFunction, type Request, type Response } from 'express'
-import DietService from '@components/diet/service/dietService'
-import { asyncHandler } from '@middlewares/asyncHandler'
-import { validateDiet } from '@components/diet/validation/dietValidation'
-import { getDietMessages } from '@config/i18n/messages'
+
+// Constants
 import httpStatus from '@constants/httpStatus'
+
+// Middlewares
+import { asyncHandler } from '@middlewares/asyncHandler'
+
+// Components { Controllers, Models, Routes, Services, Validations }
+import DietService from '@components/diet/service/dietService'
+import { validateDiet } from '@components/diet/validation/dietValidation'
+
+// Configs and Messages
+import { getDietMessages } from '@config/i18n/messages'
 
 const msg = getDietMessages.controller
 
@@ -19,7 +28,7 @@ export default class DietController {
                 message: msg.dietsFetched,
                 data: diets
             })
-        } catch(error) {
+        } catch (error) {
             next(error)
         }
     })
@@ -37,7 +46,7 @@ export default class DietController {
                 message: msg.dietCreated,
                 data: diet
             })
-        } catch(error) {
+        } catch (error) {
             next(error)
         }
     })

@@ -1,3 +1,4 @@
+// Middlewares
 import { type ErrorHandler } from '@middlewares/errorHandler'
 
 export default {

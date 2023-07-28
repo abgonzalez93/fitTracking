@@ -1,6 +1,11 @@
+// External Libraries
 import Joi from 'joi'
-import { micronutrients } from './micronutrients/micronutrients'
+
+// Configs and Messages
 import { getNutritionalGoalsMessages } from '@config/i18n/messages'
+
+// Local files
+import { micronutrients } from './micronutrients/micronutrients'
 
 const validation: Record<string, any> = {}
 

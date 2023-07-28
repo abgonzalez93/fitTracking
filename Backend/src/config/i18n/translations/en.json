@@ -1,5 +1,15 @@
 {
 	"components": {
+		"auth": {
+			"controller": {
+				"userCreated": "User created successfully",
+				"loginSuccessful": "Login successful"
+			},
+			"service": {
+				"invalidUserData": "Invalid user data to generate a token",
+				"wrongCredentials": "Invalid credentials. Please check your username and password and try again"
+			}
+		},
 		"diet": {
 			"controller": {
 				"dietsFetched": "Fetched all diets successfully",
@@ -176,7 +186,6 @@
 		"authentication": {
 			"bearerTokenRequired": "An authorization token with Bearer scheme is required",
 			"invalidUserStatus": "The user' status is invalid or has changed. Please, sign in again",
-			"invalidUserData": "Invalid user data to generate a token",
         	"invalidToken": "Invalid token",
         	"expiredToken": "Token has expired",
 			"tokenNotActiveYet": "The provided token is not active yet. Please wait for the token to become active and try again",

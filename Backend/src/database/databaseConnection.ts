@@ -1,52 +1,50 @@
+// External Libraries
 import mongoose, { type Connection } from 'mongoose'
-import { type Express } from 'express'
-import { ErrorHandler } from '@middlewares/errorHandler'
-import config from '@config/config'
-import { getDatabaseMessages, getServerMessages } from '@config/i18n/messages'
+
+// Constants
 import httpStatus from '@constants/httpStatus'
+
+// Utils
 import logger from '@utils/logger'
 
-export default class DatabaseConnection {
-    // Function to handle database events
-    private static handleDBEvents (db: Connection): void {
+// Middlewares
+import { ErrorHandler } from '@middlewares/errorHandler'
 
-        // Handle database error
+// Configs and Messages
+import config from '@config/config'
+import { getDatabaseMessages } from '@config/i18n/messages'
+
+export default class DatabaseConnection {
+    private static handleDBEvents (db: Connection): void {
         db.on('error', (error) => {
             throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.handleDBEvents.connectionError(error.message), error.stack)
         })
 
-        // Handle start of database connection
         db.on('connecting', () => {
             logger.info(getDatabaseMessages.handleDBEvents.startingConnection)
         })
 
-        // Handle database connection initiation
         db.on('connected', () => {
             logger.info(getDatabaseMessages.handleDBEvents.connectionInitiated)
         })
 
-        // Check for stable database connection
         db.once('open', () => {
             logger.info(getDatabaseMessages.handleDBEvents.connected)
         })
 
-        // Handle start of database disconnection
         db.on('disconnecting', () => {
             logger.info(getDatabaseMessages.handleDBEvents.disconnecting)
         })
 
-        // Handle database disconnection
         db.on('disconnected', () => {
             logger.info(getDatabaseMessages.handleDBEvents.connectionClosed)
         })
 
-        // Handle database reconnection
         db.on('reconnected', () => {
             logger.info(getDatabaseMessages.handleDBEvents.successfulReconnection)
         })
     };
 
-    // Function to attempt database connection
     private static async attemptConnection (maxAttempts: number): Promise<void> {
         for (let attempt = 0; attempt < maxAttempts; attempt++) {
             try {
@@ -76,7 +74,6 @@ export default class DatabaseConnection {
         }
     };
 
-    // Function to handle database disconnection
     public static async disconnect (message?: string): Promise<void> {
         const db = mongoose.connection
         if (db.readyState === 1) {
@@ -87,10 +84,10 @@ export default class DatabaseConnection {
         }
     }
 
-    // Main database connection function
     public static async connect (): Promise<void> {
         const db = mongoose.connection
         this.handleDBEvents(db)
+
         try {
             await this.attemptConnection(config.RECONNECTION_MAX_ATTEMPS)
         } catch (error) {
@@ -99,18 +96,6 @@ export default class DatabaseConnection {
             } else {
                 throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.unknownDatabaseError)
             }
-        }
-    }
-
-    // Connect to the database and start app
-    public static async startApp(app: Express, port: number): Promise<void> {
-        try {
-            await this.connect()
-            app.listen(port, () => { logger.info(getServerMessages.listeningOnPort(port)) })
-        } catch (error) {
-            const err = error instanceof ErrorHandler ? error : new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.failedToConnect((error as Error).message), (error as Error).stack)
-            logger.error(err)
-            process.exit(1)
         }
     }
 }

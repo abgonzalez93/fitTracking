@@ -1,6 +1,11 @@
+// External Libraries
 import { type Document } from 'mongoose'
-import { type activityLevel, type foodPreferences, type gender, type healthConditions, type userStatus, type userType } from './enums'
+
+// Components { Controllers, Models, Routes, Services, Validations }
 import { type NutritionalGoalsInterface } from '@components/nutricionalGoals/model/nutritionalGoalsInterface'
+
+// Local files
+import { type activityLevel, type foodPreferences, type gender, type healthConditions, type userStatus, type userType } from './enums'
 
 type ActivityLevel = typeof activityLevel[keyof typeof activityLevel]
 type FoodPreferences = typeof foodPreferences[keyof typeof foodPreferences]

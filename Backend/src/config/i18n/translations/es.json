@@ -1,5 +1,15 @@
 {
 	"components": {
+		"auth": {
+			"controller": {
+				"userCreated": "Usuario creado con éxito",
+				"loginSuccessful": "Inicio de sesión exitoso"
+			},
+			"service": {
+				"invalidUserData": "Datos de usuario inválidos para generar un token",
+				"wrongCredentials": "Credenciales inválidas. Por favor, revise su nombre de usuario y contraseña e inténtelo de nuevo"
+			}
+		},
 		"diet": {
 			"controller": {
 				"dietsFetched": "Todos las dietas han sido obtenidas exitosamente",
@@ -176,7 +186,6 @@
 		"authentication": {
 			"bearerTokenRequired": "Se requiere un token de autorización con el esquema 'Bearer'",
 			"invalidUserStatus": "El estado del usuario es inválido o ha cambiado. Por favor, inicia sesión nuevamente",
-			"invalidUserData": "Datos de usuario inválidos para generar un token",
 			"invalidToken": "Token inválido",
 			"expiredToken": "El token ha expirado",
 			"tokenNotActiveYet": "El token proporcionado aún no está activo. Por favor, espera a que el token se active e intenta de nuevo",

@@ -14,7 +14,7 @@
       "@constants/*": ["constants/*"],
       "@database/*": ["database/*"],
       "@middlewares/*": ["middlewares/*"],
-      "@routes/*": ["routes/*"],
+      "@router/*": ["router/*"],
       "@utils/*": ["utils/*"]
     }
   },

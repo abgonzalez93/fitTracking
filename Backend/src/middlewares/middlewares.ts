@@ -1,12 +1,17 @@
+// External Libraries
 import express, { type Application } from 'express'
+import rateLimit from 'express-rate-limit'
+import compression from 'compression'
+import passport from 'passport'
+import morgan from 'morgan'
 import helmet from 'helmet'
 import cors from 'cors'
-import morgan from 'morgan'
-import rateLimit from 'express-rate-limit'
-import i18n from '@config/i18n/i18n'
-import passport from 'passport'
-import compression from 'compression'
+
+// Middlewares
 import { handleError, handle404Error } from '@middlewares/errorHandler'
+
+// Configs and Messages
+import i18n from '@config/i18n/i18n'
 
 export const applyMiddleware = (app: Application): void => {
     // Middleware to help protect your application from well-known vulnerabilities

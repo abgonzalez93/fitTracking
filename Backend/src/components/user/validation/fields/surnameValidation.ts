@@ -1,4 +1,7 @@
+// External Libraries
 import Joi from 'joi'
+
+// Configs and Messages
 import { getUserMessages } from '@config/i18n/messages'
 
 const msg = getUserMessages.validation.surnameValidation

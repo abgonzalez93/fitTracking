@@ -1,4 +1,7 @@
+// External Libraries
 import mongoose, { Schema } from 'mongoose'
+
+// Local files
 import { type NutritionalGoalsInterface } from './nutritionalGoalsInterface'
 
 const nutritionalGoals: Schema = new Schema({

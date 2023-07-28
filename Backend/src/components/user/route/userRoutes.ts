@@ -1,9 +1,11 @@
+// External Libraries
 import { Router } from 'express'
+
+// Components { Controllers, Models, Routes, Services, Validations }
 import UserController from '@components/user/controller/userController'
 
 const router = Router()
 
-// Define your routes
 router.get('/', UserController.getAllUsers)
 router.post('/', UserController.createUser)
 router.get('/:id', UserController.getUser)
