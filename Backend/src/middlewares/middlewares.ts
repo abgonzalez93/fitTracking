@@ -8,7 +8,7 @@ import helmet from 'helmet'
 import cors from 'cors'
 
 // Middlewares
-import { handleError, handle404Error } from '@middlewares/errorHandler'
+import { handleError } from '@middlewares/errorHandler'
 
 // Configs and Messages
 import i18n from '@config/i18n/i18n'
@@ -50,6 +50,5 @@ export const applyMiddleware = (app: Application): void => {
     */
 
     // Middleware for centralized error handling
-    app.use(handle404Error)
     app.use(handleError)
 }

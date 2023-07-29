@@ -1,5 +1,10 @@
 {
 	"components": {
+		"api": {
+			"controller": {
+				"welcomeMessage": "Bienvenido a la API de fitTracking"
+			}
+		},
 		"auth": {
 			"controller": {
 				"userCreated": "Usuario creado con éxito",
@@ -193,7 +198,7 @@
 		},
 		"handleError": {
 			"internalServerError": "Error interno del servidor",
-			"error404": "Error 404. Página no encontrada"
+			"error404": "HTTP 404. Página no encontrada"
 		}
 	},
 	"server": {

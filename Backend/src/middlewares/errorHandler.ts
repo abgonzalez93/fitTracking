@@ -5,6 +5,7 @@ import { type Request, type Response, type NextFunction } from 'express'
 import httpStatus from '@constants/httpStatus'
 
 // Configs and Messages
+import config from '@config/config'
 import { getErrorHandlerMessages } from '@config/i18n/messages'
 
 export class ErrorHandler extends Error {
@@ -30,7 +31,7 @@ export const handleError = (error: ErrorHandler, req: Request, res: Response, ne
         message
     }
 
-    if (process.env.NODE_ENV === 'develop' && error instanceof ErrorHandler) {
+    if (config.NODE_ENV === 'develop' && error instanceof ErrorHandler) {
         errorResponse.stack = error.stack
     }
 

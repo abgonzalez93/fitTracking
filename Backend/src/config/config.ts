@@ -5,6 +5,7 @@ dotenv.config()
 
 export const config = {
     PORT: process.env.PORT !== undefined ? parseInt(process.env.PORT) : 3000,
+    NODE_ENV: process.env.NODE_ENV ?? null,
     MONGODB_URI: process.env.MONGODB_URI ?? null,
     RECONNECTION_RETRY_TIME: 5000,
     RECONNECTION_MAX_ATTEMPS: 5,

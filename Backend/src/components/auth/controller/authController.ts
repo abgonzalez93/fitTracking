@@ -18,6 +18,22 @@ import { getAuthMessages } from '@config/i18n/messages'
 const msg = getAuthMessages.controller
 
 export default class AuthController {
+    public static login = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const userData = req.body
+
+            const { user, token } = await AuthService.authenticateUser(userData.email, userData.username, userData.password)
+
+            res.status(httpStatus.OK).json({
+                status: 'success',
+                message: msg.loginSuccessful,
+                data: { user, token }
+            })
+        } catch (error) {
+            next(error)
+        }
+    })
+
     public static register = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
             const userData = req.body
@@ -30,22 +46,6 @@ export default class AuthController {
                 status: 'success',
                 message: msg.userCreated,
                 data: user
-            })
-        } catch (error) {
-            next(error)
-        }
-    })
-
-    public static login = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-        try {
-            const userData = req.body
-
-            const { user, token } = await AuthService.authenticateUser(userData.email, userData.username, userData.password)
-
-            res.status(httpStatus.OK).json({
-                status: 'success',
-                message: msg.loginSuccessful,
-                data: { user, token }
             })
         } catch (error) {
             next(error)
