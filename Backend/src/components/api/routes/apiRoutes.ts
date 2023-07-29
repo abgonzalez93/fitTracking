@@ -3,8 +3,8 @@ import { Router } from 'express'
 
 // Components { Controllers, Models, Routes, Services, Validations }
 import apiController from '@components/api/controller/apiController'
-import userRoutes from '@components/user/route/userRoutes'
-import dietRoutes from '@components/diet/route/dietRoutes'
+import userRoutes from '@components/user/routes/userRoutes'
+import dietRoutes from '@components/diet/routes/dietRoutes'
 
 const router = Router()
 

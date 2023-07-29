@@ -2,8 +2,8 @@
 import express from 'express'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import apiRoutes from '@components/api/route/apiRoutes'
-import authRoutes from '@components/auth/route/authRoutes'
+import authRoutes from '@components/auth/routes/authRoutes'
+import apiRoutes from '@components/api/routes/apiRoutes'
 
 const router = express.Router()
 
