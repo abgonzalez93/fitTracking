@@ -19,9 +19,9 @@ const msg = getDietMessages.controller
 export default class DietController {
     public static getAllDiets = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const userId = req.body.user
+            //const userId = req.body.user
 
-            const diets = await DietService.getAllDiets(userId)
+            const diets = await DietService.getAllDiets()
 
             res.status(httpStatus.OK).json({
                 status: 'success',

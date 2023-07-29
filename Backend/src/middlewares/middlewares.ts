@@ -43,8 +43,8 @@ export const applyMiddleware = (app: Application): void => {
 
     /*
         No debes usar el middleware authentication de Passport para todas las rutas de tu aplicación,
-        ya que esto requeriría que todas las solicitudes estén autenticadas. En su lugar,
-        debes usar el middleware en las rutas individuales que quieres proteger.
+        ya que esto requeriría que todas las solicitudes estén autenticadas.
+        En su lugar, debes usar el middleware en las rutas individuales que quieres proteger.
 
         app.use(authentication)
     */

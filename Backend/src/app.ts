@@ -11,9 +11,9 @@ import router from '@router/router'
 const app: Express = express()
 
 applyMiddleware(app)
+
 app.use(express.static('public'))
 app.use(router)
-
 app.use(handle404Error)
 
 export default app
