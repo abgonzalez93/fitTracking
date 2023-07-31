@@ -194,7 +194,8 @@
 			"invalidToken": "Token inválido",
 			"expiredToken": "El token ha expirado",
 			"tokenNotActiveYet": "El token proporcionado aún no está activo. Por favor, espera a que el token se active e intenta de nuevo",
-			"couldNotVerifyToken": "No se pudo verificar el token"
+			"couldNotVerifyToken": "No se pudo verificar el token",
+			"couldNotSaveToken": "No se pudo guardar el token de refresco"
 		},
 		"handleError": {
 			"internalServerError": "Error interno del servidor",

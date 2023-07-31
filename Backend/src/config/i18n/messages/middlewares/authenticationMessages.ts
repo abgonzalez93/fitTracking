@@ -8,6 +8,7 @@ export const getAuthenticationMessages = {
         invalidToken: i18n.__('middlewares.authentication.invalidToken'),
         expiredToken: i18n.__('middlewares.authentication.expiredToken'),
         tokenNotActiveYet: i18n.__('middlewares.authentication.tokenNotActiveYet'),
-        couldNotVerifyToken: i18n.__('middlewares.authentication.couldNotVerifyToken')
+        couldNotVerifyToken: i18n.__('middlewares.authentication.couldNotVerifyToken'),
+        couldNotSaveToken: i18n.__('middlewares.authentication.couldNotSaveToken')
     }
 }

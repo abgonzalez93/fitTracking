@@ -1,6 +1,3 @@
-// External Libraries
-import { Op } from 'sequelize'
-
 // Constants
 import httpStatus from '@constants/httpStatus'
 
@@ -11,13 +8,15 @@ import HashService from '@utils/hashService'
 import { ErrorHandler } from '@middlewares/errorHandler'
 
 // Components { Controllers, Models, Routes, Services, Validations }
+import AuthService from '@components/auth/service/authService'
 import User from '@components/user/model/user'
 import { type UserInterface } from '@components/user/model/userInterface'
 
 // Configs and Messages
-import { getUserMessages } from '@config/i18n/messages'
+import { getAuthMessages, getUserMessages } from '@config/i18n/messages'
 
 const msg = getUserMessages.service
+const authMsg = getAuthMessages.service
 
 export default class UserService {
     public static async getAllUsers (): Promise<UserInterface[]> {
@@ -36,6 +35,8 @@ export default class UserService {
         const user = new User(userData)
 
         await user.save()
+
+        AuthService.generateAndStoreTokens(user._id)
 
         return user
     }
@@ -76,12 +77,10 @@ export default class UserService {
 
     public static async getUserByEmailOrUsername (email: string, username: string, includePassword: boolean = false): Promise<UserInterface> {
         let query = User.findOne({
-            where: {
-                [Op.or]: [
-                    { email },
-                    { username }
-                ]
-            }
+            $or: [
+                { email: email },
+                { username: username }
+            ]
         })
 
         if (includePassword) {
@@ -91,7 +90,7 @@ export default class UserService {
         const user = await query
 
         if (user == null) {
-            throw new ErrorHandler(httpStatus.NOT_FOUND, msg.userNotFound)
+            throw new ErrorHandler(httpStatus.NOT_FOUND, authMsg.wrongCredentials)
         }
 
         return user

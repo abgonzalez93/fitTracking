@@ -22,17 +22,34 @@ export default class AuthController {
         try {
             const userData = req.body
 
-            const { user, token } = await AuthService.authenticateUser(userData.email, userData.username, userData.password)
+            const user = await AuthService.authenticateUser(userData.email, userData.username, userData.password)
 
             res.status(httpStatus.OK).json({
                 status: 'success',
                 message: msg.loginSuccessful,
-                data: { user, token }
+                data: user
             })
         } catch (error) {
             next(error)
         }
     })
+
+    /*
+    public static logout = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const userId = req.user.id
+
+            await AuthService.revokeAllRefreshTokens(userId)
+
+            res.status(httpStatus.OK).json({
+                status: 'success',
+                message: 'Logout successful'
+            })
+        } catch (error) {
+            next(error)
+        }
+    })
+    */
 
     public static register = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -46,6 +63,21 @@ export default class AuthController {
                 status: 'success',
                 message: msg.userCreated,
                 data: user
+            })
+        } catch (error) {
+            next(error)
+        }
+    })
+
+    public static refresh = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const refreshToken = req.body.refreshToken
+
+            await AuthService.refreshToken(refreshToken)
+
+            res.status(httpStatus.OK).json({
+                status: 'success',
+                message: 'Refreshed access token'
             })
         } catch (error) {
             next(error)

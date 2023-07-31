@@ -9,8 +9,10 @@ export const config = {
     MONGODB_URI: process.env.MONGODB_URI ?? null,
     RECONNECTION_RETRY_TIME: 5000,
     RECONNECTION_MAX_ATTEMPS: 5,
-    JWT_SECRET: process.env.JWT_SECRET ?? null,
-    JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN !== undefined ? parseInt(process.env.JWT_EXPIRES_IN) : null
+    JWT_SECRET_ACCESS: process.env.JWT_SECRET_ACCESS ?? null,
+    JWT_SECRET_REFRESH: process.env.JWT_SECRET_REFRESH ?? null,
+    JWT_EXPIRES_ACCESS: process.env.JWT_EXPIRES_ACCESS !== undefined ? parseInt(process.env.JWT_EXPIRES_ACCESS) : null,
+    JWT_EXPIRES_REFRESH: process.env.JWT_EXPIRES_REFRESH !== undefined ? parseInt(process.env.JWT_EXPIRES_REFRESH) : null
 }
 
 export default config

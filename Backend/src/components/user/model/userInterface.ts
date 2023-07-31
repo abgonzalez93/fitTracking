@@ -44,8 +44,8 @@ interface UserSystemInfo extends Document {
     clients?: string[]
     status: UserStatus
     profileImage?: string
-    creationDate: Date
-    updatedDate: Date
+    createdAt: Date
+    updatedAt: Date
 }
 
 export type UserInterface = UserPersonalInfo & UserPhysicalInfo & UserSystemInfo

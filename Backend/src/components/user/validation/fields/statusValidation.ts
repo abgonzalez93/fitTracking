@@ -12,6 +12,5 @@ const msg = getUserMessages.validation.statusValidation
 const values = Object.values(userStatus).filter(value => isNaN(Number(value)))
 
 export const statusValidation = Joi.string().valid(...Object.values(userStatus)).optional().messages({
-    'string.empty': msg.emptyData,
     'any.only': msg.mustBeOneOfTheFollowing(values)
 })

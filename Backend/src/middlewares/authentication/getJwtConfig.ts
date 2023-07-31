@@ -8,6 +8,7 @@ import httpStatus from '@constants/httpStatus'
 import { ErrorHandler } from '@middlewares/errorHandler'
 
 // Components { Controllers, Models, Routes, Services, Validations }
+import AuthService from '@components/auth/service/authService'
 import { userStatus } from '@components/user/model/enums'
 import UserService from '@components/user/service/userService'
 
@@ -17,34 +18,48 @@ import { getAuthenticationMessages } from '@config/i18n/messages'
 
 const msg = getAuthenticationMessages.authentication
 
-export const getJwtConfig = (): { jwtSecret: string, jwtExpires: number } => {
-    const jwtSecret = config.JWT_SECRET
-    const jwtExpires = config.JWT_EXPIRES_IN
+export const getJwtConfig = (): { jwtSecretAccess: string, jwtSecretRefresh: string, jwtExpiresAccess: number, jwtExpiresRefresh: number } => {
+    const jwtSecretAccess = config.JWT_SECRET_ACCESS
+    const jwtSecretRefresh = config.JWT_SECRET_REFRESH
+    const jwtExpiresAccess = config.JWT_EXPIRES_ACCESS
+    const jwtExpiresRefresh = config.JWT_EXPIRES_REFRESH
 
-    if (jwtSecret === null) {
+    if (jwtSecretAccess === null || jwtSecretRefresh === null) {
         throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, msg.invalidToken)
     }
 
-    if (jwtExpires === null) {
+    if (jwtExpiresAccess === null || jwtExpiresRefresh === null) {
         throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, msg.expiredToken)
     }
 
-    return { jwtSecret, jwtExpires }
+    return { jwtSecretAccess, jwtSecretRefresh, jwtExpiresAccess, jwtExpiresRefresh }
 }
 
 const jwtStrategyConfig = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: getJwtConfig().jwtSecret
+    secretOrKey: getJwtConfig().jwtSecretAccess
 }
 
-export default new JwtStrategy(jwtStrategyConfig, (payload, done) => {
-    UserService.getUser(payload.id).then(user => {
-        if (user !== null && typeof user === 'object' && user.status === userStatus.Active) {
-            done(null, user)
-        } else {
-            done(null, false)
+export default new JwtStrategy(jwtStrategyConfig, async (payload, done) => {
+    try {
+        if (payload.type !== 'access') {
+            return done(null, false)
         }
-    }).catch(error => {
-        done(error, false)
-    })
+
+        const user = await UserService.getUser(payload.id)
+
+        if (!user || typeof user !== 'object' || user.status != userStatus.Active) {
+            return done(null, false)
+        }
+
+        const providedRefreshToken = await AuthService.getRefreshTokenForUser(user.id, payload.refreshToken)
+
+        if (providedRefreshToken === null) {
+            return done(null, false)
+        }
+
+        return done(null, user)
+    } catch (error) {
+        return done(error, false)
+    }
 })
