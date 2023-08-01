@@ -4,6 +4,9 @@ import { type NextFunction, type Request, type Response } from 'express'
 // Constants
 import httpStatus from '@constants/httpStatus'
 
+// Utils
+import { createResponse } from '@utils/response'
+
 // Middlewares
 import { asyncHandler } from '@middlewares/asyncHandler'
 
@@ -22,13 +25,12 @@ export default class AuthController {
         try {
             const userData = req.body
 
-            const user = await AuthService.authenticateUser(userData.email, userData.username, userData.password)
+            const user = await UserService.getUserByEmailOrUsername(userData.email, userData.username, true)
 
-            res.status(httpStatus.OK).json({
-                status: 'success',
-                message: msg.loginSuccessful,
-                data: user
-            })
+            const authenticatedUser = await AuthService.authenticateUser(user, userData.password)
+
+            const [statusCode, response] = createResponse(httpStatus.OK, 'success', msg.loginSuccessful, authenticatedUser)
+            res.status(statusCode).json(response)
         } catch (error) {
             next(error)
         }
@@ -45,6 +47,8 @@ export default class AuthController {
                 status: 'success',
                 message: 'Logout successful'
             })
+            const [statusCode, response] = createResponse(httpStatus.OK, 'success', 'Logout successful')
+            res.status(statusCode).json(response)
         } catch (error) {
             next(error)
         }
@@ -59,11 +63,8 @@ export default class AuthController {
 
             const user = await UserService.createUser(userData)
 
-            res.status(httpStatus.CREATED).json({
-                status: 'success',
-                message: msg.userCreated,
-                data: user
-            })
+            const [statusCode, response] = createResponse(httpStatus.CREATED, 'success', msg.userCreated, user)
+            res.status(statusCode).json(response)
         } catch (error) {
             next(error)
         }
@@ -73,12 +74,10 @@ export default class AuthController {
         try {
             const refreshToken = req.body.refreshToken
 
-            await AuthService.refreshToken(refreshToken)
+            const newTokens = await AuthService.refresh(refreshToken)
 
-            res.status(httpStatus.OK).json({
-                status: 'success',
-                message: 'Refreshed access token'
-            })
+            const [statusCode, response] = createResponse(httpStatus.OK, 'success', 'Refreshed access token', newTokens)
+            res.status(statusCode).json(response)
         } catch (error) {
             next(error)
         }

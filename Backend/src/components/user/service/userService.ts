@@ -42,21 +42,11 @@ export default class UserService {
     }
 
     public static async getUser (id: string): Promise<UserInterface> {
-        const user = await User.findById(id)
-
-        if (user == null) {
-            throw new ErrorHandler(httpStatus.NOT_FOUND, msg.userNotFound)
-        }
-
-        return user
+        return await this.getUserOrThrow(id)
     }
 
     public static async updateUser (id: string, userData: Pick<UserInterface, 'name' | 'surname' | 'username' | 'email' | 'password'>): Promise<UserInterface> {
-        const currentUser = await User.findById(id).select('+password')
-
-        if (currentUser == null) {
-            throw new ErrorHandler(httpStatus.NOT_FOUND, msg.userNotFound)
-        }
+        const currentUser = await this.getUserOrThrow(id, true)
 
         await this.validateUser(userData, true, currentUser)
 
@@ -66,7 +56,30 @@ export default class UserService {
     }
 
     public static async deleteUser (id: string): Promise<(UserInterface)> {
-        const user = await User.findByIdAndDelete(id)
+        const user = await this.getUserOrThrow(id)
+        await User.deleteOne({ _id: id })
+        return user
+    }
+
+    public static async getUserByEmailOrUsername (email: string, username: string, includePassword: boolean = false): Promise<UserInterface> {
+        const query = {
+            $or: [
+                { email: email },
+                { username: username }
+            ]
+        }
+
+        return this.findUserByQuery(query, includePassword)
+    }
+
+    private static async findUserByQuery(query: any, includePassword: boolean = false): Promise<UserInterface> {
+        let queryResult = User.findOne(query)
+
+        if (includePassword) {
+            queryResult = queryResult.select('+password')
+        }
+
+        const user = await queryResult
 
         if (user == null) {
             throw new ErrorHandler(httpStatus.NOT_FOUND, msg.userNotFound)
@@ -75,59 +88,46 @@ export default class UserService {
         return user
     }
 
-    public static async getUserByEmailOrUsername (email: string, username: string, includePassword: boolean = false): Promise<UserInterface> {
-        let query = User.findOne({
-            $or: [
-                { email: email },
-                { username: username }
-            ]
-        })
 
-        if (includePassword) {
-            query = query.select('+password')
-        }
-
-        const user = await query
-
-        if (user == null) {
-            throw new ErrorHandler(httpStatus.NOT_FOUND, authMsg.wrongCredentials)
-        }
-
-        return user
+    private static async getUserOrThrow(id: string, includePassword: boolean = false): Promise<UserInterface> {
+        return this.findUserByQuery({ _id: id }, includePassword)
     }
 
     private static async validateUser (userData: Pick<UserInterface, 'username' | 'email' | 'password'>, isUpdate: boolean = false, currentUser?: Pick<UserInterface, 'username' | 'email' | 'password'>): Promise<void> {
-        if (userData.password === null || userData.password === undefined || userData.password.trim() === '') {
+        await Promise.all([
+            this.validatePassword(userData, isUpdate, currentUser),
+            this.validateInput(userData, 'username', msg.usernameAlreadyExists, currentUser),
+            this.validateInput(userData, 'email', msg.emailAlreadyExists, currentUser)
+        ])
+    }
+
+    private static async validatePassword(userData: Pick<UserInterface, 'password'>, isUpdate: boolean, currentUser?: Pick<UserInterface, 'password'>): Promise<void> {
+        if (userData.password == null || userData.password.trim() === '') {
             throw new ErrorHandler(httpStatus.BAD_REQUEST, msg.passwordMustBeProvided)
         }
 
-        if (isUpdate && currentUser != null && currentUser.password !== undefined && currentUser.password !== '') {
-            const isSamePassword = await HashService.comparePassword(userData.password, currentUser.password)
+        if (isUpdate && currentUser?.password && currentUser.password.trim() !== '') {
+            await this.comparePassword(userData.password, currentUser.password)
+        }
+    }
 
-            if (isSamePassword) {
-                throw new ErrorHandler(httpStatus.BAD_REQUEST, msg.passwordMustBeDifferentFromYourCurrent)
+    private static async comparePassword(password: string, currentPassword: string): Promise<void> {
+        const isSamePassword = await HashService.comparePassword(password, currentPassword)
+
+        if (isSamePassword) {
+            throw new ErrorHandler(httpStatus.BAD_REQUEST, msg.passwordMustBeDifferentFromYourCurrent)
+        }
+    }
+
+    private static async validateInput(userData: Pick<UserInterface, 'username' | 'email'>, field: 'username' | 'email', errorMessage: string, currentUser?: Pick<UserInterface, 'username' | 'email'>): Promise<void> {
+        if (userData[field] != null && userData[field].trim() !== '') {
+            const query: Record<string, any> = {}
+            query[field] = userData[field]
+            const user = await User.findOne(query)
+
+            if (user !== null && (currentUser === undefined || currentUser[field] !== userData[field])) {
+                throw new ErrorHandler(httpStatus.BAD_REQUEST, errorMessage)
             }
         }
-
-        if (userData.username !== null && userData.username !== undefined && userData.username.trim() !== '') {
-            await this.validateField('username', userData.username, currentUser)
-        }
-
-        if (userData.email !== null && userData.email !== undefined && userData.email.trim() !== '') {
-            await this.validateField('email', userData.email, currentUser)
-        }
-    }
-
-    private static async validateField (field: 'username' | 'email', value: string, currentUser?: Pick<UserInterface, 'username' | 'email'>): Promise<void> {
-        if ((currentUser === undefined || currentUser === null || currentUser[field] === undefined || value !== currentUser[field]) && await this.fieldExists(field, value)) {
-            throw new ErrorHandler(httpStatus.BAD_REQUEST, field === 'username' ? msg.usernameAlreadyExists : msg.emailAlreadyExists)
-        }
-    }
-
-    private static async fieldExists (field: string, value: string): Promise<boolean> {
-        const query: Record<string, any> = {}
-        query[field] = value
-        const user = await User.findOne(query)
-        return user !== null
     }
 }

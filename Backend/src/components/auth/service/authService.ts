@@ -8,74 +8,40 @@ import httpStatus from '@constants/httpStatus'
 import HashService from '@utils/hashService'
 
 // Middlewares
+import { getJwtConfig } from '@middlewares/authentication/jwtConfig'
 import { ErrorHandler } from '@middlewares/errorHandler'
-import { getJwtConfig } from '@middlewares/authentication/getJwtConfig'
 
 // Components { Controllers, Models, Routes, Services, Validations }
 import RefreshTokens from '@components/auth/model/refreshTokens'
-import { type RefreshTokensInterface } from '@components/auth/model/refreshTokensInterface'
+import { type TokenPayloadInterface } from '@components/auth/model/tokenPayloadInterface'
 import { type UserInterface } from '@components/user/model/userInterface'
-import UserService from '@components/user/service/userService'
 
 // Configs and Messages
 import { getAuthMessages, getAuthenticationMessages } from '@config/i18n/messages'
 
+// Local files
+import TokenType from '../model/enums/tokenType'
+
 const authMsg = getAuthMessages.service
 const authTokenMsg = getAuthenticationMessages.authentication
 
-export default class AuthService {
-    public static async authenticateUser (email: string, username: string, password: string): Promise<UserInterface> {
-        const user = await UserService.getUserByEmailOrUsername(email, username, true)
+const jwtConfig = getJwtConfig()
 
-        if (user === null || user === undefined || !(await HashService.comparePassword(password, user.password))) {
+export default class AuthService {
+    public static async authenticateUser (user: UserInterface, password: string): Promise<{ user: UserInterface, accessToken: string, refreshToken: string }> {
+        if (!(await HashService.comparePassword(password, user.password))) {
             throw new ErrorHandler(httpStatus.UNAUTHORIZED, authMsg.wrongCredentials)
         }
 
-        await this.generateAndStoreTokens(user._id)
+        const { accessToken, refreshToken } = await this.generateAndStoreTokens(user._id)
 
-        return user
+        return { user, accessToken, refreshToken }
     }
 
-    public static generateToken (id: string, type: 'access' | 'refresh'): string {
-        const { jwtSecretAccess, jwtSecretRefresh, jwtExpiresAccess, jwtExpiresRefresh } = getJwtConfig()
+    public static async refresh (refreshToken: string): Promise<{ accessToken: string, refreshToken: string }> {
+        const oldPayload = await this.verifyToken(refreshToken, TokenType.REFRESH)
 
-        const payload = { id, type }
-        const expiresIn = type === 'access' ? jwtExpiresAccess : jwtExpiresRefresh
-        const secret = type === 'access' ? jwtSecretAccess : jwtSecretRefresh
-
-        const token = jwt.sign(payload, secret, { expiresIn: expiresIn })
-        return token
-    }
-
-    public static async storeRefreshTokenForUser(userId: string, refreshToken: string): Promise<void> {
-        const existingTokens = await RefreshTokens.find({ userId }).sort({ createdAt: 1 })
-
-        if (existingTokens.length >= 5) {
-            const oldestToken = existingTokens[0]
-            await RefreshTokens.deleteOne({ _id: oldestToken._id })
-        }
-
-        const refreshTokenDoc = new RefreshTokens({ userId, refreshToken })
-        await refreshTokenDoc.save()
-    }
-
-    public static async getRefreshTokenForUser(userId: string, token: string): Promise<RefreshTokensInterface | null> {
-        return await RefreshTokens.findOne({ userId, token })
-    }
-
-    public static async generateAndStoreTokens(userId: string): Promise<{ accessToken: string, refreshToken: string }> {
-        const accessToken = this.generateToken(userId, 'access')
-        const refreshToken = this.generateToken(userId, 'refresh')
-
-        await this.storeRefreshTokenForUser(userId, refreshToken)
-
-        return { accessToken, refreshToken }
-    }
-
-    public static async refreshToken (refreshToken: string): Promise<void> {
-        const oldPayload = await this.verifyToken(refreshToken, 'refresh')
-
-        if (typeof oldPayload !== 'object' || oldPayload === null) {
+        if (!(typeof oldPayload === 'object' && oldPayload !== null)) {
             throw new ErrorHandler(httpStatus.BAD_REQUEST, authTokenMsg.invalidToken)
         }
 
@@ -85,21 +51,65 @@ export default class AuthService {
             throw new ErrorHandler(httpStatus.UNAUTHORIZED, authTokenMsg.invalidToken)
         }
 
-        this.generateToken(oldPayload.id, 'access')
-        const newRefreshToken = this.generateToken(oldPayload.id, 'refresh')
+        await this.revokeToken(oldPayload.id, refreshToken)
 
-        await this.storeRefreshTokenForUser(oldPayload.id, newRefreshToken)
+        return await this.generateAndStoreTokens(oldPayload.id)
     }
 
-    public static async revokeAllRefreshTokens(userId: string): Promise<void> {
-        await RefreshTokens.deleteMany({ userId })
+    public static async generateAndStoreTokens(userId: string): Promise<{ accessToken: string, refreshToken: string }> {
+        const accessToken = this.generateToken(userId, TokenType.ACCESS)
+        const refreshToken = this.generateToken(userId, TokenType.REFRESH)
+
+        await this.storeRefreshTokenForUser(userId, refreshToken)
+
+        return { accessToken, refreshToken }
     }
 
-    public static async verifyToken(token: string, type: 'access' | 'refresh'): Promise<string | jwt.JwtPayload> {
-        const { jwtSecretAccess, jwtSecretRefresh } = getJwtConfig()
+    private static generateToken (id: string, type: TokenType): string {
+        try {
+            const payload = { id, type }
+            const expiresIn = type === TokenType.ACCESS ? jwtConfig.jwtExpiresAccess : jwtConfig.jwtExpiresRefresh
+            const secret = this.getTokenSecret(type)
+
+            const token = jwt.sign(payload, secret, { expiresIn: expiresIn })
+            return token
+        } catch (error) {
+            throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, 'Could not generate token');
+        }
+    }
+
+    private static async storeRefreshTokenForUser(userId: string, refreshToken: string): Promise<void> {
+        await RefreshTokens.updateOne(
+            { userId: userId },
+            {
+                $push: {
+                    tokens: {
+                        $each: [{ refreshToken }],
+                        $slice: -5,
+                    }
+                }
+            },
+            { upsert: true }
+        )
+    }
+
+    private static async revokeToken(userId: string, refreshToken: string): Promise<void> {
+        await RefreshTokens.updateOne(
+            { userId: userId },
+            {
+                $pull: {
+                    tokens: {
+                        refreshToken: refreshToken
+                    }
+                }
+            }
+        )
+    }
+
+    private static async verifyToken(token: string, type: TokenType): Promise<TokenPayloadInterface> {
         let payload
 
-        const secret = type === 'access' ? jwtSecretAccess : jwtSecretRefresh
+        const secret = this.getTokenSecret(type)
 
         try {
             payload = jwt.verify(token, secret)
@@ -107,6 +117,14 @@ export default class AuthService {
             throw new ErrorHandler(httpStatus.BAD_REQUEST, authTokenMsg.couldNotVerifyToken)
         }
 
-        return payload;
+        if (typeof payload === 'string' || payload === null) {
+            throw new ErrorHandler(httpStatus.BAD_REQUEST, authTokenMsg.invalidToken)
+        }
+
+        return payload as TokenPayloadInterface
+    }
+
+    private static getTokenSecret(type: TokenType): string {
+        return type === TokenType.ACCESS ? jwtConfig.jwtSecretAccess : jwtConfig.jwtSecretRefresh
     }
 }

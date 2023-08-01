@@ -4,6 +4,9 @@ import { type NextFunction, type Request, type Response } from 'express'
 // Constants
 import httpStatus from '@constants/httpStatus'
 
+// Utils
+import { createResponse } from '@utils/response'
+
 // Middlewares
 import { asyncHandler } from '@middlewares/asyncHandler'
 
@@ -21,11 +24,8 @@ export default class UserController {
         try {
             const users = await UserService.getAllUsers()
 
-            res.status(httpStatus.OK).json({
-                status: 'success',
-                message: msg.usersFetched,
-                data: users
-            })
+            const [statusCode, response] = createResponse(httpStatus.OK, 'success', msg.usersFetched, users)
+            res.status(statusCode).json(response)
         } catch (error) {
             next(error)
         }
@@ -39,11 +39,8 @@ export default class UserController {
 
             const user = await UserService.createUser(userData)
 
-            res.status(httpStatus.CREATED).json({
-                status: 'success',
-                message: msg.userCreated,
-                data: user
-            })
+            const [statusCode, response] = createResponse(httpStatus.CREATED, 'success', msg.userCreated, user)
+            res.status(statusCode).json(response)
         } catch (error) {
             next(error)
         }
@@ -53,11 +50,8 @@ export default class UserController {
         try {
             const user = await UserService.getUser(req.params.id)
 
-            res.status(httpStatus.OK).json({
-                status: 'success',
-                message: msg.userFetched,
-                data: user
-            })
+            const [statusCode, response] = createResponse(httpStatus.OK, 'success', msg.userFetched, user)
+            res.status(statusCode).json(response)
         } catch (error) {
             next(error)
         }
@@ -71,11 +65,8 @@ export default class UserController {
 
             const user = await UserService.updateUser(req.params.id, userData)
 
-            res.status(httpStatus.OK).json({
-                status: 'success',
-                message: msg.userUpdated,
-                data: user
-            })
+            const [statusCode, response] = createResponse(httpStatus.OK, 'success', msg.userUpdated, user)
+            res.status(statusCode).json(response)
         } catch (error) {
             next(error)
         }
@@ -85,11 +76,8 @@ export default class UserController {
         try {
             const user = await UserService.deleteUser(req.params.id)
 
-            res.status(httpStatus.NO_CONTENT).json({
-                status: 'success',
-                message: msg.userDeleted,
-                data: user
-            })
+            const [statusCode, response] = createResponse(httpStatus.NO_CONTENT, 'success', msg.userDeleted, user)
+            res.status(statusCode).json(response)
         } catch (error) {
             next(error)
         }

@@ -2,7 +2,7 @@
 import passport from 'passport'
 
 // Middlewares
-import jwtStrategy from '@middlewares/authentication/getJwtConfig'
+import jwtStrategy from '@middlewares/authentication/jwtStrategy'
 
 passport.use(jwtStrategy)
 

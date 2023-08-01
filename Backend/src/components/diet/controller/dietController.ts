@@ -4,6 +4,9 @@ import { type NextFunction, type Request, type Response } from 'express'
 // Constants
 import httpStatus from '@constants/httpStatus'
 
+// Utils
+import { createResponse } from '@utils/response'
+
 // Middlewares
 import { asyncHandler } from '@middlewares/asyncHandler'
 
@@ -19,15 +22,10 @@ const msg = getDietMessages.controller
 export default class DietController {
     public static getAllDiets = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
-            //const userId = req.body.user
-
             const diets = await DietService.getAllDiets()
 
-            res.status(httpStatus.OK).json({
-                status: 'success',
-                message: msg.dietsFetched,
-                data: diets
-            })
+            const [statusCode, response] = createResponse(httpStatus.OK, 'success', msg.dietsFetched, diets)
+            res.status(statusCode).json(response)
         } catch (error) {
             next(error)
         }
@@ -41,11 +39,8 @@ export default class DietController {
 
             const diet = await DietService.createDiet(dietData)
 
-            res.status(httpStatus.CREATED).json({
-                status: 'success',
-                message: msg.dietCreated,
-                data: diet
-            })
+            const [statusCode, response] = createResponse(httpStatus.OK, 'success', msg.dietCreated, diet)
+            res.status(statusCode).json(response)
         } catch (error) {
             next(error)
         }
