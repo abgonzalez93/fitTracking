@@ -25,8 +25,8 @@ export const applyMiddleware = (app: Application): void => {
 
     // Middleware to limit repetitive API requests to prevent brute force attacks
     app.use(rateLimit({
-        windowMs: 15 * 60 * 1000,   // 15 minutes
-        max: 100                    // Limit each IP to 100 requests per window
+        windowMs: 15 * 60 * 1000, // 15 minutes
+        max: 100 // Limit each IP to 100 requests per window
     }))
 
     // HTTP logging middleware

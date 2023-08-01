@@ -72,7 +72,7 @@ export default class DatabaseConnection {
                 }
             }
         }
-    };
+    }
 
     public static async disconnect (message?: string): Promise<void> {
         const db = mongoose.connection

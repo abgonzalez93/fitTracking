@@ -1,4 +1,4 @@
-export function createResponse(httpStatusCode: number, status: string, message: string, data?: any): [number, object] {
+export function createResponse (httpStatusCode: number, status: string, message: string, data?: any): [number, object] {
     return [
         httpStatusCode,
         {
@@ -6,5 +6,5 @@ export function createResponse(httpStatusCode: number, status: string, message: 
             message,
             data
         }
-    ];
+    ]
 }

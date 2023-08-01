@@ -7,26 +7,15 @@ import { ErrorHandler } from '@middlewares/errorHandler'
 // Components { Controllers, Models, Routes, Services, Validations }
 import Diet from '@components/diet/model/diet'
 import { type DietInterface } from '@components/diet/model/dietInterface'
-//import User from '@components/user/model/user'
+// import User from '@components/user/model/user'
 
 // Configs and Messages
-import { getDietMessages, getUserMessages } from '@config/i18n/messages'
+import { getDietMessages } from '@config/i18n/messages'
 
 const msg = getDietMessages.service
 
 export default class DietService {
     public static async getAllDiets (): Promise<DietInterface[]> {
-        /*
-        if (userId === null || userId === undefined || userId.trim() === '') {
-            throw new ErrorHandler(httpStatus.BAD_REQUEST, getUserMessages.service.userIdRequired)
-        }
-
-        const user = await User.findById(userId)
-
-        if (user == null) {
-            throw new ErrorHandler(httpStatus.NOT_FOUND, getUserMessages.service.userNotFound)
-        }*/
-
         const diets = await Diet.find()
 
         if (diets.length === 0) {

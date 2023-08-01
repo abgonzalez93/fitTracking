@@ -17,13 +17,14 @@ import { type TokenPayloadInterface } from '@components/auth/model/tokenPayloadI
 import { type UserInterface } from '@components/user/model/userInterface'
 
 // Configs and Messages
-import { getAuthMessages, getAuthenticationMessages } from '@config/i18n/messages'
+import { getAuthMessages, getAuthenticationMessages, getUserMessages } from '@config/i18n/messages'
 
 // Local files
 import TokenType from '../model/enums/tokenType'
 
 const authMsg = getAuthMessages.service
 const authTokenMsg = getAuthenticationMessages.authentication
+const userMsg = getUserMessages.service
 
 const jwtConfig = getJwtConfig()
 
@@ -41,22 +42,19 @@ export default class AuthService {
     public static async refresh (refreshToken: string): Promise<{ accessToken: string, refreshToken: string }> {
         const oldPayload = await this.verifyToken(refreshToken, TokenType.REFRESH)
 
-        if (!(typeof oldPayload === 'object' && oldPayload !== null)) {
-            throw new ErrorHandler(httpStatus.BAD_REQUEST, authTokenMsg.invalidToken)
-        }
-
         const storedTokenDoc = await RefreshTokens.findOne({ userId: oldPayload.id, refreshToken })
 
-        if (!storedTokenDoc) {
+        if (storedTokenDoc == null) {
             throw new ErrorHandler(httpStatus.UNAUTHORIZED, authTokenMsg.invalidToken)
         }
 
         await this.revokeToken(oldPayload.id, refreshToken)
 
-        return await this.generateAndStoreTokens(oldPayload.id)
+        const newTokens = await this.generateAndStoreTokens(oldPayload.id)
+        return newTokens
     }
 
-    public static async generateAndStoreTokens(userId: string): Promise<{ accessToken: string, refreshToken: string }> {
+    public static async generateAndStoreTokens (userId: string): Promise<{ accessToken: string, refreshToken: string }> {
         const accessToken = this.generateToken(userId, TokenType.ACCESS)
         const refreshToken = this.generateToken(userId, TokenType.REFRESH)
 
@@ -68,48 +66,53 @@ export default class AuthService {
     private static generateToken (id: string, type: TokenType): string {
         try {
             const payload = { id, type }
-            const expiresIn = type === TokenType.ACCESS ? jwtConfig.jwtExpiresAccess : jwtConfig.jwtExpiresRefresh
-            const secret = this.getTokenSecret(type)
+            const secret = this.getTokenConfig(type).secret
+            const expiresIn = this.getTokenConfig(type).expiration
 
-            const token = jwt.sign(payload, secret, { expiresIn: expiresIn })
+            const token = jwt.sign(payload, secret, { expiresIn })
             return token
         } catch (error) {
-            throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, 'Could not generate token');
+            throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, 'Could not generate token')
         }
     }
 
-    private static async storeRefreshTokenForUser(userId: string, refreshToken: string): Promise<void> {
-        await RefreshTokens.updateOne(
-            { userId: userId },
-            {
-                $push: {
-                    tokens: {
-                        $each: [{ refreshToken }],
-                        $slice: -5,
+    private static async storeRefreshTokenForUser (userId: string, refreshToken: string): Promise<void> {
+        const user = await RefreshTokens.findOne({ _id: userId })
+
+        if (user === null) {
+            throw new ErrorHandler(httpStatus.BAD_REQUEST, userMsg.userNotFound)
+        } else {
+            await RefreshTokens.updateOne(
+                { _id: userId },
+                {
+                    $push: {
+                        tokens: {
+                            $each: [{ refreshToken }],
+                            $slice: -5
+                        }
                     }
                 }
-            },
-            { upsert: true }
-        )
+            )
+        }
     }
 
-    private static async revokeToken(userId: string, refreshToken: string): Promise<void> {
+    private static async revokeToken (userId: string, refreshToken: string): Promise<void> {
         await RefreshTokens.updateOne(
-            { userId: userId },
+            { _id: userId },
             {
                 $pull: {
                     tokens: {
-                        refreshToken: refreshToken
+                        refreshToken
                     }
                 }
             }
         )
     }
 
-    private static async verifyToken(token: string, type: TokenType): Promise<TokenPayloadInterface> {
+    private static async verifyToken (token: string, type: TokenType): Promise<TokenPayloadInterface> {
         let payload
 
-        const secret = this.getTokenSecret(type)
+        const secret = this.getTokenConfig(type).secret
 
         try {
             payload = jwt.verify(token, secret)
@@ -117,14 +120,25 @@ export default class AuthService {
             throw new ErrorHandler(httpStatus.BAD_REQUEST, authTokenMsg.couldNotVerifyToken)
         }
 
-        if (typeof payload === 'string' || payload === null) {
+        if (payload === null) {
             throw new ErrorHandler(httpStatus.BAD_REQUEST, authTokenMsg.invalidToken)
         }
 
         return payload as TokenPayloadInterface
     }
 
-    private static getTokenSecret(type: TokenType): string {
-        return type === TokenType.ACCESS ? jwtConfig.jwtSecretAccess : jwtConfig.jwtSecretRefresh
+    private static getTokenConfig (type: TokenType): { secret: string, expiration: number } {
+        switch (type) {
+            case TokenType.ACCESS:
+                return {
+                    secret: jwtConfig.jwtSecretAccess,
+                    expiration: jwtConfig.jwtExpiresAccess
+                }
+            case TokenType.REFRESH:
+                return {
+                    secret: jwtConfig.jwtSecretRefresh,
+                    expiration: jwtConfig.jwtExpiresRefresh
+                }
+        }
     }
 }

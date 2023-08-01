@@ -13,10 +13,9 @@ import User from '@components/user/model/user'
 import { type UserInterface } from '@components/user/model/userInterface'
 
 // Configs and Messages
-import { getAuthMessages, getUserMessages } from '@config/i18n/messages'
+import { getUserMessages } from '@config/i18n/messages'
 
 const msg = getUserMessages.service
-const authMsg = getAuthMessages.service
 
 export default class UserService {
     public static async getAllUsers (): Promise<UserInterface[]> {
@@ -36,7 +35,7 @@ export default class UserService {
 
         await user.save()
 
-        AuthService.generateAndStoreTokens(user._id)
+        await AuthService.generateAndStoreTokens(user._id)
 
         return user
     }
@@ -64,15 +63,15 @@ export default class UserService {
     public static async getUserByEmailOrUsername (email: string, username: string, includePassword: boolean = false): Promise<UserInterface> {
         const query = {
             $or: [
-                { email: email },
-                { username: username }
+                { email },
+                { username }
             ]
         }
 
-        return this.findUserByQuery(query, includePassword)
+        return await this.findUserByQuery(query, includePassword)
     }
 
-    private static async findUserByQuery(query: any, includePassword: boolean = false): Promise<UserInterface> {
+    private static async findUserByQuery (query: any, includePassword: boolean = false): Promise<UserInterface> {
         let queryResult = User.findOne(query)
 
         if (includePassword) {
@@ -88,9 +87,8 @@ export default class UserService {
         return user
     }
 
-
-    private static async getUserOrThrow(id: string, includePassword: boolean = false): Promise<UserInterface> {
-        return this.findUserByQuery({ _id: id }, includePassword)
+    private static async getUserOrThrow (id: string, includePassword: boolean = false): Promise<UserInterface> {
+        return await this.findUserByQuery({ _id: id }, includePassword)
     }
 
     private static async validateUser (userData: Pick<UserInterface, 'username' | 'email' | 'password'>, isUpdate: boolean = false, currentUser?: Pick<UserInterface, 'username' | 'email' | 'password'>): Promise<void> {
@@ -101,17 +99,17 @@ export default class UserService {
         ])
     }
 
-    private static async validatePassword(userData: Pick<UserInterface, 'password'>, isUpdate: boolean, currentUser?: Pick<UserInterface, 'password'>): Promise<void> {
+    private static async validatePassword (userData: Pick<UserInterface, 'password'>, isUpdate: boolean, currentUser?: Pick<UserInterface, 'password'>): Promise<void> {
         if (userData.password == null || userData.password.trim() === '') {
             throw new ErrorHandler(httpStatus.BAD_REQUEST, msg.passwordMustBeProvided)
         }
 
-        if (isUpdate && currentUser?.password && currentUser.password.trim() !== '') {
+        if (isUpdate && currentUser?.password !== null && currentUser?.password !== undefined && currentUser.password.trim() !== '') {
             await this.comparePassword(userData.password, currentUser.password)
         }
     }
 
-    private static async comparePassword(password: string, currentPassword: string): Promise<void> {
+    private static async comparePassword (password: string, currentPassword: string): Promise<void> {
         const isSamePassword = await HashService.comparePassword(password, currentPassword)
 
         if (isSamePassword) {
@@ -119,7 +117,7 @@ export default class UserService {
         }
     }
 
-    private static async validateInput(userData: Pick<UserInterface, 'username' | 'email'>, field: 'username' | 'email', errorMessage: string, currentUser?: Pick<UserInterface, 'username' | 'email'>): Promise<void> {
+    private static async validateInput (userData: Pick<UserInterface, 'username' | 'email'>, field: 'username' | 'email', errorMessage: string, currentUser?: Pick<UserInterface, 'username' | 'email'>): Promise<void> {
         if (userData[field] != null && userData[field].trim() !== '') {
             const query: Record<string, any> = {}
             query[field] = userData[field]
