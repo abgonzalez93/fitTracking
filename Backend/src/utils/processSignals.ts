@@ -20,7 +20,7 @@ export default class SignalHandler {
             process.exit()
         } catch (error) {
             if (error instanceof ErrorHandler) {
-                logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.connectionShutdown.errorShuttingDown(signal, error.message), error.stack))
+                logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.connectionShutdown.errorShuttingDown(signal, error.message)))
             } else {
                 logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.unknownDatabaseError))
             }
@@ -36,7 +36,7 @@ export default class SignalHandler {
                     await this.handleExit('SIGUSR2', getDatabaseMessages.connectionShutdown.nodemonRestart)
                 } catch (error) {
                     if (error instanceof ErrorHandler) {
-                        logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.connectionShutdown.nodemonRestartError(error.message), error.stack))
+                        logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.connectionShutdown.nodemonRestartError(error.message)))
                     } else {
                         logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.unknownDatabaseError))
                     }
@@ -44,7 +44,7 @@ export default class SignalHandler {
                     process.exit(1)
                 }
             })().catch((error) => {
-                logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, 'An error occurred while handling nodemon restarts', error))
+                logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, error))
             })
         })
     }
@@ -56,7 +56,7 @@ export default class SignalHandler {
                     await this.handleExit('SIGINT', getDatabaseMessages.connectionShutdown.applicationTermination)
                 } catch (error) {
                     if (error instanceof ErrorHandler) {
-                        logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.connectionShutdown.applicationTerminationError(error.message), error.stack))
+                        logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.connectionShutdown.applicationTerminationError(error.message)))
                     } else {
                         logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.unknownDatabaseError))
                     }
@@ -64,7 +64,7 @@ export default class SignalHandler {
                     process.exit(1)
                 }
             })().catch((error) => {
-                logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, 'An error occurred while handling app termination', error))
+                logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, error))
             })
         })
     }

@@ -23,11 +23,11 @@ const msg = getAuthMessages.controller
 export default class AuthController {
     public static login = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const userData = req.body
+            const { email, username, password } = req.body
 
-            const user = await UserService.getUserByEmailOrUsername(userData.email, userData.username, true)
+            const user = await UserService.getUserByEmailOrUsername(email, username, true)
 
-            const authenticatedUser = await AuthService.authenticateUser(user, userData.password)
+            const authenticatedUser = await AuthService.authenticateUser(user, password)
 
             const [statusCode, response] = createResponse(httpStatus.OK, 'success', msg.loginSuccessful, authenticatedUser)
             res.status(statusCode).json(response)
@@ -36,24 +36,18 @@ export default class AuthController {
         }
     })
 
-    /*
     public static logout = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const userId = req.user.id
+            const { userId, refreshToken } = req.body
 
-            await AuthService.revokeAllRefreshTokens(userId)
+            await AuthService.revokeToken(userId, refreshToken)
 
-            res.status(httpStatus.OK).json({
-                status: 'success',
-                message: 'Logout successful'
-            })
-            const [statusCode, response] = createResponse(httpStatus.OK, 'success', 'Logout successful')
+            const [statusCode, response] = createResponse(httpStatus.OK, 'success', msg.logoutSuccessful)
             res.status(statusCode).json(response)
         } catch (error) {
             next(error)
         }
     })
-    */
 
     public static register = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -76,7 +70,7 @@ export default class AuthController {
 
             const newTokens = await AuthService.refresh(refreshToken)
 
-            const [statusCode, response] = createResponse(httpStatus.OK, 'success', 'Refreshed access token', newTokens)
+            const [statusCode, response] = createResponse(httpStatus.OK, 'success', msg.refreshedAccessToken, newTokens)
             res.status(statusCode).json(response)
         } catch (error) {
             next(error)

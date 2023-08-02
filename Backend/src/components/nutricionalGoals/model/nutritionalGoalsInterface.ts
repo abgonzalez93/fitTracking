@@ -1,4 +1,7 @@
-export interface NutritionalGoalsInterface {
+// External Libraries
+import { type Document } from 'mongoose'
+
+export interface NutritionalGoalsInterface extends Document {
     calories?: number
     carbohydrates?: number
     fats?: number

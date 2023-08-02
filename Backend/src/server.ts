@@ -33,7 +33,7 @@ DatabaseConnection.connect()
     })
     .catch((error) => {
         if (error instanceof ErrorHandler) {
-            logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.failedToConnect(error.message), error.stack))
+            logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.failedToConnect(error.message)))
         } else {
             logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.unknownDatabaseError))
         }

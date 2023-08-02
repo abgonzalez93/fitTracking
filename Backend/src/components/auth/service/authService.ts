@@ -17,13 +17,12 @@ import { type TokenPayloadInterface } from '@components/auth/model/tokenPayloadI
 import { type UserInterface } from '@components/user/model/userInterface'
 
 // Configs and Messages
-import { getAuthMessages, getAuthenticationMessages, getUserMessages } from '@config/i18n/messages'
+import { getAuthMessages, getUserMessages } from '@config/i18n/messages'
 
 // Local files
 import TokenType from '../model/enums/tokenType'
 
 const authMsg = getAuthMessages.service
-const authTokenMsg = getAuthenticationMessages.authentication
 const userMsg = getUserMessages.service
 
 const jwtConfig = getJwtConfig()
@@ -45,7 +44,7 @@ export default class AuthService {
         const storedTokenDoc = await RefreshTokens.findOne({ userId: oldPayload.id, refreshToken })
 
         if (storedTokenDoc == null) {
-            throw new ErrorHandler(httpStatus.UNAUTHORIZED, authTokenMsg.invalidToken)
+            throw new ErrorHandler(httpStatus.BAD_REQUEST, authMsg.invalidToken)
         }
 
         await this.revokeToken(oldPayload.id, refreshToken)
@@ -63,6 +62,19 @@ export default class AuthService {
         return { accessToken, refreshToken }
     }
 
+    public static async revokeToken (userId: string, refreshToken: string): Promise<void> {
+        await RefreshTokens.updateOne(
+            { _id: userId },
+            {
+                $pull: {
+                    tokens: {
+                        refreshToken
+                    }
+                }
+            }
+        )
+    }
+
     private static generateToken (id: string, type: TokenType): string {
         try {
             const payload = { id, type }
@@ -72,7 +84,7 @@ export default class AuthService {
             const token = jwt.sign(payload, secret, { expiresIn })
             return token
         } catch (error) {
-            throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, 'Could not generate token')
+            throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, authMsg.couldNotGenerateToken)
         }
     }
 
@@ -96,19 +108,6 @@ export default class AuthService {
         }
     }
 
-    private static async revokeToken (userId: string, refreshToken: string): Promise<void> {
-        await RefreshTokens.updateOne(
-            { _id: userId },
-            {
-                $pull: {
-                    tokens: {
-                        refreshToken
-                    }
-                }
-            }
-        )
-    }
-
     private static async verifyToken (token: string, type: TokenType): Promise<TokenPayloadInterface> {
         let payload
 
@@ -117,11 +116,11 @@ export default class AuthService {
         try {
             payload = jwt.verify(token, secret)
         } catch (error) {
-            throw new ErrorHandler(httpStatus.BAD_REQUEST, authTokenMsg.couldNotVerifyToken)
+            throw new ErrorHandler(httpStatus.BAD_REQUEST, authMsg.couldNotVerifyToken)
         }
 
         if (payload === null) {
-            throw new ErrorHandler(httpStatus.BAD_REQUEST, authTokenMsg.invalidToken)
+            throw new ErrorHandler(httpStatus.BAD_REQUEST, authMsg.invalidToken)
         }
 
         return payload as TokenPayloadInterface

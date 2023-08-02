@@ -17,7 +17,7 @@ import { getDatabaseMessages } from '@config/i18n/messages'
 export default class DatabaseConnection {
     private static handleDBEvents (db: Connection): void {
         db.on('error', (error) => {
-            throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.handleDBEvents.connectionError(error.message), error.stack)
+            throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.handleDBEvents.connectionError(error.message))
         })
 
         db.on('connecting', () => {
@@ -64,6 +64,7 @@ export default class DatabaseConnection {
                 break
             } catch (error) {
                 logger.info(getDatabaseMessages.attemptConnection.tryingToReconnect)
+
                 if (attempt < maxAttempts - 1) {
                     logger.info(getDatabaseMessages.attemptConnection.connectionFailed(attempt, config.RECONNECTION_RETRY_TIME / 1000))
                     await new Promise(resolve => setTimeout(resolve, config.RECONNECTION_RETRY_TIME))
@@ -92,7 +93,7 @@ export default class DatabaseConnection {
             await this.attemptConnection(config.RECONNECTION_MAX_ATTEMPS)
         } catch (error) {
             if (error instanceof ErrorHandler) {
-                throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.attemptConnection.connectionToDatabaseError(error.message), error.stack)
+                throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.attemptConnection.connectionToDatabaseError(error.message))
             } else {
                 throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.unknownDatabaseError)
             }

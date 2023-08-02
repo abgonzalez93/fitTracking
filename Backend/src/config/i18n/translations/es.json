@@ -8,11 +8,16 @@
 		"auth": {
 			"controller": {
 				"userCreated": "Usuario creado con éxito",
-				"loginSuccessful": "Inicio de sesión exitoso"
+				"loginSuccessful": "Inicio de sesión exitoso",
+				"logoutSuccessful": "Cierre de sesión existoso",
+				"refreshedAccessToken": "Token de acceso actualizado"
 			},
 			"service": {
 				"invalidUserData": "Datos de usuario inválidos para generar un token",
-				"wrongCredentials": "Credenciales inválidas. Por favor, revise su nombre de usuario y contraseña e inténtelo de nuevo"
+				"wrongCredentials": "Credenciales inválidas. Por favor, revise su nombre de usuario y contraseña e inténtelo de nuevo",
+				"invalidToken": "Token inválido",
+				"couldNotVerifyToken": "No se pudo verificar el token",
+				"couldNotGenerateToken": "No se pudo generar el token"
 			}
 		},
 		"diet": {
@@ -189,13 +194,8 @@
 	},
 	"middlewares": {
 		"authentication": {
-			"bearerTokenRequired": "Se requiere un token de autorización con el esquema 'Bearer'",
-			"invalidUserStatus": "El estado del usuario es inválido o ha cambiado. Por favor, inicia sesión nuevamente",
 			"invalidToken": "Token inválido",
-			"expiredToken": "El token ha expirado",
-			"tokenNotActiveYet": "El token proporcionado aún no está activo. Por favor, espera a que el token se active e intenta de nuevo",
-			"couldNotVerifyToken": "No se pudo verificar el token",
-			"couldNotSaveToken": "No se pudo guardar el token de refresco"
+			"expiredToken": "El token ha expirado"
 		},
 		"handleError": {
 			"internalServerError": "Error interno del servidor",
