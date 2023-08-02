@@ -198,7 +198,6 @@
 			"expiredToken": "El token ha expirado"
 		},
 		"handleError": {
-			"internalServerError": "Error interno del servidor",
 			"error404": "HTTP 404. Página no encontrada"
 		}
 	},
@@ -208,6 +207,7 @@
 	"commonMessages": {
 		"emptyData": "{{field}} no puede estar vacío",
 		"invalidData": "{{field}} es inválido",
+		"mustBeObject": "{{field}} debe ser un objeto",
 		"mustBeArray": "{{field}} debe ser un array",
 		"mustBeNumber": "{{field}} debe ser un número",
 		"mustBePositive": "{{field}} debe ser un número positivo",

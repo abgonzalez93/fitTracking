@@ -93,19 +93,19 @@ export default class AuthService {
 
         if (user === null) {
             throw new ErrorHandler(httpStatus.BAD_REQUEST, userMsg.userNotFound)
-        } else {
-            await RefreshTokens.updateOne(
-                { _id: userId },
-                {
-                    $push: {
-                        tokens: {
-                            $each: [{ refreshToken }],
-                            $slice: -5
-                        }
+        }
+
+        await RefreshTokens.updateOne(
+            { _id: userId },
+            {
+                $push: {
+                    tokens: {
+                        $each: [{ refreshToken }],
+                        $slice: -5
                     }
                 }
-            )
-        }
+            }
+        )
     }
 
     private static async verifyToken (token: string, type: TokenType): Promise<TokenPayloadInterface> {

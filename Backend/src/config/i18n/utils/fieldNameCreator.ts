@@ -4,6 +4,7 @@ import { getCommonMessages } from '@config/i18n/messages'
 interface Field {
     emptyData: string
     invalidData: string
+    mustBeObject: string
     mustBeArray: string
     mustBeNumber: string
     mustBePositive: string
@@ -17,6 +18,7 @@ export function createField (fieldName: string): Field {
     return {
         emptyData: getCommonMessages.emptyData(fieldName),
         invalidData: getCommonMessages.invalidData(fieldName),
+        mustBeObject: getCommonMessages.mustBeObject(fieldName),
         mustBeArray: getCommonMessages.mustBeArray(fieldName),
         mustBeNumber: getCommonMessages.mustBeNumber(fieldName),
         mustBePositive: getCommonMessages.mustBePositive(fieldName),

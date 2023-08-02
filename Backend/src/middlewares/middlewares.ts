@@ -32,8 +32,9 @@ export const applyMiddleware = (app: Application): void => {
     // HTTP logging middleware
     app.use(morgan('dev'))
 
-    // Middleware for parsing the body of incoming requests as JSON
-    app.use(express.json())
+    // Middleware for parsing the body of incoming requests as JSON - Request body limit set to 100mb
+    app.use(express.json({ limit: '100mb' }))
+    app.use(express.urlencoded({ limit: '100mb' }))
 
     // Middleware for i18n
     app.use(i18n.init)

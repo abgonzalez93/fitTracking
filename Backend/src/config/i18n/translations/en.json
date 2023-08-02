@@ -198,7 +198,6 @@
         	"expiredToken": "Token has expired"
 		},
 		"handleError": {
-			"internalServerError": "Internal server error",
 			"error404": "HTTP 404. Page not found"
 		}
 	},
@@ -208,6 +207,7 @@
 	"commonMessages": {
 		"emptyData": "{{field}} cannot be empty",
 		"invalidData": "Invalid {{field}}",
+		"mustBeObject": "{{field}} must be an object",
 		"mustBeArray": "{{field}} must be an array",
 		"mustBeNumber": "{{field}} must be a number",
 		"mustBePositive": "{{field}} must be a positive number",

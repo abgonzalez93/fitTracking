@@ -36,5 +36,5 @@ export const handleError = (err: Error | ErrorHandler, req: Request, res: Respon
 }
 
 export const handle404Error = (req: Request, res: Response, next: NextFunction): void => {
-    next(new ErrorHandler(httpStatus.NOT_FOUND, getErrorHandlerMessages.handleError.error404()))
+    next(new ErrorHandler(httpStatus.NOT_FOUND, getErrorHandlerMessages.handleError.error404))
 }

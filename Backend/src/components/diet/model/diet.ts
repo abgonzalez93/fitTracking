@@ -6,9 +6,17 @@ import { type DietInterface } from './dietInterface'
 
 const diet: Schema = new Schema({
     user: { type: Types.ObjectId, ref: 'User', required: true },
-    name: { type: String, required: true },
+    name: { type: String, required: false },
     description: { type: String, required: false },
-    meals: { type: [{ type: Types.ObjectId, ref: 'Meal' }], required: false }
+    meals: {
+        type: {
+            breakfast: [{ type: Types.ObjectId, ref: 'Meal' }],
+            lunch: [{ type: Types.ObjectId, ref: 'Meal' }],
+            dinner: [{ type: Types.ObjectId, ref: 'Meal' }],
+            snacks: [{ type: Types.ObjectId, ref: 'Meal' }],
+        },
+        required: false
+    }
 }, { timestamps: true })
 
 export default mongoose.model<DietInterface>('Diet', diet)
