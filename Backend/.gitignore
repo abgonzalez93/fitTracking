@@ -7,6 +7,7 @@
 
 # testing
 /coverage
+/reports
 
 # production
 /build
@@ -32,3 +33,6 @@ tsc-debug.log
 
 # IDE - VSCode
 .vscode
+
+#SonarQube
+.scannerwork
