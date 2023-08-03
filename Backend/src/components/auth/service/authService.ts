@@ -14,7 +14,7 @@ import { ErrorHandler } from '@middlewares/errorHandler'
 // Components { Controllers, Models, Routes, Services, Validations }
 import RefreshTokens from '@components/auth/model/refreshTokens'
 import { type TokenPayloadInterface } from '@components/auth/model/tokenPayloadInterface'
-import { type UserInterface } from '@components/user/model/userInterface'
+import { type UserInterface } from '@components/api/models/user/userInterface'
 
 // Configs and Messages
 import { getAuthMessages, getUserMessages } from '@config/i18n/messages'

@@ -5,8 +5,8 @@ import httpStatus from '@constants/httpStatus'
 import { ErrorHandler } from '@middlewares/errorHandler'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import Diet from '@components/diet/model/diet'
-import { type DietInterface } from '@components/diet/model/dietInterface'
+import Diet from '@components/api/models/diet/diet'
+import { type DietInterface } from '@components/api/models/diet/dietInterface'
 // import User from '@components/user/model/user'
 
 // Configs and Messages

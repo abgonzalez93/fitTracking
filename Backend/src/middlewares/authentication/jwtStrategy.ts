@@ -7,7 +7,7 @@ import logger from '@utils/logger'
 // Components { Controllers, Models, Routes, Services, Validations }
 import TokenType from '@components/auth/model/enums/tokenType'
 import { userStatus } from '@components/user/model/enums'
-import UserService from '@components/user/service/userService'
+import UserService from '@components/api/services/userService'
 
 // Local files
 import { getJwtConfig } from './jwtConfig'

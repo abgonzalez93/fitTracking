@@ -9,8 +9,8 @@ import { ErrorHandler } from '@middlewares/errorHandler'
 
 // Components { Controllers, Models, Routes, Services, Validations }
 import AuthService from '@components/auth/service/authService'
-import User from '@components/user/model/user'
-import { type UserInterface } from '@components/user/model/userInterface'
+import User from '@components/api/models/user/user'
+import { type UserInterface } from '@components/api/models/user/userInterface'
 
 // Configs and Messages
 import { getUserMessages } from '@config/i18n/messages'

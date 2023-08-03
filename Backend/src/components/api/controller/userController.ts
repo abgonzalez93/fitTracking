@@ -11,8 +11,8 @@ import { createResponse } from '@utils/response'
 import { asyncHandler } from '@middlewares/asyncHandler'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import UserService from '@components/user/service/userService'
-import { validateUser } from '@components/user/validation/userValidation'
+import UserService from '@components/api/services/userService'
+import { validateUser } from '@components/api/validations/user/userValidation'
 
 // Configs and Messages
 import { getUserMessages } from '@config/i18n/messages'

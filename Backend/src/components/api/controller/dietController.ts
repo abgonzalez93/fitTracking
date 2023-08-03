@@ -11,8 +11,8 @@ import { createResponse } from '@utils/response'
 import { asyncHandler } from '@middlewares/asyncHandler'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import DietService from '@components/diet/service/dietService'
-import { validateDiet } from '@components/diet/validation/dietValidation'
+import DietService from '@components/api/services/dietService'
+import { validateDiet } from '@components/api/validations/diet/dietValidation'
 
 // Configs and Messages
 import { getDietMessages } from '@config/i18n/messages'

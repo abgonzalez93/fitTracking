@@ -11,7 +11,7 @@ import HashService from '@utils/hashService'
 import { ErrorHandler } from '@middlewares/errorHandler'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import { type UserInterface } from '@components/user/model/userInterface'
+import { type UserInterface } from '@components/api/models/user/userInterface'
 
 // Configs and Messages
 import { getUserMessages } from '@config/i18n/messages'
