@@ -39,7 +39,7 @@
 				"userValidation": "User"
 			}
 		},
-		"nutritionGoals": {
+		"nutritionalValues": {
 			"validation": {
 				"caloriesValidation": "Calories",
 				"carbohydratesValidation": "Carbohydrates",

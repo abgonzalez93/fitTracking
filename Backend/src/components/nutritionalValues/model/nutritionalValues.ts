@@ -2,9 +2,9 @@
 import mongoose, { Schema } from 'mongoose'
 
 // Local files
-import { type NutritionalGoalsInterface } from './nutritionalGoalsInterface'
+import { type NutritionalValuesInterface } from './nutritionalValuesInterface'
 
-const nutritionalGoals: Schema = new Schema({
+const nutritionalValues: Schema = new Schema({
     calories: { type: Number, required: false },
     carbohydrates: { type: Number, required: false },
     fats: { type: Number, required: false },
@@ -39,4 +39,4 @@ const nutritionalGoals: Schema = new Schema({
     }
 })
 
-export default mongoose.model<NutritionalGoalsInterface>('NutritionalGoals', nutritionalGoals)
+export default mongoose.model<NutritionalValuesInterface>('NutritionalValues', nutritionalValues)

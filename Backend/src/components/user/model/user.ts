@@ -40,7 +40,7 @@ const user: Schema = new Schema({
     healthConditions: { type: [String], enum: Object.values(healthConditions), required: false },
     foodPreferences: { type: [String], enum: Object.values(foodPreferences), required: false },
     activityLevel: { type: String, enum: Object.values(activityLevel), required: false },
-    nutritionalGoals: { type: Types.ObjectId, ref: 'NutritionalGoals', required: false }
+    nutritionalGoals: { type: Types.ObjectId, ref: 'NutritionalValues', required: false }
 }, { timestamps: true })
 
 user.methods.toJSON = function () {

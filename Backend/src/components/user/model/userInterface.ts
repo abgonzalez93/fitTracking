@@ -2,7 +2,7 @@
 import { type Document } from 'mongoose'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import { type NutritionalGoalsInterface } from '@components/nutricionalGoals/model/nutritionalGoalsInterface'
+import { type NutritionalValuesInterface } from '@components/nutritionalValues/model/nutritionalValuesInterface'
 
 // Local files
 import { type activityLevel, type foodPreferences, type gender, type healthConditions, type userStatus, type userType } from './enums'
@@ -36,7 +36,7 @@ interface UserPhysicalInfo {
     healthConditions?: HealthConditions[]
     foodPreferences?: FoodPreferences[]
     activityLevel?: ActivityLevel
-    nutritionalGoals?: NutritionalGoalsInterface
+    nutritionalGoals?: NutritionalValuesInterface
 }
 
 interface UserSystemInfo extends Document {

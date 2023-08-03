@@ -2,9 +2,9 @@
 import Joi from 'joi'
 
 // Configs and Messages
-import { getNutritionalGoalsMessages } from '@config/i18n/messages'
+import { getNutritionalValuesMessages } from '@config/i18n/messages'
 
-const msg = getNutritionalGoalsMessages.validation.proteinsValidation
+const msg = getNutritionalValuesMessages.validation.proteinsValidation
 
 export const proteinsValidation = Joi.number().positive().optional().messages({
     'number.base': msg.mustBeNumber,

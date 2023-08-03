@@ -9,7 +9,7 @@ import { ErrorHandler } from '@middlewares/errorHandler'
 
 // Components { Controllers, Models, Routes, Services, Validations }
 import { type UserInterface } from '@components/user/model/userInterface'
-import { nutritionalGoalsValidation } from '@components/nutricionalGoals/validation/nutritionalGoalValidation'
+import { nutritionalValuesValidation } from '@components/nutritionalValues/validation/nutritionalValuesValidation'
 
 // Configs and Messages
 import { getUserMessages } from '@config/i18n/messages'
@@ -35,7 +35,7 @@ const userValidation = Joi.object({
     healthConditions: healthConditionsValidation,
     foodPreferences: foodPreferencesValidation,
     activityLevel: activityLevelValidation,
-    nutritionalGoals: nutritionalGoalsValidation
+    nutritionalGoals: nutritionalValuesValidation
 })
 
 export const validateUser = (userData: UserInterface): UserInterface => {

@@ -34,7 +34,7 @@ export const applyMiddleware = (app: Application): void => {
 
     // Middleware for parsing the body of incoming requests as JSON - Request body limit set to 100mb
     app.use(express.json({ limit: '100mb' }))
-    app.use(express.urlencoded({ limit: '100mb' }))
+    app.use(express.urlencoded({ limit: '100mb', extended: true }))
 
     // Middleware for i18n
     app.use(i18n.init)
