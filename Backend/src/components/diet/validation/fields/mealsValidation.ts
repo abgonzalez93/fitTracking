@@ -10,7 +10,7 @@ export const mealsValidation = Joi.object({
     breakfast: Joi.array().items(Joi.string().length(24).alphanum()).optional(),
     lunch: Joi.array().items(Joi.string().length(24).alphanum()).optional(),
     dinner: Joi.array().items(Joi.string().length(24).alphanum()).optional(),
-    snacks: Joi.array().items(Joi.string().length(24).alphanum()).optional(),
+    snacks: Joi.array().items(Joi.string().length(24).alphanum()).optional()
 }).optional().messages({
     'object.base': msg.mustBeObject,
     'array.base': msg.mustBeArray,

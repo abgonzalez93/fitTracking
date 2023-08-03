@@ -13,7 +13,7 @@ const diet: Schema = new Schema({
             breakfast: [{ type: Types.ObjectId, ref: 'FoodItem' }],
             lunch: [{ type: Types.ObjectId, ref: 'FoodItem' }],
             dinner: [{ type: Types.ObjectId, ref: 'FoodItem' }],
-            snacks: [{ type: Types.ObjectId, ref: 'FoodItem' }],
+            snacks: [{ type: Types.ObjectId, ref: 'FoodItem' }]
         },
         required: false
     }

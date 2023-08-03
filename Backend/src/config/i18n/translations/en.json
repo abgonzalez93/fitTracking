@@ -39,6 +39,11 @@
 				"userValidation": "User"
 			}
 		},
+		"foodItem": {
+			"validation": {
+				"nameValidation": "Name"
+			}
+		},
 		"nutritionalValues": {
 			"validation": {
 				"caloriesValidation": "Calories",

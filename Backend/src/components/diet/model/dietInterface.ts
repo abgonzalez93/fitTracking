@@ -6,9 +6,9 @@ export interface DietInterface extends Document {
     name?: string
     description?: string
     meals?: {
-        breakfast: Types.ObjectId[],
-        lunch: Types.ObjectId[],
-        dinner: Types.ObjectId[],
+        breakfast: Types.ObjectId[]
+        lunch: Types.ObjectId[]
+        dinner: Types.ObjectId[]
         snacks: Types.ObjectId[]
     }
     createdAt: Date
