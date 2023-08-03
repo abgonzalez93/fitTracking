@@ -2,7 +2,7 @@
 import mongoose, { Schema, Types } from 'mongoose'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import { type UserInterface } from '@components/api/models/user/userInterface'
+import { type UserInterface } from '@api/models/user/userInterface'
 
 const refreshTokens: Schema = new Schema({
     _id: { type: Types.ObjectId, ref: 'User', required: true },

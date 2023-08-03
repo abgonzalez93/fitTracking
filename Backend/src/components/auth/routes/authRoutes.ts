@@ -2,7 +2,7 @@
 import { Router } from 'express'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import authController from '@components/auth/controller/authController'
+import authController from '@auth/controller/authController'
 
 const router = Router()
 

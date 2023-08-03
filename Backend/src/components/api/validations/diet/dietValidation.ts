@@ -8,7 +8,7 @@ import httpStatus from '@constants/httpStatus'
 import { ErrorHandler } from '@middlewares/errorHandler'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import { type DietInterface } from '@components/diet/model/dietInterface'
+import { type DietInterface } from '@api/models/diet/dietInterface'
 
 // Configs and Messages
 import { getDietMessages } from '@config/i18n/messages'

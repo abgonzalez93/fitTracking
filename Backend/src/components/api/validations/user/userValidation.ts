@@ -8,8 +8,8 @@ import httpStatus from '@constants/httpStatus'
 import { ErrorHandler } from '@middlewares/errorHandler'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import { type UserInterface } from '@components/api/models/user/userInterface'
-import { nutritionalValuesValidation } from '@components/nutritionalValues/validation/nutritionalValuesValidation'
+import { type UserInterface } from '@api/models/user/userInterface'
+import { nutritionalValuesValidation } from '@api/validations/nutritionalValues/nutritionalValuesValidation'
 
 // Configs and Messages
 import { getUserMessages } from '@config/i18n/messages'

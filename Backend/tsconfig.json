@@ -9,7 +9,8 @@
     "esModuleInterop": true,
     "baseUrl": "./src",
     "paths": {
-      "@components/*": ["components/*"],
+      "@api/*": ["components/api/*"],
+      "@auth/*": ["components/auth/*"],
       "@config/*": ["config/*"],
       "@constants/*": ["constants/*"],
       "@database/*": ["database/*"],

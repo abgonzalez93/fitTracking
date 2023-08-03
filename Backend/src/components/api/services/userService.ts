@@ -8,9 +8,9 @@ import HashService from '@utils/hashService'
 import { ErrorHandler } from '@middlewares/errorHandler'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import AuthService from '@components/auth/service/authService'
-import User from '@components/api/models/user/user'
-import { type UserInterface } from '@components/api/models/user/userInterface'
+import AuthService from '@auth/services/authService'
+import User from '@api/models/user/userSchema'
+import { type UserInterface } from '@api/models/user/userInterface'
 
 // Configs and Messages
 import { getUserMessages } from '@config/i18n/messages'

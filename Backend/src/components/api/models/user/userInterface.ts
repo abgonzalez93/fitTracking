@@ -2,7 +2,7 @@
 import { type Document } from 'mongoose'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import { type NutritionalValuesInterface } from '@components/nutritionalValues/model/nutritionalValuesInterface'
+import { type NutritionalValuesInterface } from '@api/models/nutritionalValues/nutritionalValuesInterface'
 
 // Local files
 import { type activityLevel, type foodPreferences, type gender, type healthConditions, type userStatus, type userType } from './enums'

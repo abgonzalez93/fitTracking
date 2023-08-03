@@ -2,7 +2,7 @@
 import { Router } from 'express'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import dietController from '@components/api/controller/dietController'
+import dietController from '@api/controllers/dietController'
 
 const router = Router()
 

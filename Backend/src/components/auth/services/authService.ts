@@ -12,15 +12,13 @@ import { getJwtConfig } from '@middlewares/authentication/jwtConfig'
 import { ErrorHandler } from '@middlewares/errorHandler'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import RefreshTokens from '@components/auth/model/refreshTokens'
-import { type TokenPayloadInterface } from '@components/auth/model/tokenPayloadInterface'
-import { type UserInterface } from '@components/api/models/user/userInterface'
+import RefreshTokens from '@auth/model/refreshTokensSchema'
+import { type TokenPayloadInterface } from '@auth/model/tokenPayloadInterface'
+import TokenType from '@auth/model/enums/tokenType'
+import { type UserInterface } from '@api/models/user/userInterface'
 
 // Configs and Messages
 import { getAuthMessages, getUserMessages } from '@config/i18n/messages'
-
-// Local files
-import TokenType from '../model/enums/tokenType'
 
 const authMsg = getAuthMessages.service
 const userMsg = getUserMessages.service

@@ -2,7 +2,7 @@
 import Joi from 'joi'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import { nutritionalValuesValidation } from '@components/nutritionalValues/validation/nutritionalValuesValidation'
+import { nutritionalValuesValidation } from '@api/validations/nutritionalValues/nutritionalValuesValidation'
 
 // Local files
 import { nameValidation } from './fields/nameValidation'
