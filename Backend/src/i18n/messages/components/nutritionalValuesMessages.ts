@@ -1,9 +1,9 @@
 // Components { Controllers, Models, Routes, Services, Validations }
-import { micronutrients } from '@components/nutritionalValues/validation/fields/micronutrients/micronutrients'
+import { micronutrients } from '@api/models/nutritionalValues/micronutrients/micronutrients'
 
 // Configs and Messages
-import i18n from '@config/i18n/i18n'
-import { createField } from '@config/i18n/utils/fieldNameCreator'
+import i18n from '@i18n/i18n'
+import { createField } from '@i18n/utils/fieldNameCreator'
 
 export const getNutritionalValuesMessages = {
     validation: {

@@ -5,7 +5,7 @@ import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 import logger from '@utils/logger'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import TokenType from '@auth/model/enums/tokenType'
+import TokenType from '@auth/models/enums/tokenType'
 import { userStatus } from '@api/models/user/enums'
 import UserService from '@api/services/userService'
 

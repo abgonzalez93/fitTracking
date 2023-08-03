@@ -2,7 +2,7 @@
 import Joi from 'joi'
 
 // Configs and Messages
-import { getFoodItemMessages } from '@config/i18n/messages'
+import { getFoodItemMessages } from '@i18n/messages'
 
 const msg = getFoodItemMessages.validation.nameValidation
 

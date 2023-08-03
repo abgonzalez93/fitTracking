@@ -8,7 +8,7 @@ import httpStatus from '@constants/httpStatus'
 import { createResponse } from '@utils/response'
 
 // Configs and Messages
-import { getApiMessages } from '@config/i18n/messages'
+import { getApiMessages } from '@i18n/messages'
 
 const msg = getApiMessages.controller
 

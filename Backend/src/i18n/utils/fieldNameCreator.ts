@@ -1,5 +1,5 @@
 // Configs and Messages
-import { getCommonMessages } from '@config/i18n/messages'
+import { getCommonMessages } from '@i18n/messages'
 
 interface Field {
     emptyData: string

@@ -15,7 +15,7 @@ import DietService from '@api/services/dietService'
 import { validateDiet } from '@api/validations/diet/dietValidation'
 
 // Configs and Messages
-import { getDietMessages } from '@config/i18n/messages'
+import { getDietMessages } from '@i18n/messages'
 
 const msg = getDietMessages.controller
 

@@ -1,6 +1,6 @@
 // Configs and Messages
-import i18n from '@config/i18n/i18n'
-import { createField } from '@config/i18n/utils/fieldNameCreator'
+import i18n from '@i18n/i18n'
+import { createField } from '@i18n/utils/fieldNameCreator'
 
 export const getDietMessages = {
     controller: {

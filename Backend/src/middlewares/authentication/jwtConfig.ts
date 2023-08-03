@@ -6,7 +6,7 @@ import httpStatus from '@constants/httpStatus'
 
 // Configs and Messages
 import config from '@config/config'
-import { getAuthenticationMessages } from '@config/i18n/messages'
+import { getAuthenticationMessages } from '@i18n/messages'
 
 const msg = getAuthenticationMessages.authentication
 

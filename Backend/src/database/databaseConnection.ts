@@ -12,7 +12,7 @@ import { ErrorHandler } from '@middlewares/errorHandler'
 
 // Configs and Messages
 import config from '@config/config'
-import { getDatabaseMessages } from '@config/i18n/messages'
+import { getDatabaseMessages } from '@i18n/messages'
 
 export default class DatabaseConnection {
     private static handleDBEvents (db: Connection): void {

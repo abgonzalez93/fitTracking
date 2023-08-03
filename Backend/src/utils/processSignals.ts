@@ -11,7 +11,7 @@ import DatabaseConnection from '@database/databaseConnection'
 import { ErrorHandler } from '@middlewares/errorHandler'
 
 // Configs and Messages
-import { getDatabaseMessages } from '@config/i18n/messages'
+import { getDatabaseMessages } from '@i18n/messages'
 
 export default class SignalHandler {
     private static async handleExit (signal: string, message: string): Promise<void> {

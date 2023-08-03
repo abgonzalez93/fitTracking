@@ -6,7 +6,7 @@ import httpStatus from '@constants/httpStatus'
 
 // Configs and Messages
 import config from '@config/config'
-import { getErrorHandlerMessages } from '@config/i18n/messages'
+import { getErrorHandlerMessages } from '@i18n/messages'
 
 export class ErrorHandler extends Error {
     readonly statusCode: number

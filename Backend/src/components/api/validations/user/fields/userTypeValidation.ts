@@ -2,10 +2,10 @@
 import Joi from 'joi'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import { userType } from '@components/user/model/enums'
+import { userType } from '@api/models/user/enums'
 
 // Configs and Messages
-import { getUserMessages } from '@config/i18n/messages'
+import { getUserMessages } from '@i18n/messages'
 
 const msg = getUserMessages.validation.userTypeValidation
 

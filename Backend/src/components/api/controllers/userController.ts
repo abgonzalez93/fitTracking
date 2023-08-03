@@ -11,11 +11,11 @@ import { createResponse } from '@utils/response'
 import { asyncHandler } from '@middlewares/asyncHandler'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import UserService from '@components/api/services/userService'
-import { validateUser } from '@components/api/validations/user/userValidation'
+import UserService from '@api/services/userService'
+import { validateUser } from '@api/validations/user/userValidation'
 
 // Configs and Messages
-import { getUserMessages } from '@config/i18n/messages'
+import { getUserMessages } from '@i18n/messages'
 
 const msg = getUserMessages.controller
 

@@ -11,7 +11,7 @@ import { ErrorHandler } from '@middlewares/errorHandler'
 import { type DietInterface } from '@api/models/diet/dietInterface'
 
 // Configs and Messages
-import { getDietMessages } from '@config/i18n/messages'
+import { getDietMessages } from '@i18n/messages'
 
 // Local files
 import { nameValidation, descriptionValidation, userValidation, mealsValidation } from './fields'

@@ -13,7 +13,7 @@ import User from '@api/models/user/userSchema'
 import { type UserInterface } from '@api/models/user/userInterface'
 
 // Configs and Messages
-import { getUserMessages } from '@config/i18n/messages'
+import { getUserMessages } from '@i18n/messages'
 
 const msg = getUserMessages.service
 

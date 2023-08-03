@@ -12,7 +12,7 @@ import { type UserInterface } from '@api/models/user/userInterface'
 import { nutritionalValuesValidation } from '@api/validations/nutritionalValues/nutritionalValuesValidation'
 
 // Configs and Messages
-import { getUserMessages } from '@config/i18n/messages'
+import { getUserMessages } from '@i18n/messages'
 
 // Local files
 import { activityLevelValidation, birthDateValidation, clientsValidation, contactInfoValidation, emailValidation, foodPreferencesValidation, genderValidation, healthConditionsValidation, heightValidation, nameValidation, passwordValidation, profileImageValidation, statusValidation, surnameValidation, userTypeValidation, usernameValidation, weightValidation } from './fields'

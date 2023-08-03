@@ -6,7 +6,7 @@ import logger from '@utils/logger'
 
 // Configs and Messages
 import config from '@config/config'
-import { getServerMessages } from '@config/i18n/messages'
+import { getServerMessages } from '@i18n/messages'
 
 const { PORT: port } = config
 

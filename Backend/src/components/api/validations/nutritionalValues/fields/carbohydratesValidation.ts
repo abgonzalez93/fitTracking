@@ -2,7 +2,7 @@
 import Joi from 'joi'
 
 // Configs and Messages
-import { getNutritionalValuesMessages } from '@config/i18n/messages'
+import { getNutritionalValuesMessages } from '@i18n/messages'
 
 const msg = getNutritionalValuesMessages.validation.carbohydratesValidation
 

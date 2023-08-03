@@ -2,7 +2,7 @@
 import Joi from 'joi'
 
 // Configs and Messages
-import { getUserMessages } from '@config/i18n/messages'
+import { getUserMessages } from '@i18n/messages'
 
 const msg = getUserMessages.validation.usernameValidation
 

@@ -16,7 +16,8 @@
       "@database/*": ["database/*"],
       "@middlewares/*": ["middlewares/*"],
       "@router/*": ["router/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@i18n/*": ["i18n/*"],
     }
   },
   "include": [

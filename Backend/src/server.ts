@@ -17,7 +17,7 @@ import DatabaseConnection from '@database/databaseConnection'
 import { ErrorHandler } from '@middlewares/errorHandler'
 
 // Configs and Messages
-import { getDatabaseMessages } from '@config/i18n/messages'
+import { getDatabaseMessages } from '@i18n/messages'
 
 // Local files
 import app from './app'
