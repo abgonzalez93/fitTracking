@@ -10,10 +10,10 @@ const diet: Schema = new Schema({
     description: { type: String, required: false },
     meals: {
         type: {
-            breakfast: [{ type: Types.ObjectId, ref: 'Meal' }],
-            lunch: [{ type: Types.ObjectId, ref: 'Meal' }],
-            dinner: [{ type: Types.ObjectId, ref: 'Meal' }],
-            snacks: [{ type: Types.ObjectId, ref: 'Meal' }],
+            breakfast: [{ type: Types.ObjectId, ref: 'FoodItem' }],
+            lunch: [{ type: Types.ObjectId, ref: 'FoodItem' }],
+            dinner: [{ type: Types.ObjectId, ref: 'FoodItem' }],
+            snacks: [{ type: Types.ObjectId, ref: 'FoodItem' }],
         },
         required: false
     }

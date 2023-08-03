@@ -9,6 +9,7 @@ export const getCommonMessages = {
     mustBeNumber: (field: string): string => i18n.__('commonMessages.mustBeNumber', { field }),
     mustBePositive: (field: string): string => i18n.__('commonMessages.mustBePositive', { field }),
     mustBeString: (field: string): string => i18n.__('commonMessages.mustBeString', { field }),
+    mustBeObjectId: (field: string): string => i18n.__('commonMessages.mustBeObjectId', { field }),
     mustBeOneOfTheFollowing: (field: string) => (array: string[]): string => i18n.__('commonMessages.mustBeOneOfTheFollowing', { field, array: array.join(', ') }),
     minLength: (field: string) => (length: string): string => i18n.__('commonMessages.minLength', { field, length }),
     maxLength: (field: string) => (length: string): string => i18n.__('commonMessages.maxLength', { field, length })

@@ -9,6 +9,7 @@ interface Field {
     mustBeNumber: string
     mustBePositive: string
     mustBeString: string
+    mustBeObjectId: string
     mustBeOneOfTheFollowing: (array: string[]) => string
     minLength: (length: string) => string
     maxLength: (length: string) => string
@@ -23,6 +24,7 @@ export function createField (fieldName: string): Field {
         mustBeNumber: getCommonMessages.mustBeNumber(fieldName),
         mustBePositive: getCommonMessages.mustBePositive(fieldName),
         mustBeString: getCommonMessages.mustBeString(fieldName),
+        mustBeObjectId: getCommonMessages.mustBeObjectId(fieldName),
         mustBeOneOfTheFollowing: getCommonMessages.mustBeOneOfTheFollowing(fieldName),
         minLength: getCommonMessages.minLength(fieldName),
         maxLength: getCommonMessages.maxLength(fieldName)

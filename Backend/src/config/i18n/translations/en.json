@@ -212,6 +212,7 @@
 		"mustBeNumber": "{{field}} must be a number",
 		"mustBePositive": "{{field}} must be a positive number",
 		"mustBeString": "{{field}} must be a string",
+		"mustBeObjectId": "{{field}} must be a valid MongoDB ID",
 		"mustBeOneOfTheFollowing": "{{field}} must be one of the following",
 		"minLength": "{{field}} has a minimum length of {{length}}",
 		"maxLength": "{{field}} has a maximum length of {{length}}"
