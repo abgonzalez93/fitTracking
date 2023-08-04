@@ -5,7 +5,7 @@ import { type NextFunction, type Request, type Response } from 'express'
 import httpStatus from '@constants/httpStatus'
 
 // Utils
-import { createResponse } from '@utils/response'
+import { createResponse } from '@utils/createResponse'
 
 // Middlewares
 import { asyncHandler } from '@middlewares/asyncHandler'
@@ -23,9 +23,7 @@ export default class DietController {
     public static getAllDiets = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
             const diets = await DietService.getAllDiets()
-
-            const [statusCode, response] = createResponse(httpStatus.OK, 'success', msg.dietsFetched, diets)
-            res.status(statusCode).json(response)
+            createResponse(res, httpStatus.OK, msg.dietsFetched, diets)
         } catch (error) {
             next(error)
         }
@@ -34,13 +32,10 @@ export default class DietController {
     public static createDiet = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
             const dietData = req.body
-
             validateDiet(dietData)
 
             const diet = await DietService.createDiet(dietData)
-
-            const [statusCode, response] = createResponse(httpStatus.OK, 'success', msg.dietCreated, diet)
-            res.status(statusCode).json(response)
+            createResponse(res, httpStatus.OK, msg.dietCreated, diet)
         } catch (error) {
             next(error)
         }

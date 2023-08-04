@@ -4,6 +4,9 @@ import { type Request, type Response, type NextFunction } from 'express'
 // Constants
 import httpStatus from '@constants/httpStatus'
 
+// Utils
+import { createResponse } from '@utils/createResponse'
+
 // Configs and Messages
 import config from '@config/config'
 import { getErrorHandlerMessages } from '@i18n/messages'
@@ -24,12 +27,9 @@ export const handleError = (err: Error | ErrorHandler, req: Request, res: Respon
     if (err instanceof ErrorHandler) {
         const { statusCode, message } = err
 
-        res.status(statusCode).json({
-            status: 'error',
-            statusCode,
-            message,
-            ...(config.NODE_ENV === 'develop' && { stack: err.stack })
-        })
+        const developmentStack = config.NODE_ENV === 'develop' ? { stack: err.stack } : {}
+
+        createResponse(res, statusCode, message, developmentStack)
     } else {
         next(err)
     }

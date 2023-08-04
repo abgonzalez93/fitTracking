@@ -5,7 +5,7 @@ import { type Request, type Response } from 'express'
 import httpStatus from '@constants/httpStatus'
 
 // Utils
-import { createResponse } from '@utils/response'
+import { createResponse } from '@utils/createResponse'
 
 // Configs and Messages
 import { getApiMessages } from '@i18n/messages'
@@ -14,7 +14,6 @@ const msg = getApiMessages.controller
 
 export default class ApiController {
     public static getWelcomeMessage = (req: Request, res: Response): void => {
-        const [statusCode, response] = createResponse(httpStatus.OK, 'success', msg.welcomeMessage)
-        res.status(statusCode).json(response)
+        createResponse(res, httpStatus.OK, msg.welcomeMessage)
     }
 }

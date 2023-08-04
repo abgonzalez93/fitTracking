@@ -5,7 +5,7 @@ import { type NextFunction, type Request, type Response } from 'express'
 import httpStatus from '@constants/httpStatus'
 
 // Utils
-import { createResponse } from '@utils/response'
+import { createResponse } from '@utils/createResponse'
 
 // Middlewares
 import { asyncHandler } from '@middlewares/asyncHandler'
@@ -23,9 +23,7 @@ export default class UserController {
     public static getAllUsers = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
             const users = await UserService.getAllUsers()
-
-            const [statusCode, response] = createResponse(httpStatus.OK, 'success', msg.usersFetched, users)
-            res.status(statusCode).json(response)
+            createResponse(res, httpStatus.OK, msg.usersFetched, users)
         } catch (error) {
             next(error)
         }
@@ -34,13 +32,10 @@ export default class UserController {
     public static createUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
             const userData = req.body
-
             validateUser(userData)
 
             const user = await UserService.createUser(userData)
-
-            const [statusCode, response] = createResponse(httpStatus.CREATED, 'success', msg.userCreated, user)
-            res.status(statusCode).json(response)
+            createResponse(res, httpStatus.CREATED, msg.userCreated, user)
         } catch (error) {
             next(error)
         }
@@ -49,9 +44,7 @@ export default class UserController {
     public static getUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
             const user = await UserService.getUser(req.params.id)
-
-            const [statusCode, response] = createResponse(httpStatus.OK, 'success', msg.userFetched, user)
-            res.status(statusCode).json(response)
+            createResponse(res, httpStatus.OK, msg.userFetched, user)
         } catch (error) {
             next(error)
         }
@@ -60,13 +53,10 @@ export default class UserController {
     public static updateUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
             const userData = req.body
-
             validateUser(userData)
 
             const user = await UserService.updateUser(req.params.id, userData)
-
-            const [statusCode, response] = createResponse(httpStatus.OK, 'success', msg.userUpdated, user)
-            res.status(statusCode).json(response)
+            createResponse(res, httpStatus.OK, msg.userUpdated, user)
         } catch (error) {
             next(error)
         }
@@ -75,9 +65,7 @@ export default class UserController {
     public static deleteUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
             const user = await UserService.deleteUser(req.params.id)
-
-            const [statusCode, response] = createResponse(httpStatus.NO_CONTENT, 'success', msg.userDeleted, user)
-            res.status(statusCode).json(response)
+            createResponse(res, httpStatus.NO_CONTENT, msg.userDeleted, user)
         } catch (error) {
             next(error)
         }

@@ -8,7 +8,7 @@ import HashService from '@utils/hashService'
 import { ErrorHandler } from '@middlewares/errorHandler'
 
 // Components { Controllers, Models, Routes, Services, Validations }
-import AuthService from '@auth/services/authService'
+import AuthService from '@auth/service/authService'
 import User from '@api/models/user/userSchema'
 import { type UserInterface } from '@api/models/user/userInterface'
 
