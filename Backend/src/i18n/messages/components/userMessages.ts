@@ -6,92 +6,92 @@ export const getUserMessages = {
     model: {
         enums: {
             activityLevel: {
-                sedentary: i18n.__('components.user.enums.activityLevel.sedentary'),
-                lightlyActive: i18n.__('components.user.enums.activityLevel.lightlyActive'),
-                moderatelyActive: i18n.__('components.user.enums.activityLevel.moderatelyActive'),
-                veryActive: i18n.__('components.user.enums.activityLevel.veryActive')
+                sedentary: i18n.__('components.api.models.userModel.enums.activityLevel.sedentary'),
+                lightlyActive: i18n.__('components.api.models.userModel.enums.activityLevel.lightlyActive'),
+                moderatelyActive: i18n.__('components.api.models.userModel.enums.activityLevel.moderatelyActive'),
+                veryActive: i18n.__('components.api.models.userModel.enums.activityLevel.veryActive')
             },
             foodPreferences: {
-                omnivore: i18n.__('components.user.enums.foodPreferences.omnivore'),
-                vegetarian: i18n.__('components.user.enums.foodPreferences.vegetarian'),
-                vegan: i18n.__('components.user.enums.foodPreferences.vegan'),
-                pescetarian: i18n.__('components.user.enums.foodPreferences.pescetarian'),
-                glutenFree: i18n.__('components.user.enums.foodPreferences.glutenFree'),
-                lactoseFree: i18n.__('components.user.enums.foodPreferences.lactoseFree')
+                omnivore: i18n.__('components.api.models.userModel.enums.foodPreferences.omnivore'),
+                vegetarian: i18n.__('components.api.models.userModel.enums.foodPreferences.vegetarian'),
+                vegan: i18n.__('components.api.models.userModel.enums.foodPreferences.vegan'),
+                pescetarian: i18n.__('components.api.models.userModel.enums.foodPreferences.pescetarian'),
+                glutenFree: i18n.__('components.api.models.userModel.enums.foodPreferences.glutenFree'),
+                lactoseFree: i18n.__('components.api.models.userModel.enums.foodPreferences.lactoseFree')
             },
             gender: {
-                male: i18n.__('components.user.enums.gender.male'),
-                female: i18n.__('components.user.enums.gender.female'),
-                other: i18n.__('components.user.enums.gender.other'),
-                preferNotToSay: i18n.__('components.user.enums.gender.preferNotToSay')
+                male: i18n.__('components.api.models.userModel.enums.gender.male'),
+                female: i18n.__('components.api.models.userModel.enums.gender.female'),
+                other: i18n.__('components.api.models.userModel.enums.gender.other'),
+                preferNotToSay: i18n.__('components.api.models.userModel.enums.gender.preferNotToSay')
             },
             healthConditions: {
-                none: i18n.__('components.user.enums.healthConditions.none'),
-                diabetes: i18n.__('components.user.enums.healthConditions.diabetes'),
-                lactoseIntolerance: i18n.__('components.user.enums.healthConditions.lactoseIntolerance'),
-                glutenIntolerance: i18n.__('components.user.enums.healthConditions.glutenIntolerance'),
-                hypertension: i18n.__('components.user.enums.healthConditions.hypertension'),
-                heartDisease: i18n.__('components.user.enums.healthConditions.heartDisease')
+                none: i18n.__('components.api.models.userModel.enums.healthConditions.none'),
+                diabetes: i18n.__('components.api.models.userModel.enums.healthConditions.diabetes'),
+                lactoseIntolerance: i18n.__('components.api.models.userModel.enums.healthConditions.lactoseIntolerance'),
+                glutenIntolerance: i18n.__('components.api.models.userModel.enums.healthConditions.glutenIntolerance'),
+                hypertension: i18n.__('components.api.models.userModel.enums.healthConditions.hypertension'),
+                heartDisease: i18n.__('components.api.models.userModel.enums.healthConditions.heartDisease')
             },
             userStatus: {
-                active: i18n.__('components.user.enums.userStatus.active'),
-                inactive: i18n.__('components.user.enums.userStatus.inactive'),
-                suspended: i18n.__('components.user.enums.userStatus.suspended')
+                active: i18n.__('components.api.models.userModel.enums.userStatus.active'),
+                inactive: i18n.__('components.api.models.userModel.enums.userStatus.inactive'),
+                suspended: i18n.__('components.api.models.userModel.enums.userStatus.suspended')
             },
             userType: {
-                basic: i18n.__('components.user.enums.userType.basic'),
-                advanced: i18n.__('components.user.enums.userType.advanced'),
-                admin: i18n.__('components.user.enums.userType.admin')
+                basic: i18n.__('components.api.models.userModel.enums.userType.basic'),
+                advanced: i18n.__('components.api.models.userModel.enums.userType.advanced'),
+                admin: i18n.__('components.api.models.userModel.enums.userType.admin')
             }
         }
     },
     controller: {
-        usersFetched: i18n.__('components.user.controller.usersFetched'),
-        userCreated: i18n.__('components.user.controller.userCreated'),
-        userFetched: i18n.__('components.user.controller.userFetched'),
-        userUpdated: i18n.__('components.user.controller.userUpdated'),
-        userDeleted: i18n.__('components.user.controller.userDeleted')
+        usersFetched: i18n.__('components.api.controllers.userController.usersFetched'),
+        userCreated: i18n.__('components.api.controllers.userController.userCreated'),
+        userFetched: i18n.__('components.api.controllers.userController.userFetched'),
+        userUpdated: i18n.__('components.api.controllers.userController.userUpdated'),
+        userDeleted: i18n.__('components.api.controllers.userController.userDeleted')
     },
     service: {
-        userIdRequired: i18n.__('components.user.service.userIdRequired'),
-        userNotFound: i18n.__('components.user.service.userNotFound'),
-        errorGettingAllUsers: i18n.__('components.user.service.errorGettingAllUsers'),
-        errorCreatingUser: i18n.__('components.user.service.errorCreatingUser'),
-        errorGettingUser: i18n.__('components.user.service.errorGettingUser'),
-        errorUpdatingUser: i18n.__('components.user.service.errorUpdatingUser'),
-        errorDeletingUser: i18n.__('components.user.service.errorDeletingUser'),
-        passwordMustBeProvided: i18n.__('components.user.service.passwordMustBeProvided'),
-        usernameAlreadyExists: i18n.__('components.user.service.usernameAlreadyExists'),
-        emailAlreadyExists: i18n.__('components.user.service.emailAlreadyExists'),
-        passwordMustBeDifferentFromYourCurrent: i18n.__('components.user.service.passwordMustBeDifferentFromYourCurrent')
+        userIdRequired: i18n.__('components.api.services.userService.userIdRequired'),
+        userNotFound: i18n.__('components.api.services.userService.userNotFound'),
+        errorGettingAllUsers: i18n.__('components.api.services.userService.errorGettingAllUsers'),
+        errorCreatingUser: i18n.__('components.api.services.userService.errorCreatingUser'),
+        errorGettingUser: i18n.__('components.api.services.userService.errorGettingUser'),
+        errorUpdatingUser: i18n.__('components.api.services.userService.errorUpdatingUser'),
+        errorDeletingUser: i18n.__('components.api.services.userService.errorDeletingUser'),
+        passwordMustBeProvided: i18n.__('components.api.services.userService.passwordMustBeProvided'),
+        usernameAlreadyExists: i18n.__('components.api.services.userService.usernameAlreadyExists'),
+        emailAlreadyExists: i18n.__('components.api.services.userService.emailAlreadyExists'),
+        passwordMustBeDifferentFromYourCurrent: i18n.__('components.api.services.userService.passwordMustBeDifferentFromYourCurrent')
     },
     validation: {
-        invalidUserData: (error: string): string => i18n.__('components.user.validation.invalidUserData', error),
-        activityLevelValidation: createField(i18n.__('components.user.validation.activityLevelValidation')),
-        birthDateValidation: createField(i18n.__('components.user.validation.birthDateValidation')),
+        invalidUserData: (error: string): string => i18n.__('components.api.validations.userValidation.invalidUserData', error),
+        activityLevelValidation: createField(i18n.__('components.api.validations.userValidation.activityLevelValidation')),
+        birthDateValidation: createField(i18n.__('components.api.validations.userValidation.birthDateValidation')),
         clientsValidation: {
-            ...createField(i18n.__('components.user.validation.clientsValidation')),
-            mustBeAdvanced: i18n.__('components.user.validation.clientsValidation.mustBeAdvanced')
+            ...createField(i18n.__('components.api.validations.userValidation.clientsValidation')),
+            mustBeAdvanced: i18n.__('components.api.validations.userValidation.clientsValidation.mustBeAdvanced')
         },
         contactInfoValidation: {
-            phoneNumberValidation: createField(i18n.__('components.user.validation.contactInfoValidation.phoneNumberValidation')),
-            addressValidation: createField(i18n.__('components.user.validation.contactInfoValidation.addressValidation'))
+            phoneNumberValidation: createField(i18n.__('components.api.validations.userValidation.contactInfoValidation.phoneNumberValidation')),
+            addressValidation: createField(i18n.__('components.api.validations.userValidation.contactInfoValidation.addressValidation'))
         },
-        emailValidation: createField(i18n.__('components.user.validation.emailValidation')),
-        foodPreferencesValidation: createField(i18n.__('components.user.validation.foodPreferencesValidation')),
-        genderValidation: createField(i18n.__('components.user.validation.genderValidation')),
-        healthConditionsValidation: createField(i18n.__('components.user.validation.healthConditionsValidation')),
-        heightValidation: createField(i18n.__('components.user.validation.heightValidation')),
-        nameValidation: createField(i18n.__('components.user.validation.nameValidation')),
+        emailValidation: createField(i18n.__('components.api.validations.userValidation.emailValidation')),
+        foodPreferencesValidation: createField(i18n.__('components.api.validations.userValidation.foodPreferencesValidation')),
+        genderValidation: createField(i18n.__('components.api.validations.userValidation.genderValidation')),
+        healthConditionsValidation: createField(i18n.__('components.api.validations.userValidation.healthConditionsValidation')),
+        heightValidation: createField(i18n.__('components.api.validations.userValidation.heightValidation')),
+        nameValidation: createField(i18n.__('components.api.validations.userValidation.nameValidation')),
         passwordValidation: {
-            ...createField(i18n.__('components.user.validation.passwordValidation')),
-            mustContain: i18n.__('components.user.validation.passwordValidation.mustContain')
+            ...createField(i18n.__('components.api.validations.userValidation.passwordValidation')),
+            mustContain: i18n.__('components.api.validations.userValidation.passwordValidation.mustContain')
         },
         profileImageValidation: {},
-        statusValidation: createField(i18n.__('components.user.validation.statusValidation')),
-        surnameValidation: createField(i18n.__('components.user.validation.surnameValidation')),
-        usernameValidation: createField(i18n.__('components.user.validation.usernameValidation')),
-        userTypeValidation: createField(i18n.__('components.user.validation.userTypeValidation')),
-        weightValidation: createField(i18n.__('components.user.validation.weightValidation'))
+        statusValidation: createField(i18n.__('components.api.validations.userValidation.statusValidation')),
+        surnameValidation: createField(i18n.__('components.api.validations.userValidation.surnameValidation')),
+        usernameValidation: createField(i18n.__('components.api.validations.userValidation.usernameValidation')),
+        userTypeValidation: createField(i18n.__('components.api.validations.userValidation.userTypeValidation')),
+        weightValidation: createField(i18n.__('components.api.validations.userValidation.weightValidation'))
     }
 }

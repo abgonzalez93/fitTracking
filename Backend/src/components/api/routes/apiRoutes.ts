@@ -10,6 +10,6 @@ const router = Router()
 
 router.get('/', apiController.getWelcomeMessage)
 router.use('/diet', dietRoutes)
-router.use('/users', userRoutes)
+router.use('/user', userRoutes)
 
 export default router

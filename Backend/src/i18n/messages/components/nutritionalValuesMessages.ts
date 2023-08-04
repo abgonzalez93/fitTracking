@@ -7,13 +7,13 @@ import { createField } from '@i18n/utils/fieldNameCreator'
 
 export const getNutritionalValuesMessages = {
     validation: {
-        caloriesValidation: createField(i18n.__('components.nutritionValues.validation.caloriesValidation')),
-        carbohydratesValidation: createField(i18n.__('components.nutritionValues.validation.carbohydratesValidation')),
-        fatsValidation: createField(i18n.__('components.nutritionValues.validation.fatsValidation')),
+        caloriesValidation: createField(i18n.__('components.api.validations.nutritionalValuesValidation.caloriesValidation')),
+        carbohydratesValidation: createField(i18n.__('components.api.validations.nutritionalValuesValidation.carbohydratesValidation')),
+        fatsValidation: createField(i18n.__('components.api.validations.nutritionalValuesValidation.fatsValidation')),
+        proteinsValidation: createField(i18n.__('components.api.validations.nutritionalValuesValidation.proteinsValidation')),
         micronutrientsValidation: micronutrients.reduce((messages: any, micronutrient: string) => {
-            messages[micronutrient] = createField(i18n.__(`components.nutritionValues.micronutrient.${micronutrient}`))
+            messages[micronutrient] = createField(i18n.__(`components.api.models.nutritionalValuesModel.micronutrient.${micronutrient}`))
             return messages
         }, {}),
-        proteinsValidation: createField(i18n.__('components.nutritionValues.validation.proteinsValidation'))
     }
 }

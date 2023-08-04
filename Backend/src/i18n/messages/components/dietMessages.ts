@@ -4,24 +4,24 @@ import { createField } from '@i18n/utils/fieldNameCreator'
 
 export const getDietMessages = {
     controller: {
-        dietsFetched: i18n.__('components.diet.controller.dietsFetched'),
-        dietCreated: i18n.__('components.diet.controller.dietCreated'),
-        dietFetched: i18n.__('components.diet.controller.dietFetched'),
-        dietUpdated: i18n.__('components.diet.controller.dietUpdated'),
-        dietDeleted: i18n.__('components.diet.controller.dietDeleted')
+        dietsFetched: i18n.__('components.api.controllers.dietController.dietsFetched'),
+        dietCreated: i18n.__('components.api.controllers.dietController.dietCreated'),
+        dietFetched: i18n.__('components.api.controllers.dietController.dietFetched'),
+        dietUpdated: i18n.__('components.api.controllers.dietController.dietUpdated'),
+        dietDeleted: i18n.__('components.api.controllers.dietController.dietDeleted')
     },
     service: {
-        errorGettingAllDiets: i18n.__('components.diet.service.errorGettingAllDiets'),
-        errorCreatingDiet: i18n.__('components.diet.service.errorCreatingDiet'),
-        errorGettingDiet: i18n.__('components.diet.service.errorGettingDiet'),
-        errorUpdatingDiet: i18n.__('components.diet.service.errorUpdatingDiet'),
-        errorDeletingDiet: i18n.__('components.diet.service.errorDeletingDiet')
+        errorGettingAllDiets: i18n.__('components.api.services.dietService.errorGettingAllDiets'),
+        errorCreatingDiet: i18n.__('components.api.services.dietService.errorCreatingDiet'),
+        errorGettingDiet: i18n.__('components.api.services.dietService.errorGettingDiet'),
+        errorUpdatingDiet: i18n.__('components.api.services.dietService.errorUpdatingDiet'),
+        errorDeletingDiet: i18n.__('components.api.services.dietService.errorDeletingDiet')
     },
     validation: {
-        invalidDietData: (error: string): string => i18n.__('components.diet.validation.invalidDietData', error),
-        descriptionValidation: createField(i18n.__('components.diet.validation.descriptionValidation')),
-        mealsValidation: createField(i18n.__('components.diet.validation.mealsValidation')),
-        nameValidation: createField(i18n.__('components.diet.validation.nameValidation')),
-        userValidation: createField(i18n.__('components.diet.validation.userValidation'))
+        invalidDietData: (error: string): string => i18n.__('components.api.validations.dietValidation.invalidDietData', error),
+        descriptionValidation: createField(i18n.__('components.api.validations.dietValidation.descriptionValidation')),
+        mealsValidation: createField(i18n.__('components.api.validations.dietValidation.mealsValidation')),
+        nameValidation: createField(i18n.__('components.api.validations.dietValidation.nameValidation')),
+        userValidation: createField(i18n.__('components.api.validations.dietValidation.userValidation'))
     }
 }

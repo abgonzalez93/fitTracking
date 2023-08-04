@@ -1,8 +1,169 @@
 {
 	"components": {
 		"api": {
-			"controller": {
-				"welcomeMessage": "Welcome to fitTracking API"
+			"controllers": {
+				"apiController": {
+					"welcomeMessage": "Welcome to fitTracking API"
+				},
+				"dietController": {
+					"dietsFetched": "Fetched all diets successfully",
+					"dietCreated": "Created diet successfully",
+					"dietFetched": "Fetched diet successfully",
+					"dietUpdated": "Updated diet successfully",
+					"dietDeleted": "Deleted diet successfully"
+				},
+				"userController": {
+					"usersFetched": "Fetched all users successfully",
+					"userCreated": "Created user successfully",
+					"userFetched": "Fetched user successfully",
+					"userUpdated": "Updated user successfully",
+					"userDeleted": "Deleted user successfully"
+				}
+			},
+			"models": {
+				"dietModel": {},
+				"foodItemModel": {},
+				"nutritionalValuesModel": {
+					"micronutrients": {
+						"vitaminA": "Vitamin A",
+						"vitaminB1": "Vitamin B1",
+						"vitaminB2": "Vitamin B2",
+						"vitaminB3": "Vitamin B3",
+						"vitaminB5": "Vitamin B5",
+						"vitaminB6": "Vitamin B6",
+						"vitaminB7": "Vitamin B7",
+						"vitaminB9": "Vitamin B9",
+						"vitaminB12": "Vitamin B12",
+						"vitaminC": "Vitamin C",
+						"vitaminD": "Vitamin D",
+						"vitaminE": "Vitamin E",
+						"vitaminK": "Vitamin K",
+						"calcium": "Calcium",
+						"iron": "Iron",
+						"magnesium": "Magnesium",
+						"potassium": "Potassium",
+						"selenium": "Selenium",
+						"sodium": "Sodium",
+						"zinc": "Zinc",
+						"iodine": "Iodine",
+						"copper": "Copper",
+						"chromium": "Chromium",
+						"manganese": "Manganese",
+						"molybdenum": "Molybdenum",
+						"chloride": "Chloride"
+					}
+				},
+				"userModel": {
+					"enums": {
+						"activityLevel": {
+							"sedentary": "Sedentary",
+							"lightlyActive": "Lightly active",
+							"moderatelyActive": "Moderately active",
+							"veryActive": "Very active"
+						},
+						"foodPreferences": {
+							"omnivore": "Omnivore",
+							"vegetarian": "Vegetarian",
+							"vegan": "Vegan",
+							"pescetarian": "Pescetarian",
+							"glutenFree": "Gluten free",
+							"lactoseFree": "Lactose free"
+						},
+						"gender": {
+							"male": "Male",
+							"female": "Female",
+							"other": "Other",
+							"preferNotToSay": "Prefer not to say"
+						},
+						"healthConditions": {
+							"none": "None",
+							"diabetes": "Diabetes",
+							"lactoseIntolerance": "Lactose intolerance",
+							"glutenIntolerance": "Gluten intolerance",
+							"hypertension": "Hypertension",
+							"heartDisease": "Heart disease"
+						},
+						"userStatus": {
+							"active": "Active",
+							"inactive": "Inactive",
+							"suspended": "Suspended"
+						},
+						"userType": {
+							"basic": "Basic",
+							"advanced": "Advanced",
+							"admin": "Admin"
+						}
+					}
+				}
+			},
+			"routes": {
+				"apiRoutes": {},
+				"dietRoutes": {},
+				"userRoutes": {}
+			},
+			"services": {
+				"dietService": {
+					"errorGettingAllDiets": "Error getting all diets"
+				},
+				"userService": {
+					"userIdIsRequired": "User ID is required",
+					"userNotFound": "User not found",
+					"errorGettingAllUsers": "Error getting all users",
+					"errorCreatingUser": "Error creating user",
+					"errorGettingUser": "Error getting user",
+					"errorUpdatingUser": "Error updating user",
+					"errorDeletingUser": "Error deleting user",
+					"passwordMustBeProvided": "Password must be provided",
+					"usernameAlreadyExists": "Username already exists",
+					"emailAlreadyExists": "Email already exists",
+					"passwordMustBeDifferentFromYourCurrent": "The entered password must be different from your current one"
+				}
+			},
+			"validations": {
+				"dietValidation": {
+					"invalidDietData": "{{error}}. Invalid diet data",
+					"descriptionValidation": "Description",
+					"mealsValidation": "Meals",
+					"nameValidation": "Name",
+					"userValidation": "User"
+				},
+				"foodItemValidation": {
+					"nameValidation": "Name"
+				},
+				"nutritionalValuesValidation": {
+					"caloriesValidation": "Calories",
+					"carbohydratesValidation": "Carbohydrates",
+					"fatsValidation": "Fats",
+					"proteinsValidation": "Proteins"
+				},
+				"userValidation": {
+					"invalidUserData": "{{error}}. Invalid user data",
+					"activityLevelValidation": "Activity level",
+					"birthDateValidation": "Date format",
+					"clientsValidation": {
+						"clientsValidation": "Clients",
+						"mustBeAdvanced": "Only advanced users can have clients"
+					},
+					"contactInfoValidation": {
+						"phoneNumberValidation": "Phone number",
+						"addressValidation": "Address"
+					},
+					"emailValidation": "Email",
+					"foodPreferencesValidation": "Food preferences",
+					"genderValidation": "Gender",
+					"healthConditionsValidation": "Health conditions",
+					"heightValidation": "Height",
+					"nameValidation": "Name",
+					"passwordValidation": {
+						"passwordValidation": "Password",
+						"mustContain": "Password must contain at least 2 digits, 1 uppercase letter, 1 lowercase letter, and 1 special character"
+					},
+					"statusValidation": "Status",
+					"surnameValidation": "Surname",
+					"usernameValidation": "Username",
+					"userTypeValidation": "User type",
+					"weightValidation": "Weight"
+				}
 			}
 		},
 		"auth": {
@@ -18,156 +179,6 @@
 				"invalidToken": "Invalid token",
 				"couldNotVerifyToken": "Could not verify token",
 				"couldNotGenerateToken": "Could not generate token"
-			}
-		},
-		"diet": {
-			"controller": {
-				"dietsFetched": "Fetched all diets successfully",
-				"dietCreated": "Created diet successfully",
-				"dietFetched": "Fetched diet successfully",
-				"dietUpdated": "Updated diet successfully",
-				"dietDeleted": "Deleted diet successfully"
-			},
-			"service": {
-				"errorGettingAllDiets": "Error getting all diets"
-			},
-			"validation": {
-				"invalidDietData": "{{error}}. Invalid diet data",
-				"descriptionValidation": "Description",
-				"mealsValidation": "Meals",
-				"nameValidation": "Name",
-				"userValidation": "User"
-			}
-		},
-		"foodItem": {
-			"validation": {
-				"nameValidation": "Name"
-			}
-		},
-		"nutritionalValues": {
-			"validation": {
-				"caloriesValidation": "Calories",
-				"carbohydratesValidation": "Carbohydrates",
-				"fatsValidation": "Fats",
-				"proteinsValidation": "Proteins"
-			},
-			"micronutrients": {
-				"vitaminA": "Vitamin A",
-				"vitaminB1": "Vitamin B1",
-				"vitaminB2": "Vitamin B2",
-				"vitaminB3": "Vitamin B3",
-				"vitaminB5": "Vitamin B5",
-				"vitaminB6": "Vitamin B6",
-				"vitaminB7": "Vitamin B7",
-				"vitaminB9": "Vitamin B9",
-				"vitaminB12": "Vitamin B12",
-				"vitaminC": "Vitamin C",
-				"vitaminD": "Vitamin D",
-				"vitaminE": "Vitamin E",
-				"vitaminK": "Vitamin K",
-				"calcium": "Calcium",
-				"iron": "Iron",
-				"magnesium": "Magnesium",
-				"potassium": "Potassium",
-				"selenium": "Selenium",
-				"sodium": "Sodium",
-				"zinc": "Zinc",
-				"iodine": "Iodine",
-				"copper": "Copper",
-				"chromium": "Chromium",
-				"manganese": "Manganese",
-				"molybdenum": "Molybdenum",
-				"chloride": "Chloride"
-			}
-		},
-		"user": {
-			"enums": {
-				"activityLevel": {
-					"sedentary": "Sedentary",
-					"lightlyActive": "Lightly active",
-					"moderatelyActive": "Moderately active",
-					"veryActive": "Very active"
-				},
-				"foodPreferences": {
-					"omnivore": "Omnivore",
-					"vegetarian": "Vegetarian",
-					"vegan": "Vegan",
-					"pescetarian": "Pescetarian",
-					"glutenFree": "Gluten free",
-					"lactoseFree": "Lactose free"
-				},
-				"gender": {
-					"male": "Male",
-					"female": "Female",
-					"other": "Other",
-					"preferNotToSay": "Prefer not to say"
-				},
-				"healthConditions": {
-					"none": "None",
-					"diabetes": "Diabetes",
-					"lactoseIntolerance": "Lactose intolerance",
-					"glutenIntolerance": "Gluten intolerance",
-					"hypertension": "Hypertension",
-					"heartDisease": "Heart disease"
-				},
-				"userStatus": {
-					"active": "Active",
-					"inactive": "Inactive",
-					"suspended": "Suspended"
-				},
-				"userType": {
-					"basic": "Basic",
-					"advanced": "Advanced",
-					"admin": "Admin"
-				}
-			},
-			"controller": {
-				"usersFetched": "Fetched all users successfully",
-				"userCreated": "Created user successfully",
-				"userFetched": "Fetched user successfully",
-				"userUpdated": "Updated user successfully",
-				"userDeleted": "Deleted user successfully"
-			},
-			"service": {
-				"userIdIsRequired": "User ID is required",
-				"userNotFound": "User not found",
-				"errorGettingAllUsers": "Error getting all users",
-				"errorCreatingUser": "Error creating user",
-				"errorGettingUser": "Error getting user",
-				"errorUpdatingUser": "Error updating user",
-				"errorDeletingUser": "Error deleting user",
-				"passwordMustBeProvided": "Password must be provided",
-				"usernameAlreadyExists": "Username already exists",
-				"emailAlreadyExists": "Email already exists",
-				"passwordMustBeDifferentFromYourCurrent": "The entered password must be different from your current one"
-			},
-			"validation": {
-				"invalidUserData": "{{error}}. Invalid user data",
-				"activityLevelValidation": "Activity level",
-				"birthDateValidation": "Date format",
-				"clientsValidation": {
-					"clientsValidation": "Clients",
-					"mustBeAdvanced": "Only advanced users can have clients"
-				},
-				"contactInfoValidation": {
-					"phoneNumberValidation": "Phone number",
-					"addressValidation": "Address"
-				},
-				"emailValidation": "Email",
-				"foodPreferencesValidation": "Food preferences",
-				"genderValidation": "Gender",
-				"healthConditionsValidation": "Health conditions",
-				"heightValidation": "Height",
-				"nameValidation": "Name",
-				"passwordValidation": {
-					"passwordValidation": "Password",
-					"mustContain": "Password must contain at least 2 digits, 1 uppercase letter, 1 lowercase letter, and 1 special character"
-				},
-				"statusValidation": "Status",
-				"surnameValidation": "Surname",
-				"usernameValidation": "Username",
-				"userTypeValidation": "User type",
-				"weightValidation": "Weight"
 			}
 		}
 	},

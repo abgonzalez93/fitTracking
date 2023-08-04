@@ -4,6 +4,6 @@ import { createField } from '@i18n/utils/fieldNameCreator'
 
 export const getFoodItemMessages = {
     validation: {
-        nameValidation: createField(i18n.__('components.foodItem.validation.nameValidation'))
+        nameValidation: createField(i18n.__('components.api.validations.foodItemValidation.nameValidation'))
     }
 }
