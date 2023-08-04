@@ -13,7 +13,7 @@ import { handleError } from '@middlewares/errorHandler'
 // Messages
 import i18n from '@i18n/i18n'
 
-export const applyMiddleware = (app: Application): void => {
+export const applyMiddlewares = (app: Application): void => {
     // Middleware to help protect your application from well-known vulnerabilities
     app.use(helmet())
 
