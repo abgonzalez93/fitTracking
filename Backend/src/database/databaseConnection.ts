@@ -10,8 +10,10 @@ import logger from '@utils/logger'
 // Middlewares
 import { ErrorHandler } from '@middlewares/errorHandler'
 
-// Configs and Messages
+// Config
 import config from '@config/config'
+
+// Messages
 import { getDatabaseMessages } from '@i18n/messages'
 
 export default class DatabaseConnection {

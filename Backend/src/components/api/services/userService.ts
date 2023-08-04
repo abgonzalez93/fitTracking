@@ -12,7 +12,7 @@ import AuthService from '@auth/service/authService'
 import User from '@api/models/user/userSchema'
 import { type UserInterface } from '@api/models/user/userInterface'
 
-// Configs and Messages
+// Messages
 import { getUserMessages } from '@i18n/messages'
 
 const msg = getUserMessages.service

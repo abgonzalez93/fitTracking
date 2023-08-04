@@ -14,7 +14,7 @@ import { asyncHandler } from '@middlewares/asyncHandler'
 import UserService from '@api/services/userService'
 import { validateUser } from '@api/validations/user/userValidation'
 
-// Configs and Messages
+// Messages
 import { getUserMessages } from '@i18n/messages'
 
 const msg = getUserMessages.controller

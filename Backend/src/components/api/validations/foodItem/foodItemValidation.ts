@@ -5,7 +5,7 @@ import Joi from 'joi'
 import { nutritionalValuesValidation } from '@api/validations/nutritionalValues/nutritionalValuesValidation'
 
 // Local files
-import { nameValidation } from './fields/nameValidation'
+import { nameValidation } from './fields'
 
 export const foodItemValidation = Joi.object({
     name: nameValidation,

@@ -4,8 +4,10 @@ import { ErrorHandler } from '@middlewares/errorHandler'
 // Constants
 import httpStatus from '@constants/httpStatus'
 
-// Configs and Messages
+// Config
 import config from '@config/config'
+
+// Messages
 import { getAuthenticationMessages } from '@i18n/messages'
 
 const msg = getAuthenticationMessages.authentication

@@ -15,7 +15,7 @@ import AuthService from '@auth/service/authService'
 import UserService from '@api/services/userService'
 import { validateUser } from '@api/validations/user/userValidation'
 
-// Configs and Messages
+// Messages
 import { getAuthMessages } from '@i18n/messages'
 
 const msg = getAuthMessages.controller

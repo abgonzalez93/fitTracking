@@ -4,8 +4,10 @@ import { type Express } from 'express'
 // Utils
 import logger from '@utils/logger'
 
-// Configs and Messages
+// Config
 import config from '@config/config'
+
+// Messages
 import { getServerMessages } from '@i18n/messages'
 
 const { PORT: port } = config

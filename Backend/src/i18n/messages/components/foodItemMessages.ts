@@ -1,4 +1,4 @@
-// Configs and Messages
+// Messages
 import i18n from '@i18n/i18n'
 import { createField } from '@i18n/utils/fieldNameCreator'
 

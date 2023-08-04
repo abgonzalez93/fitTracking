@@ -1,4 +1,4 @@
-// Configs and Messages
+// Messages
 import { getUserMessages } from '@i18n/messages'
 
 const msg = getUserMessages.model.enums.activityLevel

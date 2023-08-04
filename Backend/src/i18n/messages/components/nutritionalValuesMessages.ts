@@ -1,7 +1,7 @@
 // Components { Controllers, Models, Routes, Services, Validations }
 import { micronutrients } from '@api/models/nutritionalValues/micronutrients/micronutrients'
 
-// Configs and Messages
+// Messages
 import i18n from '@i18n/i18n'
 import { createField } from '@i18n/utils/fieldNameCreator'
 

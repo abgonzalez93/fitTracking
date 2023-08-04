@@ -1,4 +1,4 @@
-// Configs and Messages
+// Messages
 import { getCommonMessages } from '@i18n/messages'
 
 interface Field {

@@ -10,7 +10,7 @@ import { ErrorHandler } from '@middlewares/errorHandler'
 // Components { Controllers, Models, Routes, Services, Validations }
 import { type DietInterface } from '@api/models/diet/dietInterface'
 
-// Configs and Messages
+// Messages
 import { getDietMessages } from '@i18n/messages'
 
 // Local files

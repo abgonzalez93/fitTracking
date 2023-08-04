@@ -4,7 +4,7 @@ import Joi from 'joi'
 // Components { Controllers, Models, Routes, Services, Validations }
 import { gender } from '@api/models/user/enums'
 
-// Configs and Messages
+// Messages
 import { getUserMessages } from '@i18n/messages'
 
 const msg = getUserMessages.validation.genderValidation

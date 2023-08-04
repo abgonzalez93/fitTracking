@@ -17,7 +17,7 @@ import { type TokenPayloadInterface } from '@auth/models/tokenPayloadInterface'
 import TokenType from '@auth/models/enums/tokenType'
 import { type UserInterface } from '@api/models/user/userInterface'
 
-// Configs and Messages
+// Messages
 import { getAuthMessages, getUserMessages } from '@i18n/messages'
 
 const authMsg = getAuthMessages.service

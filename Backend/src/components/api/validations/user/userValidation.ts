@@ -11,7 +11,7 @@ import { ErrorHandler } from '@middlewares/errorHandler'
 import { type UserInterface } from '@api/models/user/userInterface'
 import { nutritionalValuesValidation } from '@api/validations/nutritionalValues/nutritionalValuesValidation'
 
-// Configs and Messages
+// Messages
 import { getUserMessages } from '@i18n/messages'
 
 // Local files

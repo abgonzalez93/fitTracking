@@ -13,7 +13,7 @@ import { ErrorHandler } from '@middlewares/errorHandler'
 // Components { Controllers, Models, Routes, Services, Validations }
 import { type UserInterface } from '@api/models/user/userInterface'
 
-// Configs and Messages
+// Messages
 import { getUserMessages } from '@i18n/messages'
 
 // Local files

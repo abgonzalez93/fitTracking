@@ -1,7 +1,7 @@
 // External Libraries
 import Joi from 'joi'
 
-// Configs and Messages
+// Messages
 import { getUserMessages } from '@i18n/messages'
 
 const msg = getUserMessages.validation.birthDateValidation

@@ -1,0 +1,1 @@
+export { nameValidation } from './nameValidation'

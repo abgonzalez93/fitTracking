@@ -14,7 +14,7 @@ import { asyncHandler } from '@middlewares/asyncHandler'
 import DietService from '@api/services/dietService'
 import { validateDiet } from '@api/validations/diet/dietValidation'
 
-// Configs and Messages
+// Messages
 import { getDietMessages } from '@i18n/messages'
 
 const msg = getDietMessages.controller

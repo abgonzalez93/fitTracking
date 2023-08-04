@@ -10,7 +10,7 @@ import cors from 'cors'
 // Middlewares
 import { handleError } from '@middlewares/errorHandler'
 
-// Configs and Messages
+// Messages
 import i18n from '@i18n/i18n'
 
 export const applyMiddleware = (app: Application): void => {

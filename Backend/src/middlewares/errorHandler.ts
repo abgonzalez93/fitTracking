@@ -7,8 +7,10 @@ import httpStatus from '@constants/httpStatus'
 // Utils
 import { createResponse } from '@utils/createResponse'
 
-// Configs and Messages
+// Config
 import config from '@config/config'
+
+// Messages
 import { getErrorHandlerMessages } from '@i18n/messages'
 
 export class ErrorHandler extends Error {

@@ -9,7 +9,7 @@ import Diet from '@api/models/diet/dietSchema'
 import { type DietInterface } from '@api/models/diet/dietInterface'
 // import User from '@components/user/model/user'
 
-// Configs and Messages
+// Messages
 import { getDietMessages } from '@i18n/messages'
 
 const msg = getDietMessages.service

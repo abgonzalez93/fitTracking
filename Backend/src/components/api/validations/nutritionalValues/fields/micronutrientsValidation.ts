@@ -1,11 +1,11 @@
 // External Libraries
 import Joi from 'joi'
 
-// Configs and Messages
-import { getNutritionalValuesMessages } from '@i18n/messages'
+// Components { Controllers, Models, Routes, Services, Validations }
+import { micronutrients } from '@api/models/nutritionalValues/micronutrients/micronutrients'
 
-// Local files
-import { micronutrients } from '../../../models/nutritionalValues/micronutrients/micronutrients'
+// Messages
+import { getNutritionalValuesMessages } from '@i18n/messages'
 
 const validation: Record<string, any> = {}
 
