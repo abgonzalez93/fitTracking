@@ -12,8 +12,8 @@ export const getNutritionalValuesMessages = {
         fatsValidation: createField(i18n.__('components.api.validations.nutritionalValuesValidation.fatsValidation')),
         proteinsValidation: createField(i18n.__('components.api.validations.nutritionalValuesValidation.proteinsValidation')),
         micronutrientsValidation: micronutrients.reduce((messages: any, micronutrient: string) => {
-            messages[micronutrient] = createField(i18n.__(`components.api.models.nutritionalValuesModel.micronutrient.${micronutrient}`))
+            messages[micronutrient] = createField(i18n.__(`components.api.validations.nutritionalValuesValidation.micronutrient.${micronutrient}`))
             return messages
-        }, {}),
+        }, {})
     }
 }

@@ -1,206 +1,215 @@
 {
 	"components": {
 		"api": {
-			"controller": {
-				"welcomeMessage": "Bienvenido a la API de fitTracking"
+			"controllers": {
+				"apiController": {
+					"welcomeMessage": "Bienvenido a la API de fitTracking"
+				},
+				"dietController": {
+					"dietsFetched": "Todas las dietas se obtuvieron exitosamente",
+					"dietCreated": "Dieta creada exitosamente",
+					"dietFetched": "Dieta obtenida exitosamente",
+					"dietUpdated": "Dieta actualizada exitosamente",
+					"dietDeleted": "Dieta eliminada exitosamente"
+				},
+				"userController": {
+					"usersFetched": "Todos los usuarios se obtuvieron exitosamente",
+					"userCreated": "Usuario creado exitosamente",
+					"userFetched": "Usuario obtenido exitosamente",
+					"userUpdated": "Usuario actualizado exitosamente",
+					"userDeleted": "Usuario eliminado exitosamente"
+				}
+			},
+			"models": {
+				"dietModel": {},
+				"foodItemModel": {},
+				"userModel": {
+					"enums": {
+						"activityLevel": {
+							"sedentary": "Sedentario",
+							"lightlyActive": "Ligeramente activo",
+							"moderatelyActive": "Moderadamente activo",
+							"veryActive": "Muy activo"
+						},
+						"foodPreferences": {
+							"omnivore": "Omnívoro",
+							"vegetarian": "Vegetariano",
+							"vegan": "Vegano",
+							"pescetarian": "Pescetariano",
+							"glutenFree": "Sin gluten",
+							"lactoseFree": "Sin lactosa"
+						},
+						"gender": {
+							"male": "Masculino",
+							"female": "Femenino",
+							"other": "Otro",
+							"preferNotToSay": "Prefiere no decir"
+						},
+						"healthConditions": {
+							"none": "Ninguna",
+							"diabetes": "Diabetes",
+							"lactoseIntolerance": "Intolerancia a la lactosa",
+							"glutenIntolerance": "Intolerancia al gluten",
+							"hypertension": "Hipertensión",
+							"heartDisease": "Enfermedad del corazón"
+						},
+						"userStatus": {
+							"active": "Activo",
+							"inactive": "Inactivo",
+							"suspended": "Suspendido"
+						},
+						"userType": {
+							"basic": "Básico",
+							"advanced": "Avanzado",
+							"admin": "Administrador"
+						}
+					}
+				}
+			},
+			"routes": {
+				"apiRoutes": {},
+				"dietRoutes": {},
+				"userRoutes": {}
+			},
+			"services": {
+				"dietService": {
+					"errorGettingAllDiets": "Error al obtener todas las dietas"
+				},
+				"userService": {
+					"userIdIsRequired": "Se requiere ID de usuario",
+					"userNotFound": "Usuario no encontrado",
+					"errorGettingAllUsers": "Error al obtener todos los usuarios",
+					"errorCreatingUser": "Error al crear usuario",
+					"errorGettingUser": "Error al obtener usuario",
+					"errorUpdatingUser": "Error al actualizar usuario",
+					"errorDeletingUser": "Error al eliminar usuario",
+					"passwordMustBeProvided": "Debe proporcionar una contraseña",
+					"usernameAlreadyExists": "El nombre de usuario ya existe",
+					"emailAlreadyExists": "El correo electrónico ya existe",
+					"passwordMustBeDifferentFromYourCurrent": "La contraseña ingresada debe ser diferente a la actual"
+				}
+			},
+			"validations": {
+				"dietValidation": {
+					"invalidDietData": "{{error}}. Datos de dieta inválidos",
+					"descriptionValidation": "Descripción",
+					"mealsValidation": "Comidas",
+					"nameValidation": "Nombre",
+					"userValidation": "Usuario"
+				},
+				"foodItemValidation": {
+					"nameValidation": "Nombre"
+				},
+				"nutritionalValuesValidation": {
+					"caloriesValidation": "Calorías",
+					"carbohydratesValidation": "Carbohidratos",
+					"fatsValidation": "Grasas",
+					"proteinsValidation": "Proteínas",
+					"micronutrients": {
+						"vitaminA": "Vitamina A",
+						"vitaminB1": "Vitamina B1",
+						"vitaminB2": "Vitamina B2",
+						"vitaminB3": "Vitamina B3",
+						"vitaminB5": "Vitamina B5",
+						"vitaminB6": "Vitamina B6",
+						"vitaminB7": "Vitamina B7",
+						"vitaminB9": "Vitamina B9",
+						"vitaminB12": "Vitamina B12",
+						"vitaminC": "Vitamina C",
+						"vitaminD": "Vitamina D",
+						"vitaminE": "Vitamina E",
+						"vitaminK": "Vitamina K",
+						"calcium": "Calcio",
+						"iron": "Hierro",
+						"magnesium": "Magnesio",
+						"potassium": "Potasio",
+						"selenium": "Selenio",
+						"sodium": "Sodio",
+						"zinc": "Zinc",
+						"iodine": "Yodo",
+						"copper": "Cobre",
+						"chromium": "Cromo",
+						"manganese": "Manganeso",
+						"molybdenum": "Molibdeno",
+						"chloride": "Cloruro"
+					}
+				},
+				"userValidation": {
+					"invalidUserData": "{{error}}. Datos de usuario inválidos",
+					"activityLevelValidation": "Nivel de actividad",
+					"birthDateValidation": "Formato de fecha",
+					"clientsValidation": {
+						"clientsValidation": "Clientes",
+						"mustBeAdvanced": "Solo los usuarios avanzados pueden tener clientes"
+					},
+					"contactInfoValidation": {
+						"phoneNumberValidation": "Número de teléfono",
+						"addressValidation": "Dirección"
+					},
+					"emailValidation": "Correo electrónico",
+					"foodPreferencesValidation": "Preferencias alimenticias",
+					"genderValidation": "Género",
+					"healthConditionsValidation": "Condiciones de salud",
+					"heightValidation": "Altura",
+					"nameValidation": "Nombre",
+					"passwordValidation": {
+						"passwordValidation": "Contraseña",
+						"mustContain": "La contraseña debe contener al menos 2 dígitos, 1 letra mayúscula, 1 letra minúscula y 1 carácter especial"
+					},
+					"statusValidation": "Estado",
+					"surnameValidation": "Apellido",
+					"usernameValidation": "Nombre de usuario",
+					"userTypeValidation": "Tipo de usuario",
+					"weightValidation": "Peso"
+				}
 			}
 		},
 		"auth": {
 			"controller": {
 				"userCreated": "Usuario creado con éxito",
 				"loginSuccessful": "Inicio de sesión exitoso",
-				"logoutSuccessful": "Cierre de sesión existoso",
+				"logoutSuccessful": "Cierre de sesión exitoso",
 				"refreshedAccessToken": "Token de acceso actualizado"
 			},
 			"service": {
 				"invalidUserData": "Datos de usuario inválidos para generar un token",
-				"wrongCredentials": "Credenciales inválidas. Por favor, revise su nombre de usuario y contraseña e inténtelo de nuevo",
+				"wrongCredentials": "Credenciales inválidas. Por favor, verifique su nombre de usuario y contraseña e intente nuevamente",
 				"invalidToken": "Token inválido",
 				"couldNotVerifyToken": "No se pudo verificar el token",
 				"couldNotGenerateToken": "No se pudo generar el token"
 			}
-		},
-		"diet": {
-			"controller": {
-				"dietsFetched": "Todos las dietas han sido obtenidas exitosamente",
-				"dietCreated": "Dieta creada exitosamente",
-				"dietFetched": "Dieta obtenida exitosamente",
-				"dietUpdated": "Dieta actualizada exitosamente",
-				"dietDeleted": "Dieta eliminada exitosamente"
-			},
-			"service": {
-				"errorGettingAllDiets": "Error al obtener todas los dietas"
-			},
-			"validation": {
-				"invalidDietData": "{{error}}. Datos de dieta inválidos",
-				"descriptionValidation": "Descripción",
-				"mealsValidation": "Comidas",
-				"nameValidation": "Nombre",
-				"userValidation": "Usuario"
-			}
-		},
-		"foodItem": {
-			"validation": {
-				"nameValidation": "Nombre"
-			}
-		},
-		"nutritionalValues": {
-			"validation": {
-				"caloriesValidation": "Calorías",
-				"carbohydratesValidation": "Carbohidratos",
-				"fatsValidation": "Grasas",
-				"proteinsValidation": "Proteínas"
-			},
-			"micronutrients": {
-				"vitaminA": "Vitamina A",
-				"vitaminB1": "Vitamina B1",
-				"vitaminB2": "Vitamina B2",
-				"vitaminB3": "Vitamina B3",
-				"vitaminB5": "Vitamina B5",
-				"vitaminB6": "Vitamina B6",
-				"vitaminB7": "Vitamina B7",
-				"vitaminB9": "Vitamina B9",
-				"vitaminB12": "Vitamina B12",
-				"vitaminC": "Vitamina C",
-				"vitaminD": "Vitamina D",
-				"vitaminE": "Vitamina E",
-				"vitaminK": "Vitamina K",
-				"calcium": "Calcio",
-				"iron": "Hierro",
-				"magnesium": "Magnesio",
-				"potassium": "Potasio",
-				"selenium": "Selenio",
-				"sodium": "Sodio",
-				"zinc": "Zinc",
-				"iodine": "Yodo",
-				"copper": "Cobre",
-				"chromium": "Cromo",
-				"manganese": "Manganeso",
-				"molybdenum": "Molibdeno",
-				"chloride": "Cloruro"
-			}
-		},
-		"user": {
-			"enums": {
-				"activityLevel": {
-					"sedentary": "Sedentario",
-					"lightlyActive": "Ligeramente activo",
-					"moderatelyActive": "Moderadamente activo",
-					"veryActive": "Muy activo"
-				},
-				"foodPreferences": {
-					"omnivore": "Omnívoro",
-					"vegetarian": "Vegetariano",
-					"vegan": "Vegano",
-					"pescetarian": "Pescetariano",
-					"glutenFree": "Sin gluten",
-					"lactoseFree": "Sin lactosa"
-				},
-				"gender": {
-					"male": "Hombre",
-					"female": "Mujer",
-					"other": "Otro",
-					"preferNotToSay": "Prefiero no decirlo"
-				},
-				"healthConditions": {
-					"none": "Ninguno",
-					"diabetes": "Diabetes",
-					"lactoseIntolerance": "Intolerancia a la lactosa",
-					"glutenIntolerance": "Intolerancia al gluten",
-					"hypertension": "Hipertensión",
-					"heartDisease": "Enfermedad cardíaca"
-				},
-				"userStatus": {
-					"active": "Activo",
-					"inactive": "Inactivo",
-					"suspended": "Suspendido"
-				},
-				"userType": {
-					"basic": "Básico",
-					"advanced": "Avanzado",
-					"admin": "Administrador"
-				}
-			},
-			"controller": {
-				"usersFetched": "Todos los usuarios han sido obtenidos exitosamente",
-				"userCreated": "Usuario creado exitosamente",
-				"userFetched": "Usuario obtenido exitosamente",
-				"userUpdated": "Usuario actualizado exitosamente",
-				"userDeleted": "Usuario eliminado exitosamente"
-			},
-			"service": {
-				"userIdRequired": "Se requiere un ID de usuario",
-				"userNotFound": "Usuario no encontrado",
-				"errorGettingAllUsers": "Error al obtener todos los usuarios",
-				"errorCreatingUser": "Error al crear usuario",
-				"errorGettingUser": "Error al obtener usuario",
-				"errorUpdatingUser": "Error al actualizar usuario",
-				"errorDeletingUser": "Error al eliminar usuario",
-				"passwordMustBeProvided": "Se debe proporcionar una contraseña",
-				"usernameAlreadyExists": "El nombre de usuario ya existe",
-				"emailAlreadyExists": "El correo electrónico ya existe",
-				"passwordMustBeDifferentFromYourCurrent": "La contraseña ingresada debe ser diferente a la actual"
-			},
-			"validation": {
-				"invalidUserData": "{{error}}. Datos de usuario inválidos",
-				"activityLevelValidation": "Nivel de actividad",
-				"birthDateValidation": "Formato de fecha",
-				"clientsValidation": {
-					"clientsValidation": "Clientes",
-					"mustBeAdvanced": "Solo los usuarios avanzados pueden tener clientes"
-				},
-				"contactInfoValidation": {
-					"phoneNumberValidation": "Número de teléfono",
-					"addressValidation": "Dirección"
-				},
-				"emailValidation": "Correo electrónico",
-				"foodPreferencesValidation": "Preferencias alimenticias",
-				"genderValidation": "Género",
-				"healthConditionsValidation": "Condiciones de salud",
-				"heightValidation": "Altura",
-				"nameValidation": "Nombre",
-				"passwordValidation": {
-					"passwordValidation": "Contraseña",
-					"mustContain": "La contraseña debe contener al menos 2 dígitos, 1 letra mayúscula, 1 letra minúscula, y 1 carácter especial"
-				},
-				"statusValidation": "Estado",
-				"surnameValidation": "Apellido",
-				"usernameValidation": "Nombre de usuario",
-				"userTypeValidation": "Tipo de usuario",
-				"weightValidation": "Peso"
-			}
 		}
 	},
 	"database": {
-		"failedToConnect": "Fallo al conectar con la base de datos: {{error}}",
-		"unknownDatabaseError": "Ocurrió un error desconocido en la conexión a la base de datos",
+		"failedToConnect": "Error al conectar a la base de datos: {{error}}",
+		"unknownDatabaseError": "Se produjo un error desconocido en la conexión a la base de datos",
 		"connectionShutdown": {
-			"nodemonRestart": "Mongoose se ha desconectado debido al reinicio de Nodemon",
+			"nodemonRestart": "Mongoose se ha desconectado debido al reinicio de nodemon",
 			"nodemonRestartError": "Error al manejar el reinicio de nodemon: {{error}}",
-			"applicationTermination": "Mongoose se ha desconectado debido a la terminación de la aplicación",
-			"applicationTerminationError": "Error al manejar la terminación de la aplicación: {{error}}",
+			"applicationTermination": "Mongoose se ha desconectado debido a la finalización de la aplicación",
+			"applicationTerminationError": "Error al manejar la finalización de la aplicación: {{error}}",
 			"errorShuttingDown": "Error durante el apagado en {{signal}}: {{error}}"
 		},
 		"handleDBEvents": {
 			"connectionError": "Error de conexión: {{error}}",
-			"startingConnection": "Iniciando conexión con MongoDB...",
-			"connectionInitiated": "Conexión iniciada, esperando a que se abra...",
+			"startingConnection": "Iniciando conexión a MongoDB...",
+			"connectionInitiated": "Conexión iniciada, esperando que se abra...",
 			"connected": "¡Conectado a MongoDB!",
-			"disconnecting": "Desconectándose de MongoDB...",
-			"connectionClosed": "Conexión con MongoDB cerrada",
+			"disconnecting": "Desconectando de MongoDB...",
+			"connectionClosed": "Conexión a MongoDB cerrada",
 			"successfulReconnection": "¡Reconexión exitosa a MongoDB!"
 		},
 		"attemptConnection": {
-			"uriNotSet": "La URI de MongoDB no está configurada en el archivo de configuración",
+			"uriNotSet": "La URI de MongoDB no está establecida en el archivo de configuración",
 			"tryingToReconnect": "Intentando reconectar...",
-			"connectionFailed": "La conexión falló, reintentando en {{retry}} segundos... (intento: {{attempt}})",
+			"connectionFailed": "Conexión fallida, reintentando en {{retry}} segundos... (intento: {{attempt}})",
 			"connectionToDatabaseError": "Error al conectar a la base de datos: {{error}}"
 		}
 	},
 	"middlewares": {
 		"authentication": {
 			"invalidToken": "Token inválido",
-			"expiredToken": "El token ha expirado"
+			"expiredToken": "Token ha expirado"
 		},
 		"handleError": {
 			"error404": "HTTP 404. Página no encontrada"
@@ -211,13 +220,13 @@
 	},
 	"commonMessages": {
 		"emptyData": "{{field}} no puede estar vacío",
-		"invalidData": "{{field}} es inválido",
+		"invalidData": "{{field}} inválido",
 		"mustBeObject": "{{field}} debe ser un objeto",
 		"mustBeArray": "{{field}} debe ser un array",
 		"mustBeNumber": "{{field}} debe ser un número",
 		"mustBePositive": "{{field}} debe ser un número positivo",
 		"mustBeString": "{{field}} debe ser una cadena",
-		"mustBeObjectId": "{{field}} debe ser un ID de MongoDB válido",
+		"mustBeObjectId": "{{field}} debe ser un ID válido de MongoDB",
 		"mustBeOneOfTheFollowing": "{{field}} debe ser uno de los siguientes",
 		"minLength": "{{field}} tiene una longitud mínima de {{length}}",
 		"maxLength": "{{field}} tiene una longitud máxima de {{length}}"

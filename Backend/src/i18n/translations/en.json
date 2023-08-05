@@ -23,36 +23,6 @@
 			"models": {
 				"dietModel": {},
 				"foodItemModel": {},
-				"nutritionalValuesModel": {
-					"micronutrients": {
-						"vitaminA": "Vitamin A",
-						"vitaminB1": "Vitamin B1",
-						"vitaminB2": "Vitamin B2",
-						"vitaminB3": "Vitamin B3",
-						"vitaminB5": "Vitamin B5",
-						"vitaminB6": "Vitamin B6",
-						"vitaminB7": "Vitamin B7",
-						"vitaminB9": "Vitamin B9",
-						"vitaminB12": "Vitamin B12",
-						"vitaminC": "Vitamin C",
-						"vitaminD": "Vitamin D",
-						"vitaminE": "Vitamin E",
-						"vitaminK": "Vitamin K",
-						"calcium": "Calcium",
-						"iron": "Iron",
-						"magnesium": "Magnesium",
-						"potassium": "Potassium",
-						"selenium": "Selenium",
-						"sodium": "Sodium",
-						"zinc": "Zinc",
-						"iodine": "Iodine",
-						"copper": "Copper",
-						"chromium": "Chromium",
-						"manganese": "Manganese",
-						"molybdenum": "Molybdenum",
-						"chloride": "Chloride"
-					}
-				},
 				"userModel": {
 					"enums": {
 						"activityLevel": {
@@ -134,7 +104,35 @@
 					"caloriesValidation": "Calories",
 					"carbohydratesValidation": "Carbohydrates",
 					"fatsValidation": "Fats",
-					"proteinsValidation": "Proteins"
+					"proteinsValidation": "Proteins",
+					"micronutrients": {
+						"vitaminA": "Vitamin A",
+						"vitaminB1": "Vitamin B1",
+						"vitaminB2": "Vitamin B2",
+						"vitaminB3": "Vitamin B3",
+						"vitaminB5": "Vitamin B5",
+						"vitaminB6": "Vitamin B6",
+						"vitaminB7": "Vitamin B7",
+						"vitaminB9": "Vitamin B9",
+						"vitaminB12": "Vitamin B12",
+						"vitaminC": "Vitamin C",
+						"vitaminD": "Vitamin D",
+						"vitaminE": "Vitamin E",
+						"vitaminK": "Vitamin K",
+						"calcium": "Calcium",
+						"iron": "Iron",
+						"magnesium": "Magnesium",
+						"potassium": "Potassium",
+						"selenium": "Selenium",
+						"sodium": "Sodium",
+						"zinc": "Zinc",
+						"iodine": "Iodine",
+						"copper": "Copper",
+						"chromium": "Chromium",
+						"manganese": "Manganese",
+						"molybdenum": "Molybdenum",
+						"chloride": "Chloride"
+					}
 				},
 				"userValidation": {
 					"invalidUserData": "{{error}}. Invalid user data",
