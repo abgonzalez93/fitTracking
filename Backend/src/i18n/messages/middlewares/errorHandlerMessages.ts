@@ -2,7 +2,8 @@
 import i18n from '@i18n/i18n'
 
 export const getErrorHandlerMessages = {
-    handleError: {
-        error404: i18n.__('middlewares.handleError.error404')
+    errorHandler: {
+        error404: i18n.__('middlewares.errorHandler.error404'),
+        somethingWentWrong: i18n.__('middlewares.errorHandler.somethingWentWrong')
     }
 }

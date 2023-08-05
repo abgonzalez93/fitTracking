@@ -44,7 +44,7 @@ export default class SignalHandler {
                     process.exit(1)
                 }
             })().catch((error) => {
-                logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, error))
+                logger.error(error)
             })
         })
     }
@@ -64,7 +64,7 @@ export default class SignalHandler {
                     process.exit(1)
                 }
             })().catch((error) => {
-                logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, error))
+                logger.error(error)
             })
         })
     }

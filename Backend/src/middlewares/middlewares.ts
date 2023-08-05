@@ -7,9 +7,6 @@ import morgan from 'morgan'
 import helmet from 'helmet'
 import cors from 'cors'
 
-// Middlewares
-import { handleError } from '@middlewares/errorHandler'
-
 // Messages
 import i18n from '@i18n/i18n'
 
@@ -36,12 +33,12 @@ export const applyMiddlewares = (app: Application): void => {
     app.use(express.json({ limit: '100mb' }))
     app.use(express.urlencoded({ limit: '100mb', extended: true }))
 
+    // Middleware to serve static files from 'public' directory
+    app.use(express.static('public'))
+
     // Middleware for i18n
     app.use(i18n.init)
 
     // Middleware for Passport
     app.use(passport.initialize())
-
-    // Middleware for centralized error handling
-    app.use(handleError)
 }

@@ -5,6 +5,7 @@ import { type Request, type Response, type NextFunction } from 'express'
 import httpStatus from '@constants/httpStatus'
 
 // Utils
+import logger from '@utils/logger'
 import { createResponse } from '@utils/createResponse'
 
 // Config
@@ -12,6 +13,8 @@ import config from '@config/config'
 
 // Messages
 import { getErrorHandlerMessages } from '@i18n/messages'
+
+const msg = getErrorHandlerMessages.errorHandler
 
 export class ErrorHandler extends Error {
     readonly statusCode: number
@@ -29,14 +32,25 @@ export const handleError = (err: Error | ErrorHandler, req: Request, res: Respon
     if (err instanceof ErrorHandler) {
         const { statusCode, message } = err
 
-        const developmentStack = config.NODE_ENV === 'develop' ? { stack: err.stack } : {}
+        let developmentStack = ''
 
-        createResponse(res, statusCode, message, developmentStack)
+        if (config.NODE_ENV === 'develop' && err.stack) {
+            developmentStack = cleanStack(err.stack)
+        }
+
+        createResponse(res, statusCode, message, {}, developmentStack)
     } else {
-        next(err)
+        logger.error(err)
+        createResponse(res, httpStatus.INTERNAL_SERVER_ERROR, msg.somethingWentWrong)
     }
 }
 
 export const handle404Error = (req: Request, res: Response, next: NextFunction): void => {
-    next(new ErrorHandler(httpStatus.NOT_FOUND, getErrorHandlerMessages.handleError.error404))
+    next(new ErrorHandler(httpStatus.NOT_FOUND, msg.error404))
+}
+
+function cleanStack(stack: string): string {
+    const stackLines = stack.split('\n')
+    stackLines.shift()
+    return stackLines.join('\n')
 }

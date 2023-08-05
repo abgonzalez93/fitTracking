@@ -1,8 +1,14 @@
 // External Libraries
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
 
+// Constants
+import httpStatus from '@constants/httpStatus'
+
 // Utils
 import logger from '@utils/logger'
+
+// Middlewares
+import { ErrorHandler } from '@middlewares/errorHandler'
 
 // Components { Controllers, Models, Routes, Services, Validations }
 import TokenType from '@auth/models/enums/tokenType'
@@ -21,22 +27,21 @@ export default new JwtStrategy(jwtStrategyConfig, (payload, done) => {
     (async () => {
         try {
             if (payload.type !== TokenType.ACCESS) {
-                done(null, false)
-                return
+                throw new ErrorHandler(httpStatus.UNAUTHORIZED, 'Invalid token type.')
             }
 
             const user = await UserService.getUser(payload.id)
 
             if (user === null || typeof user !== 'object' || user.status !== userStatus.Active) {
-                done(null, false)
-                return
+                throw new ErrorHandler(httpStatus.UNAUTHORIZED, 'User not found or not active.')
             }
 
-            done(null, user)
+            return done(null, user)
         } catch (error) {
-            done(error, false)
+            return done(error, false)
         }
     })().catch((error) => {
         logger.error(error)
+        return done(error, false)
     })
 })

@@ -211,8 +211,9 @@
 			"invalidToken": "Token inválido",
 			"expiredToken": "Token ha expirado"
 		},
-		"handleError": {
-			"error404": "HTTP 404. Página no encontrada"
+		"errorHandler": {
+			"error404": "HTTP 404. Página no encontrada",
+			"somethingWentWrong": "Algo salió mal..."
 		}
 	},
 	"server": {

@@ -19,7 +19,7 @@ import { getDatabaseMessages } from '@i18n/messages'
 export default class DatabaseConnection {
     private static handleDBEvents (db: Connection): void {
         db.on('error', (error) => {
-            throw new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.handleDBEvents.connectionError(error.message))
+            logger.error(new ErrorHandler(httpStatus.INTERNAL_SERVER_ERROR, getDatabaseMessages.handleDBEvents.connectionError(error.message)))
         })
 
         db.on('connecting', () => {
