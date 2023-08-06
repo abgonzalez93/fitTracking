@@ -8,18 +8,20 @@ import httpStatus from '@constants/httpStatus'
 // Middlewares
 import jwtStrategy from '@middlewares/authentication/jwtStrategy'
 import { ErrorHandler } from '@middlewares/errorHandler'
-import { UserInterface } from '@api/models/user/userInterface'
+import { type UserInterface } from '@api/models/user/userInterface'
 
 passport.use(jwtStrategy)
 
-export const authentication = (req: Request, res: Response, next: NextFunction) => {
+export const authentication = (req: Request, res: Response, next: NextFunction): void => {
     passport.authenticate('jwt', { session: false }, (error: ErrorHandler, user: UserInterface) => {
-        if (error) {
-            return next(error)
+        if (error !== null) {
+            next(error)
+            return
         }
 
-        if (!user) {
-            return next(new ErrorHandler(httpStatus.UNAUTHORIZED, 'Unauthorized'))
+        if (user === null) {
+            next(new ErrorHandler(httpStatus.UNAUTHORIZED, 'Unauthorized'))
+            return
         }
 
         req.user = user

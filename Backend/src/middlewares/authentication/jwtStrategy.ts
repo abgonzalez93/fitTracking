@@ -36,12 +36,12 @@ export default new JwtStrategy(jwtStrategyConfig, (payload, done) => {
                 throw new ErrorHandler(httpStatus.UNAUTHORIZED, 'User not found or not active.')
             }
 
-            return done(null, user)
+            done(null, user)
         } catch (error) {
-            return done(error, false)
+            done(error, false)
         }
     })().catch((error) => {
         logger.error(error)
-        return done(error, false)
+        done(error, false)
     })
 })

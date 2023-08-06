@@ -3,7 +3,7 @@ import { micronutrients } from '@api/models/nutritionalValues/micronutrients/mic
 
 // Messages
 import i18n from '@i18n/i18n'
-import { Field, createField } from '@i18n/utils/fieldNameCreator'
+import { type Field, createField } from '@i18n/utils/fieldNameCreator'
 
 export const getNutritionalValuesMessages = {
     validation: {
@@ -11,7 +11,7 @@ export const getNutritionalValuesMessages = {
         carbohydratesValidation: createField(i18n.__('components.api.validations.nutritionalValuesValidation.carbohydratesValidation')),
         fatsValidation: createField(i18n.__('components.api.validations.nutritionalValuesValidation.fatsValidation')),
         proteinsValidation: createField(i18n.__('components.api.validations.nutritionalValuesValidation.proteinsValidation')),
-        micronutrientsValidation: micronutrients.reduce((messages: { [key: string]: Field }, micronutrient: string) => {
+        micronutrientsValidation: micronutrients.reduce((messages: Record<string, Field>, micronutrient: string) => {
             messages[micronutrient] = createField(i18n.__(`components.api.validations.nutritionalValuesValidation.micronutrient.${micronutrient}`))
             return messages
         }, {})

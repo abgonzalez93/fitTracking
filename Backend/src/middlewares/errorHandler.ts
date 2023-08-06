@@ -34,8 +34,8 @@ export const handleError = (err: Error | ErrorHandler, req: Request, res: Respon
 
         let developmentStack = ''
 
-        if (config.NODE_ENV === 'develop' && err.stack) {
-            developmentStack = cleanStack(err.stack)
+        if (config.NODE_ENV === 'develop' && err.stack != null) {
+            developmentStack = err.stack
         }
 
         createResponse(res, statusCode, message, {}, developmentStack)
@@ -47,10 +47,4 @@ export const handleError = (err: Error | ErrorHandler, req: Request, res: Respon
 
 export const handle404Error = (req: Request, res: Response, next: NextFunction): void => {
     next(new ErrorHandler(httpStatus.NOT_FOUND, msg.error404))
-}
-
-function cleanStack(stack: string): string {
-    const stackLines = stack.split('\n')
-    stackLines.shift()
-    return stackLines.join('\n')
 }

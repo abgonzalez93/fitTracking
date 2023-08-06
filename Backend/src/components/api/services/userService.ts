@@ -17,9 +17,8 @@ import { getUserMessages } from '@i18n/messages'
 
 const msg = getUserMessages.service
 
-type QueryCondition = { [key: string]: string }
-type QueryType = { [key: string]: string | QueryCondition[] | QueryCondition }
-
+type QueryCondition = Record<string, string>
+type QueryType = Record<string, string | QueryCondition[] | QueryCondition>
 
 export default class UserService {
     public static async getAllUsers (): Promise<UserInterface[]> {
@@ -69,16 +68,17 @@ export default class UserService {
     }
 
     public static async getUserByEmailOrUsername (email?: string, username?: string, includePassword: boolean = false): Promise<UserInterface> {
-        if (!email && !username) {
-            throw new ErrorHandler(httpStatus.BAD_REQUEST, 'Either email or username must be provided');
+        if ((email == null || email.trim() === '') && (username == null || username.trim() === '')) {
+            throw new ErrorHandler(httpStatus.BAD_REQUEST, 'Either email or username must be provided')
         }
 
-        const orQuery: Array<{ [key: string]: string }> = []
+        const orQuery: Array<Record<string, string>> = []
 
-        if (email) {
+        if (email != null && email.trim() !== '') {
             orQuery.push({ email })
         }
-        if (username) {
+
+        if (username != null && username.trim() !== '') {
             orQuery.push({ username })
         }
 
@@ -118,11 +118,11 @@ export default class UserService {
     }
 
     private static async validatePassword (userData: Pick<UserInterface, 'password'>, isUpdate: boolean, currentUser?: Pick<UserInterface, 'password'>): Promise<void> {
-        if (userData.password == null || userData.password.trim() === '') {
+        if (userData.password?.trim() === '' || userData.password == null) {
             throw new ErrorHandler(httpStatus.BAD_REQUEST, msg.passwordMustBeProvided)
         }
 
-        if (isUpdate && currentUser?.password !== null && currentUser?.password !== undefined && currentUser.password.trim() !== '') {
+        if (isUpdate && currentUser != null && currentUser.password?.trim() !== '') {
             await this.comparePassword(userData.password, currentUser.password)
         }
     }
