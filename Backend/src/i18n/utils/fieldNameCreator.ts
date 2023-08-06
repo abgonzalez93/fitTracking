@@ -1,7 +1,7 @@
 // Messages
 import { getCommonMessages } from '@i18n/messages'
 
-interface Field {
+export interface Field {
     emptyData: string
     invalidData: string
     mustBeObject: string

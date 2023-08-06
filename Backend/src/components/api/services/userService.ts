@@ -17,6 +17,10 @@ import { getUserMessages } from '@i18n/messages'
 
 const msg = getUserMessages.service
 
+type QueryCondition = { [key: string]: string }
+type QueryType = { [key: string]: string | QueryCondition[] | QueryCondition }
+
+
 export default class UserService {
     public static async getAllUsers (): Promise<UserInterface[]> {
         const users = await User.find()
@@ -50,28 +54,42 @@ export default class UserService {
         await this.validateUser(userData, true, currentUser)
 
         Object.assign(currentUser, userData)
+
         const updatedUser = await currentUser.save()
+
         return updatedUser
     }
 
     public static async deleteUser (id: string): Promise<(UserInterface)> {
         const user = await this.getUserOrThrow(id)
+
         await User.deleteOne({ _id: id })
+
         return user
     }
 
-    public static async getUserByEmailOrUsername (email: string, username: string, includePassword: boolean = false): Promise<UserInterface> {
-        const query = {
-            $or: [
-                { email },
-                { username }
-            ]
+    public static async getUserByEmailOrUsername (email?: string, username?: string, includePassword: boolean = false): Promise<UserInterface> {
+        if (!email && !username) {
+            throw new ErrorHandler(httpStatus.BAD_REQUEST, 'Either email or username must be provided');
         }
 
-        return await this.findUserByQuery(query, includePassword)
+        const orQuery: Array<{ [key: string]: string }> = []
+
+        if (email) {
+            orQuery.push({ email })
+        }
+        if (username) {
+            orQuery.push({ username })
+        }
+
+        const query = { $or: orQuery }
+
+        const user = await this.findUserByQuery(query, includePassword)
+
+        return user
     }
 
-    private static async findUserByQuery (query: any, includePassword: boolean = false): Promise<UserInterface> {
+    private static async findUserByQuery (query: QueryType, includePassword: boolean = false): Promise<UserInterface> {
         let queryResult = User.findOne(query)
 
         if (includePassword) {
@@ -119,7 +137,7 @@ export default class UserService {
 
     private static async validateInput (userData: Pick<UserInterface, 'username' | 'email'>, field: 'username' | 'email', errorMessage: string, currentUser?: Pick<UserInterface, 'username' | 'email'>): Promise<void> {
         if (userData[field] != null && userData[field].trim() !== '') {
-            const query: Record<string, any> = {}
+            const query: Record<string, string> = {}
             query[field] = userData[field]
             const user = await User.findOne(query)
 

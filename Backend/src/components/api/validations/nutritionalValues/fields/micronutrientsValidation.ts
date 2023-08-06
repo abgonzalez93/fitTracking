@@ -7,7 +7,7 @@ import { micronutrients } from '@api/models/nutritionalValues/micronutrients/mic
 // Messages
 import { getNutritionalValuesMessages } from '@i18n/messages'
 
-const validation: Record<string, any> = {}
+const validation: Record<string, Joi.NumberSchema> = {}
 
 micronutrients.forEach((micronutrient) => {
     validation[micronutrient] = Joi.number().positive().optional().messages({
