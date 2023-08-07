@@ -86,6 +86,7 @@
 					"passwordMustBeProvided": "Debe proporcionar una contraseña",
 					"usernameAlreadyExists": "El nombre de usuario ya existe",
 					"emailAlreadyExists": "El correo electrónico ya existe",
+					"emailOrUsernameMustBeProvided": "Debe proporcionar un correo electrónico o nombre de usuario",
 					"passwordMustBeDifferentFromYourCurrent": "La contraseña ingresada debe ser diferente a la actual"
 				}
 			},
@@ -208,8 +209,9 @@
 	},
 	"middlewares": {
 		"authentication": {
+			"unauthorized": "Unauthorized",
 			"invalidToken": "Token inválido",
-			"expiredToken": "Token ha expirado"
+        	"expiredToken": "El token ha expirado"
 		},
 		"errorHandler": {
 			"error404": "HTTP 404. Página no encontrada",

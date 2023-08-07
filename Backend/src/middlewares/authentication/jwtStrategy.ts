@@ -15,8 +15,14 @@ import TokenType from '@auth/models/enums/tokenType'
 import { userStatus } from '@api/models/user/enums'
 import UserService from '@api/services/userService'
 
+// Messages
+import { getAuthenticationMessages, getUserMessages } from '@i18n/messages'
+
 // Local files
 import { getJwtConfig } from './jwtConfig'
+
+const authMsg = getAuthenticationMessages.authentication
+const userMsg = getUserMessages.service
 
 const jwtStrategyConfig = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -27,13 +33,13 @@ export default new JwtStrategy(jwtStrategyConfig, (payload, done) => {
     (async () => {
         try {
             if (payload.type !== TokenType.ACCESS) {
-                throw new ErrorHandler(httpStatus.UNAUTHORIZED, 'Invalid token type.')
+                throw new ErrorHandler(httpStatus.UNAUTHORIZED, authMsg.invalidToken)
             }
 
             const user = await UserService.getUser(payload.id)
 
             if (user === null || typeof user !== 'object' || user.status !== userStatus.Active) {
-                throw new ErrorHandler(httpStatus.UNAUTHORIZED, 'User not found or not active.')
+                throw new ErrorHandler(httpStatus.UNAUTHORIZED, userMsg.userNotFound)
             }
 
             done(null, user)

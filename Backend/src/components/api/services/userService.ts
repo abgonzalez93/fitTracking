@@ -69,7 +69,7 @@ export default class UserService {
 
     public static async getUserByEmailOrUsername (email?: string, username?: string, includePassword: boolean = false): Promise<UserInterface> {
         if ((email == null || email.trim() === '') && (username == null || username.trim() === '')) {
-            throw new ErrorHandler(httpStatus.BAD_REQUEST, 'Either email or username must be provided')
+            throw new ErrorHandler(httpStatus.BAD_REQUEST, msg.emailOrUsernameMustBeProvided)
         }
 
         const orQuery: Array<Record<string, string>> = []

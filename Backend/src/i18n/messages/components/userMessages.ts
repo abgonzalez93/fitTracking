@@ -63,6 +63,7 @@ export const getUserMessages = {
         passwordMustBeProvided: i18n.__('components.api.services.userService.passwordMustBeProvided'),
         usernameAlreadyExists: i18n.__('components.api.services.userService.usernameAlreadyExists'),
         emailAlreadyExists: i18n.__('components.api.services.userService.emailAlreadyExists'),
+        emailOrUsernameMustBeProvided: i18n.__('components.api.services.userService.emailOrUsernameMustBeProvided'),
         passwordMustBeDifferentFromYourCurrent: i18n.__('components.api.services.userService.passwordMustBeDifferentFromYourCurrent')
     },
     validation: {

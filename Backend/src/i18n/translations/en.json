@@ -86,6 +86,7 @@
 					"passwordMustBeProvided": "Password must be provided",
 					"usernameAlreadyExists": "Username already exists",
 					"emailAlreadyExists": "Email already exists",
+					"emailOrUsernameMustBeProvided": "Either email or username must be provided",
 					"passwordMustBeDifferentFromYourCurrent": "The entered password must be different from your current one"
 				}
 			},
@@ -208,7 +209,8 @@
 	},
 	"middlewares": {
 		"authentication": {
-        	"invalidToken": "Invalid token",
+        	"unauthorized": "Unauthorized",
+			"invalidToken": "Invalid token",
         	"expiredToken": "Token has expired"
 		},
 		"errorHandler": {

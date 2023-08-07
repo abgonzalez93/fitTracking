@@ -10,6 +10,11 @@ import jwtStrategy from '@middlewares/authentication/jwtStrategy'
 import { ErrorHandler } from '@middlewares/errorHandler'
 import { type UserInterface } from '@api/models/user/userInterface'
 
+// Messages
+import { getAuthenticationMessages } from '@i18n/messages'
+
+const msg = getAuthenticationMessages.authentication
+
 passport.use(jwtStrategy)
 
 export const authentication = (req: Request, res: Response, next: NextFunction): void => {
@@ -20,7 +25,7 @@ export const authentication = (req: Request, res: Response, next: NextFunction):
         }
 
         if (user === null) {
-            next(new ErrorHandler(httpStatus.UNAUTHORIZED, 'Unauthorized'))
+            next(new ErrorHandler(httpStatus.UNAUTHORIZED, msg.unauthorized))
             return
         }
 
