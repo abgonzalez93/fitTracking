@@ -31,8 +31,7 @@ export default class DietService {
         return diet
     }
 
-    /*
-    public static async getDiet (id: string, userId: string): Promise<DietInterface> {
+    public static async getDiet (id: string): Promise<DietInterface> {
     }
 
     public static async updateDiet (id: string, dietData: Partial<DietInterface>): Promise<DietInterface> {
@@ -40,5 +39,4 @@ export default class DietService {
 
     public static async deleteDiet (id: string): Promise<DietInterface> {
     }
-    */
 }

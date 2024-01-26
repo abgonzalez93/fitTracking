@@ -41,19 +41,12 @@ export default class DietController {
         }
     })
 
-    /*
+
     public static getDiet = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const userId = req.body.user
-
-            const diet = await DietService.getDiet(req.params.id, userId)
-
-            res.status(httpStatus.OK).json({
-                status: 'success',
-                message: msg.dietFetched,
-                data: diet
-            })
-        } catch(error) {
+            const diet = await DietService.getDiet(req.params.id)
+            createResponse(res, httpStatus.OK, msg.dietFetched, diet)
+        } catch (error) {
             next(error)
         }
     })
@@ -61,17 +54,11 @@ export default class DietController {
     public static updateDiet = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
             const dietData = req.body
-
             validateDiet(dietData)
 
             const diet = await DietService.updateDiet(req.params.id, dietData)
-
-            res.status(httpStatus.OK).json({
-                status: 'success',
-                message: msg.dietUpdated,
-                data: diet
-            })
-        } catch(error) {
+            createResponse(res, httpStatus.OK, msg.dietUpdated, diet)
+        } catch (error) {
             next(error)
         }
     })
@@ -79,15 +66,9 @@ export default class DietController {
     public static deleteDiet = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
         try {
             const diet = await DietService.deleteDiet(req.params.id)
-
-            res.status(httpStatus.NO_CONTENT).json({
-                status: 'success',
-                message: msg.dietDeleted,
-                data: diet
-            })
-        } catch(error) {
+            createResponse(res, httpStatus.NO_CONTENT, msg.dietDeleted, diet)
+        } catch (error) {
             next(error)
         }
     })
-    */
 }
